@@ -17,7 +17,7 @@
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-                <img src="./IMG/logo.svg" alt="">
+                <img src="../IMG/logo.png" alt="">
             </div>
 
             <span class="logo_name">HOTEL</span>
@@ -75,8 +75,7 @@
     <section class="dashboard">
         <div class="top">
             <i class="uil uil-bars sidebar-toggle"></i>
-            
-            <img src="./IMG/user.jpg" alt="">
+            <img src="../IMG/logo.png" alt="">
         </div>
         </div>
     </section>

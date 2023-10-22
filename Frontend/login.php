@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../Frontend/CSS/login.css">
-    <link rel="stylesheet" href="../Frontend/CSS/registrar.css">
 </head>
 
 <body>
@@ -17,11 +16,11 @@
                 <p>Iniciar Sesión</p>
             </div>
             <div class="inputContainer">
-                <input type="text" class="input" placeholder="a" name="usuario">
+                <input type="text" class="input" placeholder="" name="usuario">
                 <label for="" class="label">Usuario</label>
             </div>
             <div class="inputContainer">
-                <input type="password" class="input" placeholder="a" name="codigo">
+                <input type="password" class="input" placeholder="" name="codigo">
                 <label for="" class="label">Contraseña</label>
             </div>
             <input type="submit" class="submitBtn" value="INGRESAR">
