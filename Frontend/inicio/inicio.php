@@ -17,10 +17,10 @@
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-                <img src="./IMG/logo.svg" alt="">
+                <img src="../IMG/logo.png" alt="">
             </div>
 
-            <span class="logo_name">HOTEL</span>
+            <span class="logo_name">FERRETERIA</span>
         </div>
 
         <div class="menu-items">
@@ -76,7 +76,6 @@
         <div class="top">
             <i class="uil uil-bars sidebar-toggle"></i>
             
-            <img src="./IMG/user.jpg" alt="">
         </div>
         </div>
     </section>

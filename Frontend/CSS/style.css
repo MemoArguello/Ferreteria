@@ -1,5 +1,5 @@
 /* ===== Google Font Import - Poppins ===== */
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto+Condensed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Quicksand&family=Roboto+Condensed:wght@300&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -11,10 +11,10 @@
 
 :root{
     /* ===== Colores ===== */
-    --primary-color: #1100ff;
-    --panel-color: rgb(255, 255, 255);
-    --text-color: #000;
-    --black-light-color: #2A384C;
+    --primary-color: #000000;
+    --panel-color: #2e323a; 
+    --text-color: #ffffff;
+    --black-light-color: #ffffff;
     --border-color: #e6e5e5;
     --toggle-color: #DDD;
     --box1-color: #4DA3FF;
@@ -225,7 +225,7 @@ nav.close ~ .dashboard{
     justify-content: space-between;
     align-items: center;
     padding: 10px 14px;
-    background-color: var(--panel-color);
+    background-color: #ff7f0a;
     transition: var(--tran-05);
     z-index: 10;
 }
