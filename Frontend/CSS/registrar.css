@@ -214,7 +214,7 @@ body {
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background: linear-gradient(to right, #4A00E0, #8E2DE2);
+  background: #2e323a;
   overflow: hidden;
 }
 

@@ -14,71 +14,75 @@
     <title>HOTEL</title> 
 </head>
 <body>
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="../CSS/style.css">
+     
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link href="./IMG/logo.svg" rel="icon">
+    <title>HOTEL</title> 
+</head>
+<body>
     <nav>
         <div class="logo-name">
             <div class="logo-image">
                 <img src="../IMG/logo.png" alt="">
             </div>
 
-            <span class="logo_name">HOTEL</span>
+            <span class="logo_name">FERRETERIA</span>
         </div>
 
         <div class="menu-items">
             <ul class="nav-links">
                 <li><a href="#">
-                    <i class="uil uil-calendar-alt"></i>
-                    <span class="link-name">Reservas</span>
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Inicio</span>
                 </a></li>
                 <li><a href="#">
-                    <i class="uil uil-clipboard-notes"></i>
-                    <span class="link-name">Recepción</span>
+                    <i class="lar la-money-bill-alt"></i>
+                    <span class="link-name">Ventas</span>
                 </a></li>
                 <li><a href="#">
-                    <i class="uil uil-bed"></i>
-                    <span class="link-name">Habitación</span>
+                    <i class="las la-shopping-cart"></i>
+                    <span class="link-name">Compras</span>
                 </a></li>
                 <li><a href="#">
-                    <i class="uil uil-file-graph"></i>
-                    <span class="link-name">Reportes</span>
-                </a></li>
-                <li><a href="#">
-                    <i class="uil uil-coffee"></i>
+                    <i class="las la-hammer"></i>
                     <span class="link-name">Productos</span>
                 </a></li>
                 <li><a href="#">
-                    <i class="uil uil-setting"></i>
+                    <i class="las la-chart-bar"></i>
+                    <span class="link-name">Reportes</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="las la-phone-volume"></i>
+                    <span class="link-name">Proveedores</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="las la-coins"></i>
+                    <span class="link-name">Caja</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="las la-user"></i>
+                    <span class="link-name">Clientes</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="las la-cog"></i>
                     <span class="link-name">Configuración</span>
                 </a></li>
             </ul>
             
+            
             <ul class="logout-mode">
                 <li><a href="../../Backend/validacion/cerrar_sesion.php">
-                    <i class="uil uil-signout"></i>
+                     <i class="las la-sign-out-alt"></i>
                     <span class="link-name">Cerrar Sesión</span>
                 </a></li>
-
-               <li class="mode">
-                    <a href="#">
-                        <i class="uil uil-moon"></i>
-                    <span class="link-name">Modo Oscuro</span>
-                </a> 
-        
-                <div class="mode-toggle">
-                 <span class="switch"></span>
-                </div>
-            </li>
-        
             </ul>
         </div>
     </nav>
-
-    <section class="dashboard">
-        <div class="top">
-            <i class="uil uil-bars sidebar-toggle"></i>
-            <img src="../IMG/logo.png" alt="">
-        </div>
-        </div>
-    </section>
 
     <script src="../JS/scripts.js"></script>
 </body>
