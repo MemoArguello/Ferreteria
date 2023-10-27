@@ -11,7 +11,7 @@
 
 :root{
     /* ===== Colores ===== */
-    --primary-color: #e6e5e5;
+    --primary-color: #ffffff;
     --panel-color: #2e323a; 
     --text-color: #ffffff;
     --black-light-color: #ffffff;
@@ -48,7 +48,7 @@ body.dark{
     width: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
 }
 ::-webkit-scrollbar-thumb {
     background: var(--primary-color);
@@ -207,7 +207,7 @@ body.dark .switch:before{
 .dashboard{
     position: relative;
     left: 250px;
-    background-color: rgb(238, 238, 238);
+    background-color: rgb(255, 255, 255);
     min-height: 100vh;
     width: calc(100% - 250px);
     padding: 10px 14px;
@@ -457,7 +457,7 @@ nav.close ~ .dashboard .top{
     }
 }
 table.dataTable thead {
-    background: linear-gradient(to right, #001f83, #3d0072);
+    background: linear-gradient(to right, #ffa600, #c9ab00);
     color: white;
 }
 .submitBoton {

@@ -14,17 +14,6 @@
     <title>HOTEL</title> 
 </head>
 <body>
-
-    <!----======== CSS ======== -->
-    <link rel="stylesheet" href="../CSS/style.css">
-     
-    <!----===== Iconscout CSS ===== -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <link href="./IMG/logo.svg" rel="icon">
-    <title>HOTEL</title> 
-</head>
-<body>
     <nav>
         <div class="logo-name">
             <div class="logo-image">
@@ -36,7 +25,7 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="#">
+                <li><a href="../inicio/inicio.php">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Inicio</span>
                 </a></li>
@@ -68,7 +57,7 @@
                     <i class="las la-user"></i>
                     <span class="link-name">Clientes</span>
                 </a></li>
-                <li><a href="#">
+                <li><a href="../reportes/reporte_cuenta.php">
                     <i class="las la-cog"></i>
                     <span class="link-name">Configuración</span>
                 </a></li>
@@ -76,6 +65,7 @@
             
             
             <ul class="logout-mode">
+
                 <li><a href="../../Backend/validacion/cerrar_sesion.php">
                      <i class="las la-sign-out-alt"></i>
                     <span class="link-name">Cerrar Sesión</span>

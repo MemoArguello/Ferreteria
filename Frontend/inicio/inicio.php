@@ -21,16 +21,16 @@ $query1 = "SELECT COUNT(*) total1 FROM cargo";
 $query2 = "SELECT COUNT(*) total2 FROM usuarios";
 $query3 = "SELECT COUNT(*) total3 FROM usuarios";
 $query4 = "SELECT COUNT(*) total4 FROM usuarios";
-/*$query5 = "SELECT sum(total_pagar) total5 FROM venta";
-$query6 = "SELECT SUM(total_pagar) total6 FROM compra";*/
+$query5 = "SELECT sum(id_usuario) total5 FROM usuarios";
+$query6 = "SELECT SUM(id_usuario) total6 FROM usuarios";
 
 
 $resultado1 = mysqli_query($conexiondb, $query1);
 $resultado2 = mysqli_query($conexiondb, $query2);
 $resultado3 = mysqli_query($conexiondb, $query3);
 $resultado4 = mysqli_query($conexiondb, $query4);
-/*$resultado5 = mysqli_query($conexiondb, $query5);
-$resultado6 = mysqli_query($conexiondb, $query6);*/
+$resultado5 = mysqli_query($conexiondb, $query5);
+$resultado6 = mysqli_query($conexiondb, $query6);
 
 
 
@@ -104,7 +104,12 @@ $resultado6 = mysqli_query($conexiondb, $query6);*/
         <div class="top">
             <div class="topnav" id="myTopnav">
                 <a href="./inicio.php">Inicio</a>
-                <a href="./auditoria.php">Auditoria</a>
+                <a href="#">Auditoria</a>
+                <li><a>
+                    <i class="uil uil-user"></i>
+                    <span class="link-name"><?php echo "Usuario: $usuario"; ?></span>
+                </a>
+            </li> 
             </div>
         </div>
         <br>
@@ -142,46 +147,43 @@ $resultado6 = mysqli_query($conexiondb, $query6);*/
                     <div class="card-head">
                         <?php
                         while ($reserva = mysqli_fetch_assoc($resultado3)) {
-                            echo "<td align= 'center'>" . $reserva['total3'] . ' Habitaciones Registradas' . "</td>";
+                            echo "<td align= 'center'>" . $reserva['total3'] . ' Proveedores Registrados' . "</td>";
                         }
                         ?>
-                        <span class="uil uil-house-user"></span>
+                        <img src="../IMG/img1.png" class="" alt="...">
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-head">
                         <?php
                         while ($reserva = mysqli_fetch_assoc($resultado4)) {
-                            echo "<td align= 'center'>" . $reserva['total4'] . ' Productos Registrados' . "</td>";
+                            echo "<td align= 'center'>" . $reserva['total4'] . ' Productos Vendidos' . "</td>";
                         }
                         ?>
-                        <span class="las la-shopping-cart"></span>
+                        <img src="../IMG/img4.png" class="" alt="...">
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-head">
                         <?php
-                  /*      while ($reserva = mysqli_fetch_assoc($resultado5)) {
+                        while ($reserva = mysqli_fetch_assoc($resultado5)) {
                             echo "<td align= 'center'>" . $reserva['total5'] . ' Gs en Ventas Realizadas' . "</td>";
                         }
-                        */
                         ?>
-                        <span class="las la-money-bill"></span>
+                        <img src="../IMG/img3.png" class="" alt="...">
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-head">
                         <?php
-                     /*   while ($reserva = mysqli_fetch_assoc($resultado6)) {
+                        while ($reserva = mysqli_fetch_assoc($resultado6)) {
                             echo "<td align= 'center'>" . $reserva['total6'] . ' Gs en Compras Realizadas' . "</td>";
                         }
-                        */
                         ?>
-                        <span class="las la-store"></span>
+                        <img src="../IMG/img2.png" class="" alt="...">
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 </body>
