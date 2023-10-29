@@ -2,7 +2,7 @@
 include '../config/baseDeDatos.php';
 if (!empty($_POST)) {
     $alert = '';
-    if (empty($_POST['correo']) || empty($_POST['usuario']) || empty($_POST['codigo']) || empty($_POST['ccodigo'])) {
+    if (empty($_POST['correo']) || empty($_POST['usuario']) || empty($_POST['codigo']) || empty($_POST['ccodigo']) || empty($_POST['id_cargo']) ) {
             echo "<script>alert('Todos los campos son obligatorios');
             window.location.href='../../Frontend/configuracion/registrar_usuario.php'</script>";
         }else{

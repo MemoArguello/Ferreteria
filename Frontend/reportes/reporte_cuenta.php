@@ -133,7 +133,7 @@ mysqli_close($conexiondb);
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../cuenta/formularioEditar.php?id_usuario=' + row.id_usuario + '" class="submitBoton">Editar</a>';
+                                return '<a href="../configuracion/editar_cuenta.php?id_usuario=' + row.id_usuario + '" class="submitBoton">Editar</a>';
                             }
                         },
                         {
