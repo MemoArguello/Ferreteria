@@ -7,12 +7,12 @@ if (!isset($usuario)) {
     header("location:../../index.php");
 }
 $conexiondb = conectardb();
-    $sql = "SELECT id_cargo FROM `usuarios` WHERE usuario = '$usuario';";
-    $result = mysqli_query($conexiondb, $sql);
-    while ($usuario= mysqli_fetch_assoc($result)) {
-        if ($usuario['id_cargo'] != 1) {
-            header("location:../index.php");
-        }
+$sql = "SELECT id_cargo FROM `usuarios` WHERE usuario = '$usuario';";
+$result = mysqli_query($conexiondb, $sql);
+while ($usuario = mysqli_fetch_assoc($result)) {
+    if ($usuario['id_cargo'] != 1) {
+        header("location:../index.php");
+    }
 }
 $usuario = $_SESSION['usuario'];
 $conexiondb = conectardb();
@@ -52,15 +52,15 @@ $usuarios = mysqli_fetch_row($resultado);
     ?>
     <section class="dashboard">
         <div class="top">
-        <div class="topnav" id="myTopnav">
-                <a href="../reportes/reporte_cuentas.php">Cuentas Existentes</a>
-                <a href="../configuracion/form_cuenta.php">Registrar Cuenta</a>
+            <div class="topnav" id="myTopnav">
+                <a href="../reportes/reporte_cuenta.php">Cuentas Existentes</a>
+                <a href="./registrar_usuario.php">Registrar Cuenta</a>
             </div>
         </div>
 
         <div class="dash-content">
             <form action="../../Backend/cuenta/editar.php" class="formRecepcion" method="POST">
-            <h1 align="center">Registrar Usuario</h1>
+                <h1 align="center">Registrar Usuario</h1>
                 <div class="row">
                     <div class="col-25">
                         <label for="fname">Correo Electronico</label>
@@ -87,7 +87,7 @@ $usuarios = mysqli_fetch_row($resultado);
                         $result_cargo = mysqli_num_rows($query_rol);
                         ?>
                         <select id="" name="id_cargo">
-                        <option value="">Seleccione una opción</option> <!-- Opción en blanco -->
+                            <option value="">Seleccione una opción</option> <!-- Opción en blanco -->
                             <?php
                             if ($result_cargo > 0) {
                                 while ($cargo = mysqli_fetch_array($query_rol)) {
