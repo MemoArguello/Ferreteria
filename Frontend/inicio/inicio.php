@@ -55,7 +55,7 @@ $resultado6 = mysqli_query($conexiondb, $query6);
     }
     .card {
         box-shadow: 0px 10px 10px -5px rgb(0 0 0 / 10%);
-        background: #fff;
+        background: #DDD;
         padding: 40px;
         border-radius: 10px;
         height: 200px;

@@ -52,14 +52,14 @@ mysqli_close($conexiondb);
         </div>
 
         <div class="dash-content">
-            <form action="/action_page.php" class="formRecepcion">
+            <form action="../../Backend/cuenta/guardar_cuenta.php" class="formRecepcion" method="POST">
             <h1 align="center">Registrar Usuario</h1>
                 <div class="row">
                     <div class="col-25">
                         <label for="fname">Correo Electronico</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                        <input type="text" id="fname" name="correo" placeholder="Your name..">
                     </div>
                 </div>
                 <div class="row">
@@ -67,7 +67,7 @@ mysqli_close($conexiondb);
                         <label for="lname">Nombre de Usuario</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                        <input type="text" id="lname" name="usuario" placeholder="Your last name..">
                     </div>
                 </div>
                 <div class="row">
@@ -75,7 +75,7 @@ mysqli_close($conexiondb);
                         <label for="lname">Contraseña</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                        <input type="text" id="lname" name="codigo" placeholder="Your last name..">
                     </div>
                 </div>
                 <div class="row">
@@ -83,7 +83,7 @@ mysqli_close($conexiondb);
                         <label for="lname">Confirmar Contraseña</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                        <input type="text" id="lname" name="ccodigo" placeholder="Your last name..">
                     </div>
                 </div>
                 <div class="row">
@@ -91,16 +91,19 @@ mysqli_close($conexiondb);
                         <label for="country">Cargo</label>
                     </div>
                     <div class="col-75">
-                        <select id="country" name="country">
-                            <option value="australia">Australia</option>
-                            <option value="canada">Canada</option>
-                            <option value="usa">USA</option>
+                        <select id="country" name="id">
+                        <option value="">Seleccione una opción</option> <!-- Opción en blanco -->
+                        <?php
+                            while ($cargo = mysqli_fetch_assoc($resultado)) {
+                                echo "<option value='" . $cargo['id'] . "'>" . $cargo['descripcion'] . "</option>";
+                            }
+                            ?>
                         </select>
                     </div>
                 </div>
                 <br>
                 <div class="row">
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Guardar">
                 </div>
             </form>
         </div>
