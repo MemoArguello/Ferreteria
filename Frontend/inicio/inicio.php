@@ -57,7 +57,6 @@ $resultado6 = mysqli_query($conexiondb, $query6);
         box-shadow: 0px 10px 10px -5px rgb(0 0 0 / 10%);
         background: #DDD;
         padding: 40px;
-        border-radius: 10px;
         height: 200px;
         width: 340px;
     }
@@ -90,6 +89,7 @@ $resultado6 = mysqli_query($conexiondb, $query6);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/stiles.css">
     <link rel="stylesheet" href="../CSS/registrar.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
@@ -105,11 +105,6 @@ $resultado6 = mysqli_query($conexiondb, $query6);
             <div class="topnav" id="myTopnav">
                 <a href="./inicio.php">Inicio</a>
                 <a href="#">Auditoria</a>
-                <li><a>
-                    <i class="uil uil-user"></i>
-                    <span class="link-name"><?php echo "Usuario: $usuario"; ?></span>
-                </a>
-            </li> 
             </div>
         </div>
         <br>

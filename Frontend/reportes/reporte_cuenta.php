@@ -36,7 +36,6 @@ mysqli_close($conexiondb);
     <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css">
     <!---datatables bootstrap 4 css-->
     <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.13.1/css/dataTables.bootstrap.css">
-    
 </head>
 
 <body>
@@ -128,7 +127,7 @@ mysqli_close($conexiondb);
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../productos/formularioEditar.php?id_usuario=' + row.id_usuario + '" class="submitBoton">Cambiar</a>';
+                                return '<a href="../configuracion/editar_contraseña.php?id_usuario=' + row.id_usuario + '" class="submitBoton">Cambiar</a>';
                             }
                         },
                         {

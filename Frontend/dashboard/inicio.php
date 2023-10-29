@@ -1,79 +1,95 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!----======== CSS ======== -->
-    <link rel="stylesheet" href="../CSS/style.css">
-     
-    <!----===== Iconscout CSS ===== -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link href="./IMG/logo.svg" rel="icon">
-    <title>HOTEL</title> 
+	<meta charset="UTF-8">
+	<title>Side Navigation Bar</title>
+	<link rel="stylesheet" href="../CSS/stiles.css">
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+	<script>
+		$(document).ready(function(){
+			$(".hamburger").click(function(){
+			  $(".wrapper").toggleClass("active")
+			})
+		});
+	</script>
 </head>
 <body>
-    <nav>
-        <div class="logo-name">
-            <div class="logo-image">
-                <img src="../IMG/logo.png" alt="">
-            </div>
 
-            <span class="logo_name">FERRETERIA</span>
-        </div>
+<div class="wrapper">
 
-        <div class="menu-items">
-            <ul class="nav-links">
-                <li><a href="../inicio/inicio.php">
-                    <i class="uil uil-estate"></i>
-                    <span class="link-name">Inicio</span>
-                </a></li>
-                <li><a href="#">
-                    <i class="lar la-money-bill-alt"></i>
-                    <span class="link-name">Ventas</span>
-                </a></li>
-                <li><a href="#">
-                    <i class="las la-shopping-cart"></i>
-                    <span class="link-name">Compras</span>
-                </a></li>
-                <li><a href="#">
-                    <i class="las la-hammer"></i>
-                    <span class="link-name">Productos</span>
-                </a></li>
-                <li><a href="#">
-                    <i class="las la-chart-bar"></i>
-                    <span class="link-name">Reportes</span>
-                </a></li>
-                <li><a href="#">
-                    <i class="las la-phone-volume"></i>
-                    <span class="link-name">Proveedores</span>
-                </a></li>
-                <li><a href="#">
-                    <i class="las la-coins"></i>
-                    <span class="link-name">Caja</span>
-                </a></li>
-                <li><a href="#">
-                    <i class="las la-user"></i>
-                    <span class="link-name">Clientes</span>
-                </a></li>
-                <li><a href="../reportes/reporte_cuenta.php">
-                    <i class="las la-cog"></i>
-                    <span class="link-name">Configuración</span>
-                </a></li>
-            </ul>
-            
-            
-            <ul class="logout-mode">
+	<div class="top_navbar">
+		<div class="logo">
+			<a href="../inicio/inicio.php">FERRETERIA</a>
+		</div>
+	</div>
 
-                <li><a href="../../Backend/validacion/cerrar_sesion.php">
-                     <i class="las la-sign-out-alt"></i>
-                    <span class="link-name">Cerrar Sesión</span>
-                </a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <script src="../JS/scripts.js"></script>
+	<div class="main_body">
+		
+		<div class="sidebar_menu">
+	        	<ul>
+		          <li>
+		            <a href="../inicio/inicio.php">
+		              <span class="icon">
+		              	<i class="uil uil-estate"></i></span>
+		              <span class="list">Inicio</span>
+		            </a>
+		          </li>
+		          <li>
+		            <a href="">
+		              <span class="icon"><i class="lar la-money-bill-alt"></i></span>
+		              <span class="list">Ventas</span>
+		            </a>
+		          </li>
+		          <li>
+		            <a href="#">
+		              <span class="icon"><i class="las la-shopping-cart"></i></span>
+		              <span class="list">Compras</span>
+		            </a>
+		          </li>
+		          <li>
+		            <a href="#">
+		              <span class="icon"><i class="las la-hammer"></i></span>
+		              <span class="list">Productos</span>
+		            </a>
+		          </li>
+		          <li>
+		            <a href="#">
+		              <span class="icon"><i class="las la-chart-bar"></i></span>
+		              <span class="list">Reportes</span>
+		            </a>
+		          </li>
+		          <li>
+		            <a href="#">
+		              <span class="icon"><i class="las la-coins"></i></span>
+		              <span class="list">Caja</span>
+		            </a>
+		          </li>
+				  <li>
+		            <a href="#">
+		              <span class="icon"><i class="las la-user"></i></span>
+		              <span class="list">Clientes</span>
+		            </a>
+		          </li>
+				  <li>
+		            <a href="../reportes/reporte_cuenta.php">
+		              <span class="icon"><i class="las la-cog"></i></span>
+		              <span class="list">Configuracion</span>
+		            </a>
+		          </li>
+				  <ul class="inner__sidebar_menu">
+				  <li>
+		            <a href="../../Backend/validacion/cerrar_sesion.php">
+		              <span class="icon"><i class="las la-sign-out-alt"></i></span>
+		              <span class="list">Cerrar Sesión</span>
+		            </a>
+		          </li>
+				</ul>
+		        </ul>
+	        </div>
+	</div>
+</div>
 </body>
 </html>
