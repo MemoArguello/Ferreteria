@@ -48,7 +48,7 @@ body.dark{
     width: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: rgb(255, 255, 255);
+    background: rgb(0, 17, 255)255
 }
 ::-webkit-scrollbar-thumb {
     background: var(--primary-color);
@@ -235,7 +235,7 @@ nav.close ~ .dashboard .top{
 }
 .dashboard .top .sidebar-toggle{
     font-size: 26px;
-    color: #2e323a;
+    color: #3421c0;
     cursor: pointer;
 }
 .dashboard .top .search-box{

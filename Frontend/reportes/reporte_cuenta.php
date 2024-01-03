@@ -86,26 +86,34 @@ mysqli_close($conexiondb);
         <script>
             $(document).ready(function() {
                 $('#tablaUsuarios').DataTable({
-                    //para usar botones
                     responsive: "true",
                     dom: 'Bfrtilp',
                     buttons: [{
                             extend: 'excelHtml5',
                             text: 'Excel',
                             titleAttr: 'Exportar a Excel',
-                            className: 'btn btn-success'
+                            className: 'btn btn-success',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3] // Incluir solo las primeras 4 columnas
+                            }
                         },
                         {
                             extend: 'pdfHtml5',
                             text: 'PDF',
                             titleAttr: 'Exportar a PDF',
-                            className: 'btn btn-danger'
+                            className: 'btn btn-danger',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3] // Incluir solo las primeras 4 columnas
+                            }
                         },
                         {
                             extend: 'print',
-                            text: 'imprimir',
-                            titleAttr: 'imprimir',
-                            className: 'btn btn-info'
+                            text: 'Imprimir',
+                            titleAttr: 'Imprimir',
+                            className: 'btn btn-info',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3] // Incluir solo las primeras 4 columnas
+                            }
                         },
                     ],
                     "ajax": {

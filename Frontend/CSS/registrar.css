@@ -12,7 +12,7 @@ body {
 .signupFrm {
   display: flex;
   justify-content: center;
-  height: 70vh;
+  height: 71vh;
 }
 
 .form_categoria {
@@ -226,12 +226,13 @@ body {
   padding: 16px 20px;
   text-decoration: none;
   font-size: 17px;
+  border-radius: 4%;
 }
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: #3421c0;
+  color: rgb(255, 255, 255);
 }
 
 /* Add an active class to highlight the current page */
