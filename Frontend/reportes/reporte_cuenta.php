@@ -45,8 +45,8 @@ mysqli_close($conexiondb);
     <section class="dashboard">
         <div class="top">
             <div class="topnav" id="myTopnav">
-                <a href="./reporte_cuenta.php">Cuentas Existentes</a>
-                <a href="../configuracion/registrar_usuario.php">Registrar Cuenta</a>
+                <a href="./reporte_cuenta.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_cuenta.php') echo 'class="active"'; ?>>Cuentas</a>
+                <a href="../configuracion/registrar_usuario.php" <?php if (basename($_SERVER['PHP_SELF']) == '../configuracion/registrar_usuario.php') echo 'class="active"'; ?>>Registrar Cuenta</a>
             </div>
         </div>
         <div class="dash-content">

@@ -37,22 +37,24 @@ $resultado6 = mysqli_query($conexiondb, $query6);
 ?>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Quicksand&family=Roboto+Condensed:wght@300&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "lato", sans-serif;
-}
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "lato", sans-serif;
+    }
 
     .card-head span {
         font-size: 5.2rem;
         color: #2e323a;
     }
 
-    .card img{
+    .card img {
         height: 120px;
         width: 150px;
     }
+
     .card {
         box-shadow: 0px 10px 10px -5px rgb(0 0 0 / 10%);
         background: #DDD;
@@ -93,7 +95,6 @@ $resultado6 = mysqli_query($conexiondb, $query6);
     <link rel="stylesheet" href="../CSS/registrar.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-
 </head>
 
 <body>
@@ -101,10 +102,10 @@ $resultado6 = mysqli_query($conexiondb, $query6);
     include($_SERVER['DOCUMENT_ROOT'] . '/Sistema_Ferreteria/Frontend/dashboard/inicio.php');
     ?>
     <section class="dashboard">
-        <div class="top">
+    <div class="top">
             <div class="topnav" id="myTopnav">
-                <a href="./inicio.php">Inicio</a>
-                <a href="#">Auditoria</a>
+                <a href="#" <?php if (basename($_SERVER['PHP_SELF']) == './inicio.php') echo 'class="active"'; ?>>Inicio</a>
+                <a href="#" <?php if (basename($_SERVER['PHP_SELF']) == 'formulario_cliente.php') echo 'class="active"'; ?>>Auditoria</a>
             </div>
         </div>
         <br>
@@ -114,13 +115,13 @@ $resultado6 = mysqli_query($conexiondb, $query6);
                     <div class="card-head">
                         <?php
                         while ($reserva = mysqli_fetch_assoc($resultado1)) {
-                            if ($reserva['total1'] == '1'){
-                            echo "<td align= 'center'>" . $reserva['total1'] . ' Cliente Registrado' . "</td>";
-                            }else{
-                            echo "<td align= 'center'>" . $reserva['total1'] . ' Clientes Registrados' . "</td>";
-                            }    
+                            if ($reserva['total1'] == '1') {
+                                echo "<td align= 'center'>" . $reserva['total1'] . ' Cliente Registrado' . "</td>";
+                            } else {
+                                echo "<td align= 'center'>" . $reserva['total1'] . ' Clientes Registrados' . "</td>";
+                            }
                         }
-                        ?> 
+                        ?>
                         <img src="../IMG/client.png" class="" alt="...">
                     </div>
                 </div>
@@ -128,12 +129,12 @@ $resultado6 = mysqli_query($conexiondb, $query6);
                     <div class="card-head">
                         <?php
                         while ($reserva = mysqli_fetch_assoc($resultado2)) {
-                            if ($reserva['total2'] == 1){
-                            echo "<td align= 'center'>" . $reserva['total2'] . ' Producto Registrado' . "</td>";
-                            }else{
-                            echo "<td align= 'center'>" . $reserva['total2'] . ' Productos Registrados' . "</td>";
-                            } 
-                        } 
+                            if ($reserva['total2'] == 1) {
+                                echo "<td align= 'center'>" . $reserva['total2'] . ' Producto Registrado' . "</td>";
+                            } else {
+                                echo "<td align= 'center'>" . $reserva['total2'] . ' Productos Registrados' . "</td>";
+                            }
+                        }
                         ?>
                         <img src="../IMG/producto.png" class="" alt="...">
                     </div>
@@ -152,7 +153,11 @@ $resultado6 = mysqli_query($conexiondb, $query6);
                     <div class="card-head">
                         <?php
                         while ($reserva = mysqli_fetch_assoc($resultado4)) {
-                            echo "<td align= 'center'>" . $reserva['total4'] . ' Productos Vendidos' . "</td>";
+                            if ($reserva['total4'] == 1) {
+                                echo "<td align= 'center'>" . $reserva['total4'] . ' Producto Registrado' . "</td>";
+                            } else {
+                                echo "<td align= 'center'>" . $reserva['total4'] . ' Productos Registrados' . "</td>";
+                            }
                         }
                         ?>
                         <img src="../IMG/img4.png" class="" alt="...">

@@ -68,7 +68,7 @@
 		            </a>
 		          </li>
 				  <li>
-		            <a href="#">
+		            <a href="../cliente/formulario_cliente.php">
 		              <span class="icon"><i class="las la-user"></i></span>
 		              <span class="list">Clientes</span>
 		            </a>

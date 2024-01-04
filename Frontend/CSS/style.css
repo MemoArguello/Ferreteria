@@ -207,7 +207,7 @@ body.dark .switch:before{
 .dashboard{
     position: relative;
     left: 250px;
-    background-color: rgb(255, 255, 255);
+    background-color: #eeeeee;
     min-height: 100vh;
     width: calc(100% - 250px);
     padding: 10px 14px;
