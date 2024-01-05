@@ -69,7 +69,7 @@ $usuario = $_SESSION['usuario'];
                         <label for="fname">Numero de Cedula</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="fname" name="cedula" placeholder="">
+                        <input type="text" id="fname" name="cedula" placeholder="" required>
                     </div>
                 </div>
                 <div class="row">
@@ -77,7 +77,7 @@ $usuario = $_SESSION['usuario'];
                         <label for="lname">Nombres</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="lname" name="nombre" placeholder="">
+                        <input type="text" id="lname" name="nombre" placeholder="" required>
                     </div>
                 </div>
                 <div class="row">
@@ -85,7 +85,7 @@ $usuario = $_SESSION['usuario'];
                         <label for="lname">Apellidos</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="lname" name="apellido" placeholder="">
+                        <input type="text" id="lname" name="apellido" placeholder="" required>
                     </div>
                 </div>
                 <div class="row">
@@ -93,7 +93,7 @@ $usuario = $_SESSION['usuario'];
                         <label for="lname">RUC</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="lname" name="ruc" placeholder="">
+                        <input type="text" id="lname" name="ruc" placeholder="" required>
                     </div>
                 </div>
                 <div class="row">
@@ -101,7 +101,7 @@ $usuario = $_SESSION['usuario'];
                         <label for="country">Departamento</label>
                     </div>
                     <div class="col-75">
-                        <select id="departamento" name="id_departamento" onchange="getCiudades(this.value)">
+                        <select id="departamento" name="id_departamento" onchange="getCiudades(this.value)" required>
                             <option value="">Seleccione una opción</option>
                             <?php
                             while ($departamento = mysqli_fetch_assoc($resultado)) {
@@ -117,7 +117,7 @@ $usuario = $_SESSION['usuario'];
                         <label for="country">Ciudad</label>
                     </div>
                     <div class="col-75">
-                        <select id="ciudad" name="id_ciudad">
+                        <select id="ciudad" name="id_ciudad" required>
                             <option value="">Seleccione una opción</option> <!-- Opción en blanco -->
                             <?php
                             while ($ciudad = mysqli_fetch_assoc($resultado2)) {

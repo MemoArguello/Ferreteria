@@ -91,7 +91,7 @@ mysqli_close($conexiondb);
                         <label for="country">Cargo</label>
                     </div>
                     <div class="col-75">
-                        <select id="country" name="id">
+                        <select id="country" name="id_cargo">
                         <option value="">Seleccione una opción</option> <!-- Opción en blanco -->
                         <?php
                             while ($cargo = mysqli_fetch_assoc($resultado)) {

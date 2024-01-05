@@ -6,7 +6,7 @@ if (!empty($_POST)) {
             echo "<script>alert('Todos los campos son obligatorios');
             window.location.href='../../Frontend/configuracion/registrar_usuario.php'</script>";
         }else{
-        $cargo=$_POST['id'];
+        $cargo=$_POST['id_cargo'];
         $correo=$_POST['correo'];
         $usuario=$_POST['usuario'];
         $password=md5($_POST['codigo']);

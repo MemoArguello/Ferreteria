@@ -4,8 +4,8 @@ include '../config/baseDeDatos.php';
 if (!empty($_POST)) {
     $alert = '';
 if (empty($_POST['cedula']) || empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['ruc']) || empty($_POST['id_departamento']) || empty($_POST['id_ciudad'])){
-    echo "<script>alert('Todos los campos son obligatorios, por favor complete todos los campos');</script>";
-    header("Location: ../../Frontend/cliente/formulario_cliente.php");
+    echo "<script>alert('Complete los datos');
+    window.location.href='../../Frontend/cliente/formulario_cliente.php'</script>";
     exit;
 }else{
         $cedula = $_POST['cedula'];

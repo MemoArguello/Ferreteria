@@ -45,8 +45,8 @@ mysqli_close($conexiondb);
     <section class="dashboard">
         <div class="top">
             <div class="topnav" id="myTopnav">
-                <a href="./reporte_cuenta.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_cliente.php') echo 'class="active"'; ?>>Cuentas</a>
-                <a href="../configuracion/registrar_usuario.php" <?php if (basename($_SERVER['PHP_SELF']) == '../configuracion/registrar_usuario.php') echo 'class="active"'; ?>>Registrar Cuenta</a>
+                <a href="./reporte_cliente.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_cliente.php') echo 'class="active"'; ?>>Clientes</a>
+                <a href="../cliente/formulario_cliente.php" <?php if (basename($_SERVER['PHP_SELF']) == '../cliente/formulario_cliente.php') echo 'class="active"'; ?>>Registrar</a>
             </div>
         </div>
         <div class="dash-content">
@@ -96,7 +96,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a Excel',
                             className: 'btn btn-success',
                             exportOptions: {
-                                columns: [0, 1, 2, 3,4,5,6] 
+                                columns: [0, 1, 2, 3, 4, 5, 6] 
                             }
                         },
                         {
@@ -105,7 +105,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a PDF',
                             className: 'btn btn-danger',
                             exportOptions: {
-                                columns: [0, 1, 2, 3,4,5,6]
+                                columns: [0, 1, 2, 3, 4, 5, 6]
                             }
                         },
                         {
@@ -114,7 +114,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Imprimir',
                             className: 'btn btn-info',
                             exportOptions: {
-                                columns: [0, 1, 2, 3,4,5,6]
+                                columns: [0, 1, 2, 3, 4, 5, 6]
                             }
                         },
                     ],
@@ -146,13 +146,13 @@ mysqli_close($conexiondb);
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../configuracion/editar_cuenta.php?id_usuario=' + row.id_usuario + '" class="submitBoton">Editar</a>';
+                                return '<a href="../../backend/cliente/eliminar_cliente.php?id_cliente=' + row.id_cliente + '" class="submitBoton">Editar</a>';
                             }
                         },
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../../Backend/cuenta/eliminar_cuenta.php?id_usuario=' + row.id_usuario + '" class="submitBotonEliminar">Borrar</a>';
+                                return '<a href="../../Backend/cliente/eliminar_cliente.php?id_cliente=' + row.id_cliente + '" class="submitBotonEliminar">Borrar</a>';
                             }
                         }
                     ]
