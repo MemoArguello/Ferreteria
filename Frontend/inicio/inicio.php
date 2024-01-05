@@ -104,7 +104,7 @@ $resultado6 = mysqli_query($conexiondb, $query6);
     <section class="dashboard">
     <div class="top">
             <div class="topnav" id="myTopnav">
-                <a href="#" <?php if (basename($_SERVER['PHP_SELF']) == './inicio.php') echo 'class="active"'; ?>>Inicio</a>
+                <a href="#" <?php if (basename($_SERVER['PHP_SELF']) == 'inicio.php') echo 'class="active"'; ?>>Inicio</a>
                 <a href="#" <?php if (basename($_SERVER['PHP_SELF']) == 'formulario_cliente.php') echo 'class="active"'; ?>>Auditoria</a>
             </div>
         </div>
