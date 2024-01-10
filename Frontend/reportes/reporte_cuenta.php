@@ -51,7 +51,6 @@ mysqli_close($conexiondb);
         </div>
         <div class="dash-content">
             <div class="container">
-                <br>
                 <div class"row">
                     <div class="col-lg-12">
                         <table id="tablaUsuarios" class="table-striped table-bordered" style="width: 100%">

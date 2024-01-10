@@ -146,7 +146,7 @@ mysqli_close($conexiondb);
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../../backend/cliente/eliminar_cliente.php?id_cliente=' + row.id_cliente + '" class="submitBoton">Editar</a>';
+                                return '<a href="../cliente/editar_cliente.php?id_cliente=' + row.id_cliente + '" class="submitBoton">Editar</a>';
                             }
                         },
                         {
