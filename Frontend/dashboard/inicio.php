@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Side Navigation Bar</title>
+	<title>Inicio</title>
 	<link rel="stylesheet" href="../CSS/stiles.css">
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -43,16 +43,16 @@
 		              <span class="list">Ventas</span>
 		            </a>
 		          </li>
-		          <li>
-		            <a href="#">
-		              <span class="icon"><i class="las la-shopping-cart"></i></span>
-		              <span class="list">Compras</span>
+				  <li>
+		            <a href="../productos/registrar_productos.php">
+		              <span class="icon"><i class="las la-hammer"></i></span>
+		              <span class="list">Productos</span>
 		            </a>
 		          </li>
 		          <li>
-		            <a href="#">
-		              <span class="icon"><i class="las la-hammer"></i></span>
-		              <span class="list">Productos</span>
+		            <a href="../reportes/reporte_prov.php">
+		              <span class="icon"><i class="las la-truck"></i></span>
+		              <span class="list">Proveedores</span>
 		            </a>
 		          </li>
 		          <li>

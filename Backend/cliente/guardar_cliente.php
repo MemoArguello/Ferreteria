@@ -1,5 +1,4 @@
 <?php
-
 include '../config/baseDeDatos.php';
 if (!empty($_POST)) {
     $alert = '';
