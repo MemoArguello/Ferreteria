@@ -43,6 +43,7 @@ $usuario = $_SESSION['usuario'];
             xhttp.send();
         }
     </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <?php 

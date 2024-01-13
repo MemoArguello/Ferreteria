@@ -38,13 +38,13 @@
 		            </a>
 		          </li>
 		          <li>
-		            <a href="">
+		            <a href="#">
 		              <span class="icon"><i class="lar la-money-bill-alt"></i></span>
 		              <span class="list">Ventas</span>
 		            </a>
 		          </li>
 				  <li>
-		            <a href="../productos/registrar_productos.php">
+		            <a href="../reportes/reporte_prod.php">
 		              <span class="icon"><i class="las la-hammer"></i></span>
 		              <span class="list">Productos</span>
 		            </a>

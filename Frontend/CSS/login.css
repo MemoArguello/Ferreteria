@@ -83,7 +83,12 @@ body {
     color: var(--negro);
 }
 
-.texto-formulario h2 {
+.texto-formulario h3 {
+    font-size: 30px;
+    text-align: center;
+}
+
+.texto-formulario h2,h3 {
     color: var(--azulGris)
 }
 

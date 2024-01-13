@@ -26,7 +26,7 @@ mysqli_close($conexiondb);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuentas</title>
+    <title>Proveedores</title>
     <link rel="stylesheet" href="../CSS/login.css">
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/registrar.css">
@@ -46,14 +46,14 @@ mysqli_close($conexiondb);
     <section class="dashboard">
         <div class="top">
             <div class="topnav" id="myTopnav">
-                <a href="./reporte_cuenta.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_cuenta.php') echo 'class="active"'; ?>>Cuentas</a>
-                <a href="../configuracion/registrar_usuario.php" <?php if (basename($_SERVER['PHP_SELF']) == '../configuracion/registrar_usuario.php') echo 'class="active"'; ?>>Registrar Cuenta</a>
+                <a href="./reporte_prod.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_prod.php') echo 'class="active"'; ?>>Productos</a>
+                <a href="../productos/registrar_productos.php" <?php if (basename($_SERVER['PHP_SELF']) == '../productos/registrar_productos') echo 'class="active"'; ?>>Registrar</a>
             </div>
         </div>
         <div class="dash-content">
             <div class="container">
                 <div class="texto-formulario">
-                    <h2>Cuentas Existentes</h2>
+                    <h2>Listado de Productos</h2>
                 </div>
                 <div class"row">
                     <div class="col-lg-12">
@@ -61,10 +61,13 @@ mysqli_close($conexiondb);
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Correo</th>
-                                    <th>Usuario</th>
-                                    <th>Cargo</th>
-                                    <th>Contraseña</th>
+                                    <th>Nombre</th>
+                                    <th>Categoria</th>
+                                    <th>Lote</th>
+                                    <th>Stock</th>
+                                    <th>Precio</th>
+                                    <th>Proveedor</th>
+                                    <th>Informacion</th>
                                     <th>Editar</th>
                                     <th>Eliminar</th>
                                 </tr>
@@ -97,7 +100,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a Excel',
                             className: 'btn btn-success',
                             exportOptions: {
-                                columns: [0, 1, 2, 3] // Incluir solo las primeras 4 columnas
+                                columns: [0, 1, 2, 3, 4, 5]
                             }
                         },
                         {
@@ -106,7 +109,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a PDF',
                             className: 'btn btn-danger',
                             exportOptions: {
-                                columns: [0, 1, 2, 3] // Incluir solo las primeras 4 columnas
+                                columns: [0, 1, 2, 3, 4, 5]
                             }
                         },
                         {
@@ -115,42 +118,48 @@ mysqli_close($conexiondb);
                             titleAttr: 'Imprimir',
                             className: 'btn btn-info',
                             exportOptions: {
-                                columns: [0, 1, 2, 3] // Incluir solo las primeras 4 columnas
+                                columns: [0, 1, 2, 3, 4, 5]
                             }
                         },
                     ],
                     "ajax": {
-                        "url": "list_cuenta.php",
+                        "url": "list_prod.php",
                         "dataSrc": ""
                     },
                     "columns": [{
-                            "data": "id_usuario"
+                            "data": "id_producto"
                         },
                         {
-                            "data": "correo"
+                            "data": "nombre_producto"
                         },
                         {
-                            "data": "usuario"
+                            "data": "categoria"
                         },
                         {
-                            "data": "descripcion"
+                            "data": "lote"
+                        },
+                        {
+                            "data": "stock"
+                        },
+                        {
+                            "data": "precio"
+                        },
+                        {
+                            "data": "nombre_prov"
+                        },
+                        {
+                            "data": "informacion"
                         },
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../configuracion/editar_contraseña.php?id_usuario=' + row.id_usuario + '" class="submitBoton">Cambiar</a>';
+                                return '<a href="../productos/editar_prod.php?id_producto=' + row.id_producto + '" class="submitBoton">Editar</a>';
                             }
                         },
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../configuracion/editar_cuenta.php?id_usuario=' + row.id_usuario + '" class="submitBoton">Editar</a>';
-                            }
-                        },
-                        {
-                            "data": null,
-                            "render": function(data, type, row) {
-                                return '<a href="../../Backend/cuenta/eliminar_cuenta.php?id_usuario=' + row.id_usuario + '" class="submitBotonEliminar">Borrar</a>';
+                                return '<a href="../../Backend/producto/eliminar_prod.php?id_producto=' + row.id_producto + '" class="submitBotonEliminar">Borrar</a>';
                             }
                         }
                     ]

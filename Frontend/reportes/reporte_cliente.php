@@ -27,6 +27,7 @@ mysqli_close($conexiondb);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clientes</title>
+    <link rel="stylesheet" href="../CSS/login.css">
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/registrar.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -51,7 +52,9 @@ mysqli_close($conexiondb);
         </div>
         <div class="dash-content">
             <div class="container">
-                <br>
+                <div class="texto-formulario">
+                    <h2>Listado de Clientes</h2>
+                </div>
                 <div class"row">
                     <div class="col-lg-12">
                         <table id="tablaUsuarios" class="table-striped table-bordered" style="width: 100%">
@@ -96,7 +99,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a Excel',
                             className: 'btn btn-success',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6] 
+                                columns: [0, 1, 2, 3, 4, 5, 6]
                             }
                         },
                         {

@@ -27,6 +27,7 @@ mysqli_close($conexiondb);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proveedores</title>
+    <link rel="stylesheet" href="../CSS/login.css">
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/registrar.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -45,13 +46,15 @@ mysqli_close($conexiondb);
     <section class="dashboard">
         <div class="top">
             <div class="topnav" id="myTopnav">
-                <a href="./reporte_prov.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_cliente.php') echo 'class="active"'; ?>>Proveedores</a>
+                <a href="./reporte_prov.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_prov.php') echo 'class="active"'; ?>>Proveedores</a>
                 <a href="../proveedores/agg_proveedor.php" <?php if (basename($_SERVER['PHP_SELF']) == '../proveedores/agg_proveedor') echo 'class="active"'; ?>>Registrar</a>
             </div>
         </div>
         <div class="dash-content">
             <div class="container">
-                <br>
+                <div class="texto-formulario">
+                    <h2>Listado de Proveedores</h2>
+                </div>
                 <div class"row">
                     <div class="col-lg-12">
                         <table id="tablaUsuarios" class="table-striped table-bordered" style="width: 100%">
@@ -95,7 +98,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a Excel',
                             className: 'btn btn-success',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5] 
+                                columns: [0, 1, 2, 3, 4, 5]
                             }
                         },
                         {
