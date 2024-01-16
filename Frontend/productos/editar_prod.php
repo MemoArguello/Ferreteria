@@ -21,6 +21,17 @@ while ($usuario = mysqli_fetch_assoc($result)) {
     }
 }
 $usuario = $_SESSION['usuario'];
+
+$id_producto = $_GET['id_producto'];
+$query3 ="SELECT productos.id_producto, productos.nombre_producto, productos.categoria, 
+        productos.lote, productos.stock, productos.precio, 
+        proveedores.id_proveedor, productos.informacion, proveedores.nombre_prov, categorias.id_categoria, categorias.descripcion
+        FROM productos JOIN proveedores
+        ON proveedores.id_proveedor = productos.id_proveedor 
+        JOIN categorias ON categorias.id_categoria = productos.categoria where id_producto = $id_producto";
+$resultado3 = mysqli_query($conexiondb, $query3);
+$producto = mysqli_fetch_row($resultado3);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,13 +58,13 @@ $usuario = $_SESSION['usuario'];
 
         <div class="dash-content">
             <form action="../../Backend/producto/guardar_product.php" class="formRecepcion" method="POST">
-                <h1 align="center">Registrar Producto</h1>
+                <h1 align="center">Editar Producto</h1>
                 <div class="row">
                     <div class="col-25">
                         <label for="fname">Nombre del Producto</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="fname" name="nombre_producto" placeholder="" required>
+                        <input type="text" id="fname" name="nombre_producto" placeholder="" required value='<?php echo $producto[1]; ?>'>
                     </div>
                 </div>
                 <div class="row">
@@ -62,7 +73,6 @@ $usuario = $_SESSION['usuario'];
                     </div>
                     <div class="col-75">
                         <select id="proveedor" name="categoria" required>
-                            <option value="">Seleccione una opción</option>
                             <?php
                             while ($categoria = mysqli_fetch_assoc($resultado2)) {
                                 echo "<option value='" . $categoria['id_categoria'] . "'>" . $categoria['descripcion'] . "</option>";
@@ -76,7 +86,7 @@ $usuario = $_SESSION['usuario'];
                         <label for="lname">Lote</label>
                     </div>      
                     <div class="col-75">
-                        <input type="text" id="lname" name="lote" placeholder="" required>
+                        <input type="text" id="lname" name="lote" placeholder="" required value='<?php echo $producto[3]; ?>'>
                     </div>
                 </div>
                 <div class="row">
@@ -84,7 +94,7 @@ $usuario = $_SESSION['usuario'];
                         <label for="lname">Stock</label>
                     </div>      
                     <div class="col-75">
-                        <input type="number" id="lname" name="stock" placeholder="" required>
+                        <input type="number" id="lname" name="stock" placeholder="" required value='<?php echo $producto[4]; ?>'>
                     </div>
                 </div>
                 <div class="row">
@@ -92,7 +102,7 @@ $usuario = $_SESSION['usuario'];
                         <label for="lname">Precio</label>
                     </div>      
                     <div class="col-75">
-                        <input type="number" id="lname" name="precio" placeholder="" required>
+                        <input type="number" id="lname" name="precio" placeholder="" required value='<?php echo $producto[5]; ?>'>
                     </div>
                 </div>
                 <div class="row">
@@ -101,7 +111,6 @@ $usuario = $_SESSION['usuario'];
                     </div>
                     <div class="col-75">
                         <select id="proveedor" name="id_proveedor" onchange="getCiudades(this.value)" required>
-                            <option value="">Seleccione una opción</option>
                             <?php
                             while ($proveedor = mysqli_fetch_assoc($resultado)) {
                                 echo "<option value='" . $proveedor['id_proveedor'] . "'>" . $proveedor['nombre_prov'] . "</option>";
@@ -116,12 +125,13 @@ $usuario = $_SESSION['usuario'];
                         <label for="lname">Informacion</label>
                     </div>      
                     <div class="col-75">
-                        <input type="text" id="lname" name="informacion" placeholder="" required>
+                        <input type="text" id="lname" name="informacion" placeholder="" required value='<?php echo $producto[7]; ?>'>
                     </div>
                 </div>
                 <br>
                 <div class="row">
-                    <input type="hidden" name="editar" id="" value='no' readonly>
+                    <input type="hidden" name="id_producto" id="" value='<?php echo $producto[0]; ?>' readonly>
+                    <input type="hidden" name="editar" id="" value='si' readonly>
                     <input type="submit" value="Guardar">
                 </div>
             </form>

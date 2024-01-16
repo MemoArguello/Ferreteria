@@ -16,8 +16,10 @@ if (empty($_POST['nombre_producto']) || empty($_POST['categoria']) || empty($_PO
         $conexiondb = conectardb();
 
         if ($editar == "si") {
-            $id_proveedor = $_POST['id_proveedor'];
-            $query = "UPDATE proveedores SET nombre_prov='" . $nombre_prov . "', ruc='" . $ruc . "', telefono ='" . $telefono . "' WHERE id_proveedor='" . $id_proveedor . "'";
+            $id_producto = $_POST['id_producto'];
+            $query = "UPDATE productos SET nombre_producto='" . $nombre . "', categoria='" . $categoria . "'
+                    ,lote ='" . $lote . "', stock= '" . $stock . "', precio= '" . $precio . "', informacion= '" . $informacion . "' 
+                    WHERE id_producto='" . $id_producto . "'";
             
             $respuesta = mysqli_query($conexiondb, $query);
 

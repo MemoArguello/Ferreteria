@@ -133,7 +133,7 @@ mysqli_close($conexiondb);
                             "data": "nombre_producto"
                         },
                         {
-                            "data": "categoria"
+                            "data": "descripcion"
                         },
                         {
                             "data": "lote"

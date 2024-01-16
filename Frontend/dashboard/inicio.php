@@ -38,7 +38,7 @@
 		            </a>
 		          </li>
 		          <li>
-		            <a href="#">
+		            <a href="../venta.php/venta.php">
 		              <span class="icon"><i class="lar la-money-bill-alt"></i></span>
 		              <span class="list">Ventas</span>
 		            </a>
