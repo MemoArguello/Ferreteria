@@ -37,88 +37,63 @@ $usuario = $_SESSION['usuario'];
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
-<style>
-    body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+    <style>
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
 
-h2 {
-    text-align: center;
-    color: #333;
-}
+        input{
+            width: 30%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
 
-form {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
 
-label {
-    display: block;
-    margin-bottom: 8px;
-}
+        table,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
 
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
-}
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
 
-table {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-}
 
-table, th, td {
-    border: 1px solid #ccc;
-}
 
-th, td {
-    padding: 10px;
-    text-align: left;
-}
+        @media screen and (max-width: 600px) {
+            form {
+                margin: 10px;
+                padding: 10px;
+            }
 
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
+            input,
+            select,
+            textarea {
+                margin-bottom: 8px;
+            }
 
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-@media screen and (max-width: 600px) {
-    form {
-        margin: 10px;
-        padding: 10px;
-    }
-
-    input,
-    select,
-    textarea {
-        margin-bottom: 8px;
-    }
-
-    table {
-        margin-top: 10px;
-    }
-}
-
-</style>
+            table {
+                margin-top: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -134,171 +109,212 @@ input[type="submit"]:hover {
         </div>
 
         <div class="dash-content">
-        <form action="procesar_factura.php" method="post" class="">
-        <label for="codigo_factura">Código de factura:</label>
-        <input type="text" name="codigo_factura" required>
-        <br>
+            <form action="procesar_factura.php" method="post" class="form_venta">
+                <h1 align="center">Generar Factura</h1>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="codigo_factura">Código de factura:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="codigo_factura" required>
+                    </div>
+                </div>
 
-        <label for="cliente">Cliente:</label>
-        <select name="cliente" required>
-            <!-- Obtener la lista de clientes desde la base de datos o algún otro origen -->
-            <?php
-            // Aquí deberías tener código para conectarte a la base de datos y obtener la lista de clientes
-            // Puedes usar mysqli o PDO para ello
-            // Ejemplo con mysqli:
-            $mysqli = new mysqli("localhost", "root", "", "ferreteria");
-            $result = $mysqli->query("SELECT id_cliente, nombre FROM cliente");
+                <div class="row">
+                    <div class="col-25">
+                        <label for="cliente">Cliente:</label>
+                    </div>
+                    <div class="col-75">
+                        <select name="cliente" required>
+                            <!-- Obtener la lista de clientes desde la base de datos o algún otro origen -->
+                            <?php
+                            // Aquí deberías tener código para conectarte a la base de datos y obtener la lista de clientes
+                            // Puedes usar mysqli o PDO para ello
+                            // Ejemplo con mysqli:
+                            $mysqli = new mysqli("localhost", "root", "", "ferreteria");
+                            $result = $mysqli->query("SELECT id_cliente, nombre FROM cliente");
 
-            while ($row = $result->fetch_assoc()) {
-                echo "<option value='{$row['id_cliente']}'>{$row['nombre']}</option>";
-            }
-            ?>
-        </select>
-        <br>
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<option value='{$row['id_cliente']}'>{$row['nombre']}</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
 
-        <label for="tipo">Tipo:</label>
-        <select name="tipo" required>
-            <option value="Productos">Productos</option>
-            <option value="Servicios">Servicios</option>
-        </select>
-        <br>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="tipo">Tipo:</label>
+                    </div>
+                    <div class="col-75">
+                        <select name="tipo" required>
+                            <option value="Productos">Productos</option>
+                            <option value="Servicios">Servicios</option>
+                        </select>
+                    </div>
+                </div>
 
-        <h3>Formulario de Productos:</h3>
-        <label for="categoria">Categoría:</label>
-        <select name="categoria" id="categoria" onchange="cargarProductos(this.value)" required>
-            <!-- Obtener la lista de categorías desde la base de datos o algún otro origen -->
-            <?php
-            // Aquí deberías tener código similar para obtener la lista de categorías
-            $resultCategorias = $mysqli->query("SELECT id_categoria, descripcion FROM categorias");
+                <div class="row">
+                    <h3>Formulario de Productos:</h3>
+                </div>
 
-            while ($rowCategoria = $resultCategorias->fetch_assoc()) {
-                echo "<option value='{$rowCategoria['id_categoria']}'>{$rowCategoria['descripcion']}</option>";
-            }
-            ?>
-        </select>
-        <br>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="categoria">Categoría:</label>
+                    </div>
+                    <div class="col-75">
+                        <select name="categoria" id="categoria" onchange="cargarProductos(this.value)" required>
+                            <!-- Obtener la lista de categorías desde la base de datos o algún otro origen -->
+                            <?php
+                            // Aquí deberías tener código similar para obtener la lista de categorías
+                            $resultCategorias = $mysqli->query("SELECT id_categoria, descripcion FROM categorias");
 
-        <label for="producto">Producto:</label>
-        <select name="producto" id="producto" required>
-            <option value="" disabled selected>Selecciona primero la categoría</option>
-        </select>
-        <br>
+                            while ($rowCategoria = $resultCategorias->fetch_assoc()) {
+                                echo "<option value='{$rowCategoria['id_categoria']}'>{$rowCategoria['descripcion']}</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
 
-        <label for="cantidad">Cantidad:</label>
-        <input type="number" name="cantidad" min="1" required>
-        <br>
-        <input type="button" value="Agregar" onclick="agregarProducto()">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="producto">Producto:</label>
+                    </div>
+                    <div class="col-75">
+                        <select name="producto" id="producto" required>
+                            <option value="" disabled selected>Selecciona primero la categoría</option>
+                        </select>
+                    </div>
+                </div>
 
-        <!-- Tabla para mostrar los productos seleccionados -->
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Cantidad</th>
-                    <th>Producto</th>
-                    <th>Costo</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody id="tabla_productos">
-                <!-- Aquí se mostrarán los productos seleccionados -->
-            </tbody>
-        </table>
+                <div class="row">
+                <div class="col-25">
+
+                    <label for="cantidad">Cantidad:</label>
+                </div>
+                <div class="col-75">
+
+                    <input type="number" name="cantidad" min="1" required>
+                </div>
+                </div>
+
+                <div class="row">
+                    <input type="button" value="Agregar" onclick="agregarProducto()">
+                </div>
+
+                <!-- Tabla para mostrar los productos seleccionados -->
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Cantidad</th>
+                            <th>Producto</th>
+                            <th>Costo</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla_productos">
+                        <!-- Aquí se mostrarán los productos seleccionados -->
+                    </tbody>
+                </table>
+
+                <div class="row">
+                    <input type="submit" value="Generar Factura">
+                </div>
+            </form>
 
 
+            <script>
+                function cargarProductos(idCategoria) {
+                    // Aquí puedes realizar una solicitud AJAX para cargar los productos de la categoría seleccionada
+                    // Puedes utilizar JavaScript puro o alguna biblioteca como jQuery
+                    // ...
 
-        <input type="submit" value="Generar Factura">
-    </form>
-
-    <script>
-        function cargarProductos(idCategoria) {
-            // Aquí puedes realizar una solicitud AJAX para cargar los productos de la categoría seleccionada
-            // Puedes utilizar JavaScript puro o alguna biblioteca como jQuery
-            // ...
-
-            // Ejemplo con jQuery:
-            $.ajax({
-                url: 'cargar_productos.php',
-                method: 'GET',
-                data: { id_categoria: idCategoria },
-                success: function(data) {
-                    // Actualizar el contenido del select de productos
-                    $('#producto').html(data);
+                    // Ejemplo con jQuery:
+                    $.ajax({
+                        url: 'cargar_productos.php',
+                        method: 'GET',
+                        data: {
+                            id_categoria: idCategoria
+                        },
+                        success: function(data) {
+                            // Actualizar el contenido del select de productos
+                            $('#producto').html(data);
+                        }
+                    });
                 }
-            });
-        }
 
-        // Puedes agregar más funciones JavaScript según sea necesario para manejar la lógica del formulario
-    </script>
+                // Puedes agregar más funciones JavaScript según sea necesario para manejar la lógica del formulario
+            </script>
 </body>
 <script>
-function agregarProducto() {
-    // Obtener valores seleccionados del formulario
-    var cantidad = document.getElementsByName('cantidad')[0].value;
-    var productoSelect = document.getElementsByName('producto')[0];
-    var productoId = productoSelect.value;
-    var productoNombre = productoSelect.options[productoSelect.selectedIndex].text;
+    function agregarProducto() {
+        // Obtener valores seleccionados del formulario
+        var cantidad = document.getElementsByName('cantidad')[0].value;
+        var productoSelect = document.getElementsByName('producto')[0];
+        var productoId = productoSelect.value;
+        var productoNombre = productoSelect.options[productoSelect.selectedIndex].text;
 
-    // Llamar a la función para cargar el costo del producto
-    cargarCostoProducto(productoId, cantidad, productoNombre);
-}
+        // Llamar a la función para cargar el costo del producto
+        cargarCostoProducto(productoId, cantidad, productoNombre);
+    }
 
-function cargarCostoProducto(idProducto, cantidad, nombreProducto) {
-    // Realizar una solicitud AJAX para obtener el costo del producto
-    $.ajax({
-        url: 'obtener_costo_producto.php',
-        method: 'GET',
-        data: {
-            productoId: idProducto  // Corregir el nombre del parámetro
-        },
-        success: function(data) {
-            // Obtener el costo real del producto
-            var costo = parseFloat(data);
+    function cargarCostoProducto(idProducto, cantidad, nombreProducto) {
+        // Realizar una solicitud AJAX para obtener el costo del producto
+        $.ajax({
+            url: 'obtener_costo_producto.php',
+            method: 'GET',
+            data: {
+                productoId: idProducto // Corregir el nombre del parámetro
+            },
+            success: function(data) {
+                // Obtener el costo real del producto
+                var costo = parseFloat(data);
 
-            // Verificar si el costo es un número válido
-            if (!isNaN(costo)) {
-                // Calcular el total con el costo real del producto
-                var total = cantidad * costo;
+                // Verificar si el costo es un número válido
+                if (!isNaN(costo)) {
+                    // Calcular el total con el costo real del producto
+                    var total = cantidad * costo;
 
-                // Crear una nueva fila para la tabla con los detalles del producto
-                var newRow = document.createElement('tr');
-                newRow.innerHTML = '<td>' + cantidad + '</td>' +
-                    '<td>' + nombreProducto + '</td>' +
-                    '<td>' + costo.toFixed(2) + '</td>' +  // Asegurar dos decimales en el costo
-                    '<td>' + total.toFixed(2) + '</td>';  // Asegurar dos decimales en el total
+                    // Crear una nueva fila para la tabla con los detalles del producto
+                    var newRow = document.createElement('tr');
+                    newRow.innerHTML = '<td>' + cantidad + '</td>' +
+                        '<td>' + nombreProducto + '</td>' +
+                        '<td>' + costo.toFixed(2) + '</td>' + // Asegurar dos decimales en el costo
+                        '<td>' + total.toFixed(2) + '</td>'; // Asegurar dos decimales en el total
 
-                // Agregar la fila a la tabla
-                document.getElementById('tabla_productos').appendChild(newRow);
+                    // Agregar la fila a la tabla
+                    document.getElementById('tabla_productos').appendChild(newRow);
 
-                // Calcular y actualizar totales
-                calcularTotales();
-            } else {
-                console.log('Error: El costo no es un número válido.');
+                    // Calcular y actualizar totales
+                    calcularTotales();
+                } else {
+                    console.log('Error: El costo no es un número válido.');
+                }
+            },
+            error: function() {
+                console.log('Error al obtener el costo del producto.');
             }
-        },
-        error: function() {
-            console.log('Error al obtener el costo del producto.');
-        }
-    });
-}
+        });
+    }
 
 
-function calcularTotales() {
-    // Lógica para calcular y actualizar los totales
-    var subtotal = 0;
+    function calcularTotales() {
+        // Lógica para calcular y actualizar los totales
+        var subtotal = 0;
 
-    // Iterar sobre las filas de la tabla
-    var tableRows = document.querySelectorAll('#tabla_productos tbody tr');
-    tableRows.forEach(function(row) {
-        var totalCell = row.cells[3];
-        subtotal += parseFloat(totalCell.textContent || totalCell.innerText);
-    });
+        // Iterar sobre las filas de la tabla
+        var tableRows = document.querySelectorAll('#tabla_productos tbody tr');
+        tableRows.forEach(function(row) {
+            var totalCell = row.cells[3];
+            subtotal += parseFloat(totalCell.textContent || totalCell.innerText);
+        });
 
-    // Actualizar los campos de totales en el formulario
-    document.getElementsByName('subtotal')[0].value = subtotal.toFixed(2);
-    document.getElementsByName('impuesto')[0].value = (subtotal * 0.1).toFixed(2);
-    document.getElementsByName('total')[0].value = (subtotal + (subtotal * 0.1)).toFixed(2);
-}
-
+        // Actualizar los campos de totales en el formulario
+        document.getElementsByName('subtotal')[0].value = subtotal.toFixed(2);
+        document.getElementsByName('impuesto')[0].value = (subtotal * 0.1).toFixed(2);
+        document.getElementsByName('total')[0].value = (subtotal + (subtotal * 0.1)).toFixed(2);
+    }
 </script>
 
 </html>
