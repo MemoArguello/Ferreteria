@@ -231,44 +231,74 @@ input[type="submit"]:hover {
     </script>
 </body>
 <script>
-   function agregarProducto() {
-      // Obtener valores seleccionados del formulario
-      var cantidad = document.getElementsByName('cantidad')[0].value;
-      var productoId = document.getElementsByName('producto')[0].value;
-      var productoNombre = document.querySelector('#producto option:checked').text;
-      var costo = 10; // Reemplazar con el costo real del producto obtenido de la base de datos
-      var total = cantidad * costo;
+function agregarProducto() {
+    // Obtener valores seleccionados del formulario
+    var cantidad = document.getElementsByName('cantidad')[0].value;
+    var productoSelect = document.getElementsByName('producto')[0];
+    var productoId = productoSelect.value;
+    var productoNombre = productoSelect.options[productoSelect.selectedIndex].text;
 
-      // Crear una nueva fila para la tabla con los detalles del producto
-      var newRow = document.createElement('tr');
-      newRow.innerHTML = '<td>' + cantidad + '</td>' +
-                         '<td>' + productoNombre + '</td>' +
-                         '<td>' + costo + '</td>' +
-                         '<td>' + total + '</td>';
+    // Llamar a la función para cargar el costo del producto
+    cargarCostoProducto(productoId, cantidad, productoNombre);
+}
 
-      // Agregar la fila a la tabla
-      document.getElementById('tabla_productos').appendChild(newRow);
+function cargarCostoProducto(idProducto, cantidad, nombreProducto) {
+    // Realizar una solicitud AJAX para obtener el costo del producto
+    $.ajax({
+        url: 'obtener_costo_producto.php',
+        method: 'GET',
+        data: {
+            productoId: idProducto  // Corregir el nombre del parámetro
+        },
+        success: function(data) {
+            // Obtener el costo real del producto
+            var costo = parseFloat(data);
 
-      // Calcular y actualizar totales (puedes adaptar esto según tus necesidades)
-      calcularTotales();
-   }
- 
-   function calcularTotales() {
-      // Lógica para calcular y actualizar los totales
-      var subtotal = 0;
+            // Verificar si el costo es un número válido
+            if (!isNaN(costo)) {
+                // Calcular el total con el costo real del producto
+                var total = cantidad * costo;
 
-      // Iterar sobre las filas de la tabla
-      var tableRows = document.querySelectorAll('#tabla_productos tbody tr');
-      tableRows.forEach(function(row) {
-         var totalCell = row.cells[3];
-         subtotal += parseFloat(totalCell.textContent || totalCell.innerText);
-      });
+                // Crear una nueva fila para la tabla con los detalles del producto
+                var newRow = document.createElement('tr');
+                newRow.innerHTML = '<td>' + cantidad + '</td>' +
+                    '<td>' + nombreProducto + '</td>' +
+                    '<td>' + costo.toFixed(2) + '</td>' +  // Asegurar dos decimales en el costo
+                    '<td>' + total.toFixed(2) + '</td>';  // Asegurar dos decimales en el total
 
-      // Actualizar los campos de totales en el formulario
-      document.getElementsByName('subtotal')[0].value = subtotal.toFixed(2);
-      document.getElementsByName('impuesto')[0].value = (subtotal * 0.1).toFixed(2);
-      document.getElementsByName('total')[0].value = (subtotal + (subtotal * 0.1)).toFixed(2);
-   }
+                // Agregar la fila a la tabla
+                document.getElementById('tabla_productos').appendChild(newRow);
+
+                // Calcular y actualizar totales
+                calcularTotales();
+            } else {
+                console.log('Error: El costo no es un número válido.');
+            }
+        },
+        error: function() {
+            console.log('Error al obtener el costo del producto.');
+        }
+    });
+}
+
+
+function calcularTotales() {
+    // Lógica para calcular y actualizar los totales
+    var subtotal = 0;
+
+    // Iterar sobre las filas de la tabla
+    var tableRows = document.querySelectorAll('#tabla_productos tbody tr');
+    tableRows.forEach(function(row) {
+        var totalCell = row.cells[3];
+        subtotal += parseFloat(totalCell.textContent || totalCell.innerText);
+    });
+
+    // Actualizar los campos de totales en el formulario
+    document.getElementsByName('subtotal')[0].value = subtotal.toFixed(2);
+    document.getElementsByName('impuesto')[0].value = (subtotal * 0.1).toFixed(2);
+    document.getElementsByName('total')[0].value = (subtotal + (subtotal * 0.1)).toFixed(2);
+}
+
 </script>
 
 </html>
