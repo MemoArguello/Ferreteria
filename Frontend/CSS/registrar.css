@@ -272,6 +272,7 @@ label {
 }
 
 input[type=submit] {
+  width: 15%;
   background-color: #3421C0;
   color: white;
   padding: 12px 20px;
@@ -282,7 +283,8 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #3700ce;
+  background-color: #26008d;
+
 }
 
 .container {

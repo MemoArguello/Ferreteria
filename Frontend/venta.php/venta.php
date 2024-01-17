@@ -44,6 +44,7 @@ $usuario = $_SESSION['usuario'];
         }
 
         input{
+            float: right;
             width: 30%;
             padding: 8px;
             margin-bottom: 16px;
