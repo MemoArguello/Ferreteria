@@ -23,7 +23,7 @@ while ($usuario = mysqli_fetch_assoc($result)) {
 $usuario = $_SESSION['usuario'];
 
 $id_cliente = $_GET['id_cliente'];
-$query = "SELECT cliente.id_cliente, cliente.cedula, cliente.nombre, cliente.apellido, cliente.ruc, departamentos.nombre as nombre_departamento, ciudades.nombre as nombre_ciudad FROM cliente JOIN departamentos 
+$query = "SELECT cliente.id_cliente, cliente.cedula, cliente.nombre, cliente.ruc, departamentos.nombre as nombre_departamento, ciudades.nombre as nombre_ciudad FROM cliente JOIN departamentos 
             ON departamentos.id_departamento = cliente.id_departamento  JOIN ciudades ON ciudades.id_ciudad = cliente.id_ciudad where id_cliente=" . $id_cliente;
 $resultado3 = mysqli_query($conexiondb, $query);
 
@@ -90,18 +90,10 @@ mysqli_close($conexiondb);
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="lname">Apellidos</label>
-                    </div>
-                    <div class="col-75">
-                        <input type="text" id="lname" name="apellido" placeholder="" required value='<?php echo $cliente[3]; ?>'>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
                         <label for="lname">RUC</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="lname" name="ruc" placeholder="" required value='<?php echo $cliente[4]; ?>'>
+                        <input type="text" id="lname" name="ruc" placeholder="" required value='<?php echo $cliente[3]; ?>'>
                     </div>
                 </div>
                 <div class="row">
@@ -109,7 +101,7 @@ mysqli_close($conexiondb);
                         <label for="lname">Departamento</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="lname" name="departamento" placeholder="" required value='<?php echo $cliente[5]; ?>' readonly>
+                        <input type="text" id="lname" name="departamento" placeholder="" required value='<?php echo $cliente[4]; ?>' readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -117,7 +109,7 @@ mysqli_close($conexiondb);
                         <label for="lname">Ciudad</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="lname" name="ciudad" placeholder="" required value='<?php echo $cliente[6]; ?>' readonly>
+                        <input type="text" id="lname" name="ciudad" placeholder="" required value='<?php echo $cliente[5]; ?>' readonly>
                     </div>
                 </div>
 

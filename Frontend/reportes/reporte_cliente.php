@@ -63,7 +63,6 @@ mysqli_close($conexiondb);
                                     <th>Id</th>
                                     <th>Cedula</th>
                                     <th>Nombre</th>
-                                    <th>Apellido</th>
                                     <th>RUC</th>
                                     <th>Departamento</th>
                                     <th>Ciudad</th>
@@ -133,9 +132,6 @@ mysqli_close($conexiondb);
                         },
                         {
                             "data": "nombre"
-                        },
-                        {
-                            "data": "apellido"
                         },
                         {
                             "data": "ruc"

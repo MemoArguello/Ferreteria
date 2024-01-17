@@ -17,7 +17,7 @@ class Conexion{
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 
-$consulta = "SELECT cliente.id_cliente, cliente.cedula, cliente.nombre, cliente.apellido, cliente.ruc, departamentos.id_departamento,
+$consulta = "SELECT cliente.id_cliente, cliente.cedula, cliente.nombre, cliente.ruc, departamentos.id_departamento,
             departamentos.nombre AS nombre_depar, ciudades.id_ciudad, ciudades.nombre AS nombre_ciudad 
             FROM cliente JOIN departamentos ON departamentos.id_departamento = cliente.id_departamento
             JOIN ciudades ON ciudades.id_ciudad = cliente.id_ciudad";

@@ -14,7 +14,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($mysqli->connect_error) {
         die("Error en la conexión a la base de datos: " . $mysqli->connect_error);
     }
+    function obtenerCostoProducto($idProducto) {
+        global $mysqli;  // Asegúrate de que $mysqli esté disponible en este contexto
 
+        $query = "SELECT precio FROM productos WHERE id_producto = ?";
+        
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("i", $idProducto);
+        
+        $stmt->execute();
+        
+        $stmt->bind_result($costo);
+        $stmt->fetch();
+        
+        $stmt->close();
+    
+        return $costo;
+    }
     // Iniciar una transacción para garantizar la consistencia de la base de datos
     $mysqli->begin_transaction();
 
@@ -22,15 +38,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insertFactura = $mysqli->prepare("INSERT INTO facturas (codigo_factura, cliente, tipo, fecha_creacion) VALUES (?, ?, ?, ?)");
         $insertFactura->bind_param("siss", $codigoFactura, $clienteId, $tipo, $fechaActual);
         $insertFactura->execute();
-        $facturaId = $mysqli->insert_id; 
+        $facturaId = $mysqli->insert_id;
 
         // Insertar los detalles de la factura en la tabla detalle_factura
         $productos = $_POST["producto"];
-        foreach ($productos as $producto) {
-            $idProducto = $producto["id_producto"];
-            $cantidad = $producto["cantidad"];
-            $costoUnitario = $producto["costo"];
-            $total = $producto["total"];
+        $cantidades = $_POST["cantidad"];
+
+        foreach ($productos as $key => $idProducto) {
+            $cantidad = $cantidades[$key];
+
+            $costoUnitario = obtenerCostoProducto($idProducto);
+            $total = $cantidad * $costoUnitario;
 
             $insertDetalle = $mysqli->prepare("INSERT INTO detalle_factura (id_factura, id_producto, cantidad, costo_unitario, total) VALUES (?, ?, ?, ?, ?)");
             $insertDetalle->bind_param("iiidd", $facturaId, $idProducto, $cantidad, $costoUnitario, $total);
@@ -40,7 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Confirmar la transacción
         $mysqli->commit();
 
-        echo "Factura procesada exitosamente";
+        echo "<script>alert('Factura procesada exitosamente');
+        window.location.href='./venta.php'</script>";
     } catch (Exception $e) {
         // Revertir la transacción en caso de error
         $mysqli->rollback();

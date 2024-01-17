@@ -54,9 +54,10 @@ $usuario = $_SESSION['usuario'];
             float: right;
         }
 
-    .boton:hover{
-        background-color: #008604;
-    }
+        .boton:hover {
+            background-color: #008604;
+        }
+
         input {
             float: right;
             width: 30%;
@@ -193,27 +194,28 @@ $usuario = $_SESSION['usuario'];
                     </div>
                 </div>
 
+                <!-- Dentro de la sección del formulario -->
                 <div class="row">
                     <div class="col-25">
                         <label for="producto">Producto:</label>
                     </div>
                     <div class="col-75">
-                        <select name="producto" id="producto" required>
+                        <select name="producto[]" id="producto" required>
                             <option value="" disabled selected>Selecciona primero la categoría</option>
                         </select>
                     </div>
                 </div>
 
+
                 <div class="row">
                     <div class="col-25">
-
                         <label for="cantidad">Cantidad:</label>
                     </div>
                     <div class="col-75">
-
-                        <input type="number" name="cantidad" min="1" required>
+                        <input type="number" name="cantidad[]" min="1" required>
                     </div>
                 </div>
+
 
                 <div class="row">
                     <input type="button" class="boton" value="Agregar" onclick="agregarProducto()">
@@ -265,15 +267,17 @@ $usuario = $_SESSION['usuario'];
 </body>
 <script>
     function agregarProducto() {
-        // Obtener valores seleccionados del formulario
-        var cantidad = document.getElementsByName('cantidad')[0].value;
-        var productoSelect = document.getElementsByName('producto')[0];
+        var productoSelect = document.getElementsByName('producto[]')[0];
+        var cantidadInput = document.getElementsByName('cantidad[]')[0];
+
         var productoId = productoSelect.value;
-        var productoNombre = productoSelect.options[productoSelect.selectedIndex].text;
+        var productoNombre = productoSelect.options[productoSelect.selectedIndex].text; // Obtén el nombre del producto
+        var cantidad = cantidadInput.value;
 
         // Llamar a la función para cargar el costo del producto
         cargarCostoProducto(productoId, cantidad, productoNombre);
     }
+
 
     function cargarCostoProducto(idProducto, cantidad, nombreProducto) {
         // Realizar una solicitud AJAX para obtener el costo del producto
