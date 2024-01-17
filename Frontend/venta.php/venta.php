@@ -43,13 +43,28 @@ $usuario = $_SESSION['usuario'];
             margin-bottom: 8px;
         }
 
-        input{
+        .boton {
+            width: 15%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+    .boton:hover{
+        background-color: #008604;
+    }
+        input {
             float: right;
             width: 30%;
             padding: 8px;
             margin-bottom: 16px;
             box-sizing: border-box;
         }
+
         select,
         textarea {
             width: 100%;
@@ -190,18 +205,18 @@ $usuario = $_SESSION['usuario'];
                 </div>
 
                 <div class="row">
-                <div class="col-25">
+                    <div class="col-25">
 
-                    <label for="cantidad">Cantidad:</label>
-                </div>
-                <div class="col-75">
+                        <label for="cantidad">Cantidad:</label>
+                    </div>
+                    <div class="col-75">
 
-                    <input type="number" name="cantidad" min="1" required>
-                </div>
+                        <input type="number" name="cantidad" min="1" required>
+                    </div>
                 </div>
 
                 <div class="row">
-                    <input type="button" value="Agregar" onclick="agregarProducto()">
+                    <input type="button" class="boton" value="Agregar" onclick="agregarProducto()">
                 </div>
 
                 <!-- Tabla para mostrar los productos seleccionados -->
