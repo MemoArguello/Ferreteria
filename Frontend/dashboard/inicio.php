@@ -38,7 +38,7 @@
 		            </a>
 		          </li>
 		          <li>
-		            <a href="../venta.php/venta.php">
+		            <a href="../venta/venta.php">
 		              <span class="icon"><i class="lar la-money-bill-alt"></i></span>
 		              <span class="list">Ventas</span>
 		            </a>
@@ -58,7 +58,7 @@
 		          <li>
 		            <a href="#">
 		              <span class="icon"><i class="las la-chart-bar"></i></span>
-		              <span class="list">Reportes</span>
+		              <span class="list">Estadisticas</span>
 		            </a>
 		          </li>
 		          <li>

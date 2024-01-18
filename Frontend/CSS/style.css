@@ -484,10 +484,10 @@ table.dataTable thead {
     border-radius: 4px;
   }
   .submitBoton:hover {
-    background-color: #1100ff;
+    background-color: #299200;
     transform: translateY(2px);
   }
   .submitBotonEliminar:hover {
-    background-color: #1100ff;
+    background-color: #c40000;
     transform: translateY(2px);
   }

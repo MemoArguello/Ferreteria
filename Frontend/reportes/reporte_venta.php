@@ -26,7 +26,7 @@ mysqli_close($conexiondb);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poroductos</title>
+    <title>Cuentas</title>
     <link rel="stylesheet" href="../CSS/login.css">
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/registrar.css">
@@ -37,20 +37,6 @@ mysqli_close($conexiondb);
     <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css">
     <!---datatables bootstrap 4 css-->
     <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.13.1/css/dataTables.bootstrap.css">
-    <style>
-        @media print {
-            /* Estilos para impresión */
-            body {
-                margin: 1cm; /* Márgenes para la página impresa */
-            }
-
-            #tituloImpreso {
-                text-align: center; /* Centrar el título al imprimir */
-                font-size: 18px; /* Tamaño del texto del título */
-                margin-bottom: 10px; /* Espacio después del título */
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -60,28 +46,23 @@ mysqli_close($conexiondb);
     <section class="dashboard">
         <div class="top">
             <div class="topnav" id="myTopnav">
-                <a href="./reporte_prod.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_prod.php') echo 'class="active"'; ?>>Productos</a>
-                <a href="../productos/registrar_productos.php" <?php if (basename($_SERVER['PHP_SELF']) == '../productos/registrar_productos') echo 'class="active"'; ?>>Registrar</a>
+                <a href="../venta/venta.php" <?php if (basename($_SERVER['PHP_SELF']) == 'venta.php') echo 'class="active"'; ?>>Venta</a>
+                <a href="./reporte_venta.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_venta.php') echo 'class="active"'; ?>>Registros Venta</a>
+                <a href="./reporte_factura.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_factura.php') echo 'class="active"'; ?>>Facturas</a>    
             </div>
         </div>
         <div class="dash-content">
             <div class="container">
-                <div class="texto-formulario">
-                    <h2>Listado de Productos</h2>
-                </div>
-                <div class"row">
+                <div class="row">
                     <div class="col-lg-12">
                         <table id="tablaUsuarios" class="table-striped table-bordered" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>Categoria</th>
-                                    <th>Lote</th>
-                                    <th>Stock</th>
-                                    <th>Precio</th>
-                                    <th>Proveedor</th>
-                                    <th>Informacion</th>
+                                    <th>Codigo</th>
+                                    <th>Cliente</th>
+                                    <th>Tipo</th>
+                                    <th>Fecha</th>
                                     <th>Editar</th>
                                     <th>Eliminar</th>
                                 </tr>
@@ -114,7 +95,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a Excel',
                             className: 'btn btn-success',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 7]
+                                columns: [0, 1, 2, 3,4] 
                             }
                         },
                         {
@@ -123,7 +104,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a PDF',
                             className: 'btn btn-danger',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 7]
+                                columns: [0, 1, 2, 3,4] 
                             }
                         },
                         {
@@ -132,48 +113,39 @@ mysqli_close($conexiondb);
                             titleAttr: 'Imprimir',
                             className: 'btn btn-info',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 7]
+                                columns: [0, 1, 2, 3,4] 
                             }
                         },
                     ],
                     "ajax": {
-                        "url": "list_prod.php",
+                        "url": "list_venta.php",
                         "dataSrc": ""
                     },
                     "columns": [{
-                            "data": "id_producto"
+                            "data": "id_factura"
                         },
                         {
-                            "data": "nombre_producto"
+                            "data": "codigo_factura"
                         },
                         {
-                            "data": "descripcion"
+                            "data": "nombre"
                         },
                         {
-                            "data": "lote"
+                            "data": "tipo"
                         },
                         {
-                            "data": "stock"
-                        },
-                        {
-                            "data": "precio"
-                        },
-                        {
-                            "data": "nombre_prov"
-                        },
-                        {
-                            "data": "informacion"
+                            "data": "fecha_creacion"
                         },
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../productos/editar_prod.php?id_producto=' + row.id_producto + '" class="submitBoton">Editar</a>';
+                                return '<a href="../configuracion/editar_cuenta.php?id_usuario=' + row.id_usuario + '" class="submitBoton">Editar</a>';
                             }
                         },
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../../Backend/producto/eliminar_prod.php?id_producto=' + row.id_producto + '" class="submitBotonEliminar">Borrar</a>';
+                                return '<a href="../../Backend/cuenta/eliminar_cuenta.php?id_usuario=' + row.id_usuario + '" class="submitBotonEliminar">Borrar</a>';
                             }
                         }
                     ]

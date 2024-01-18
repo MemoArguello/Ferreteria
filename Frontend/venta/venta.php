@@ -84,8 +84,12 @@ $usuario = $_SESSION['usuario'];
         th,
         td {
             border: 1px solid #ccc;
-        }
+            background-color: #ccc;
 
+        }
+        td{
+            background-color: white;
+        }
         th,
         td {
             padding: 10px;
@@ -121,7 +125,8 @@ $usuario = $_SESSION['usuario'];
         <div class="top">
             <div class="topnav" id="myTopnav">
                 <a href="./venta.php" <?php if (basename($_SERVER['PHP_SELF']) == 'venta.php') echo 'class="active"'; ?>>Venta</a>
-                <a href="./registrar_productos.php" <?php if (basename($_SERVER['PHP_SELF']) == 'registrar_productos.php') echo 'class="active"'; ?>>Registros Venta</a>
+                <a href="../reportes/reporte_venta.php" <?php if (basename($_SERVER['PHP_SELF']) == 'registrar_productos.php') echo 'class="active"'; ?>>Registros Venta</a> 
+                <a href="../reportes/reporte_factura.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_factura.php') echo 'class="active"'; ?>>Facturas</a>
             </div>
         </div>
 
