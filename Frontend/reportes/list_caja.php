@@ -17,13 +17,7 @@ class Conexion{
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 
-$consulta = "SELECT detalle_factura.id_detalle, detalle_factura.id_factura, detalle_factura.id_producto, 
-            detalle_factura.cantidad, detalle_factura.costo_unitario, detalle_factura.total, 
-            facturas.id_factura, facturas.codigo_factura, facturas.cliente, productos.id_producto,
-            productos.nombre_producto, cliente.id_cliente, cliente.nombre, cliente.cedula, detalle_factura.estado 
-            FROM detalle_factura JOIN facturas 
-            ON facturas.id_factura =  detalle_factura.id_factura JOIN productos 
-            ON productos.id_producto = detalle_factura.id_producto JOIN cliente ON cliente.id_cliente = facturas.cliente";
+$consulta = "SELECT * FROM caja";
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
 $data=$resultado->fetchALL(PDO::FETCH_ASSOC);

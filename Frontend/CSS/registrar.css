@@ -70,13 +70,12 @@ body {
 
 .formCaja {
   margin: 5%;
-  text-align: center;
-  background-color: white;
-  width: 500px;
-  height: 300px;
-  border-radius: 8px;
-  padding: 20px 40px;
-  box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
+  text-align: left;
+  background-color: rgb(214, 214, 214);
+  width: 1000px;
+  height: 200px;
+  border-radius: 0px;
+  padding: 30px 40px;
 }
 
 .file-select {
@@ -244,7 +243,13 @@ body {
 * {
   box-sizing: border-box;
 }
-
+input[type=date], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
 input[type=text], select, textarea {
   width: 100%;
   padding: 12px;

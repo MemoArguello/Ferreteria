@@ -75,8 +75,10 @@ mysqli_close($conexiondb);
                                     <th>Cantidad</th>
                                     <th>Costo Unitario</th>
                                     <th>Total</th>
+                                    <th>Estado</th>
                                     <th>Imprimir</th>
                                     <th>Estado</th>
+                                    <th>Eliminar</th>
                                 </tr>
                             </thead>
                         </table>
@@ -155,6 +157,9 @@ mysqli_close($conexiondb);
                             "data": "total"
                         },
                         {
+                            "data": "estado"
+                        },
+                        {
                             "data": null,
                             "render": function(data, type, row) {
                                 return '<a href="../venta/RECEIPT/ticket.php?id_detalle=' + row.id_detalle + '" class="submitBoton">Factura</a>';
@@ -163,7 +168,13 @@ mysqli_close($conexiondb);
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../../Backend/cuenta/eliminar_cuenta.php?id_usuario=' + row.id_usuario + '" class="submitBotonEliminar">Pagado</a>';
+                                return '<a href="../venta/estado.php?id_detalle=' + row.id_detalle + '" class="submitBotonStatus">Pagado</a>';
+                            }
+                        },
+                        {
+                            "data": null,
+                            "render": function(data, type, row) {
+                                return '<a href="../venta/borrar_venta.php?id_detalle=' + row.id_detalle + '" class="submitBotonEliminar">Borrar</a>';
                             }
                         }
                     ]

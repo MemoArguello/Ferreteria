@@ -37,6 +37,13 @@ mysqli_close($conexiondb);
     <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css">
     <!---datatables bootstrap 4 css-->
     <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.13.1/css/dataTables.bootstrap.css">
+    <style>
+        @media print {
+            title {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -46,24 +53,29 @@ mysqli_close($conexiondb);
     <section class="dashboard">
         <div class="top">
             <div class="topnav" id="myTopnav">
-                <a href="../venta/venta.php" <?php if (basename($_SERVER['PHP_SELF']) == 'venta.php') echo 'class="active"'; ?>>Venta</a>
-                <a href="./reporte_venta.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_venta.php') echo 'class="active"'; ?>>Registros Venta</a>
-                <a href="./reporte_factura.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_factura.php') echo 'class="active"'; ?>>Facturas</a>    
+                <a href="./reporte_caja.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_caja.php') echo 'class="active"'; ?>>Cajas</a>
             </div>
         </div>
         <div class="dash-content">
             <div class="container">
+            <div class="texto-formulario">
+                    <h2>Cajas</h2>
+                </div>
+                <a href="../../Backend/caja/abrir.php" class="submitBoton">Abrir Caja</a>
+                
                 <div class="row">
                     <div class="col-lg-12">
                         <table id="tablaUsuarios" class="table-striped table-bordered" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Codigo</th>
-                                    <th>Cliente</th>
-                                    <th>Tipo</th>
-                                    <th>Fecha</th>
-                                    <th>Editar</th>
+                                    <th>Fecha Apertura</th>
+                                    <th>Fecha Cierre</th>
+                                    <th>Ingreso</th>
+                                    <th>Egreso</th>
+                                    <th>Saldo_cierre</th>
+                                    <th>Estado</th>
+                                    <th>Cerrar Caja</th>
                                     <th>Eliminar</th>
                                 </tr>
                             </thead>
@@ -95,7 +107,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a Excel',
                             className: 'btn btn-success',
                             exportOptions: {
-                                columns: [0, 1, 2, 3,4] 
+                                columns: [0, 1, 2, 3, 4, 5, 6]
                             }
                         },
                         {
@@ -104,7 +116,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a PDF',
                             className: 'btn btn-danger',
                             exportOptions: {
-                                columns: [0, 1, 2, 3,4] 
+                                columns: [0, 1, 2, 3, 4, 5, 6]
                             }
                         },
                         {
@@ -113,39 +125,45 @@ mysqli_close($conexiondb);
                             titleAttr: 'Imprimir',
                             className: 'btn btn-info',
                             exportOptions: {
-                                columns: [0, 1, 2, 3,4] 
+                                columns: [0, 1, 2, 3, 4, 5, 6]
                             }
                         },
                     ],
                     "ajax": {
-                        "url": "list_venta.php",
+                        "url": "list_caja.php",
                         "dataSrc": ""
                     },
                     "columns": [{
-                            "data": "id_factura"
+                            "data": "id_caja"
                         },
                         {
-                            "data": "codigo_factura"
+                            "data": "fecha_apertura"
                         },
                         {
-                            "data": "nombre"
+                            "data": "fecha_cierre"
                         },
                         {
-                            "data": "tipo"
+                            "data": "ingreso"
                         },
                         {
-                            "data": "fecha_creacion"
+                            "data": "egreso"
+                        },
+                        {
+                            "data": "saldo_cierre"
+                        },
+                        {
+                            "data": "estado"
                         },
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../configuracion/editar_cuenta.php?id_factura=' + row.id_factura + '" class="submitBoton">Editar</a>';
+                                return '<a href="../venta/estado.php?id_caja=' + row.id_caja + '" class="submitBotonStatus">Cerrar</a>';
                             }
                         },
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../../Backend/venta/eliminar_venta.php?id_factura=' + row.id_factura + '" class="submitBotonEliminar">Borrar</a>';
+                                return '<a href="../venta/borrar_caja.php?id_caja=' + row.id_caja + '" class="submitBotonEliminar">Borrar</a>';
                             }
                         }
                     ]

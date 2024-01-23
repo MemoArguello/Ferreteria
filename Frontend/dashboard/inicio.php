@@ -56,13 +56,7 @@
 		            </a>
 		          </li>
 		          <li>
-		            <a href="#">
-		              <span class="icon"><i class="las la-chart-bar"></i></span>
-		              <span class="list">Estadisticas</span>
-		            </a>
-		          </li>
-		          <li>
-		            <a href="#">
+		            <a href="../reportes/reporte_caja.php">
 		              <span class="icon"><i class="las la-coins"></i></span>
 		              <span class="list">Caja</span>
 		            </a>
@@ -80,6 +74,12 @@
 		            </a>
 		          </li>
 				  <ul class="inner__sidebar_menu">
+				  <li>
+		            <a>
+		              <span class="icon"><i class="uil uil-user"></i></span>
+		              <span class="list"><?php echo "Usuario: $usuario"; ?></span>
+		            </a>
+		          </li>
 				  <li>
 		            <a href="../../Backend/validacion/cerrar_sesion.php">
 		              <span class="icon"><i class="las la-sign-out-alt"></i></span>

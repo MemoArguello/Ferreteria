@@ -473,7 +473,7 @@ table.dataTable thead {
   }
 
   .submitBotonEliminar {
-    background-color: #f44336; /* Rojo */
+    background-color: #f44336; 
     border: none;
     color: white;
     padding: 5px 12px;
@@ -482,6 +482,23 @@ table.dataTable thead {
     display: inline-block;
     font-size: 16px;
     border-radius: 4px;
+  }
+  
+  .submitBotonStatus {
+    background-color: #f4a236; 
+    border: none;
+    color: white;
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+
+  .submitBotonStatus:hover{
+    background-color: #c46f00;
+    transform: translateY(2px);
   }
   .submitBoton:hover {
     background-color: #299200;
