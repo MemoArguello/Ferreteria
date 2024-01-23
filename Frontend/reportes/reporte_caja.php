@@ -9,11 +9,7 @@ if (!isset($usuario)) {
 $conexiondb = conectardb();
 $sql = "SELECT id_cargo FROM `usuarios` WHERE usuario = '$usuario';";
 $result = mysqli_query($conexiondb, $sql);
-while ($usuario = mysqli_fetch_assoc($result)) {
-    if ($usuario['id_cargo'] != 1) {
-        header("location:../../index.php");
-    }
-}
+
 $usuario = $_SESSION['usuario'];
 $conexiondb = conectardb();
 $query = "SELECT * FROM cargo ORDER BY id ASC";
@@ -157,7 +153,7 @@ mysqli_close($conexiondb);
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../venta/estado.php?id_caja=' + row.id_caja + '" class="submitBotonStatus">Cerrar</a>';
+                                return '<a href="../../Backend/caja/cerrar.php?id_caja=' + row.id_caja + '" class="submitBotonStatus">Cerrar</a>';
                             }
                         },
                         {

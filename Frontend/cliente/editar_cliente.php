@@ -15,11 +15,6 @@ $resultado2 = mysqli_query($conexiondb, $query2);
 
 $sql = "SELECT id_cargo FROM `usuarios` WHERE usuario = '$usuario';";
 $result = mysqli_query($conexiondb, $sql);
-while ($usuario = mysqli_fetch_assoc($result)) {
-    if ($usuario['id_cargo'] != 1) {
-        header("location:../../index.php");
-    }
-}
 $usuario = $_SESSION['usuario'];
 
 $id_cliente = $_GET['id_cliente'];

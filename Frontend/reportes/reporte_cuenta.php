@@ -6,20 +6,21 @@ $usuario = $_SESSION['usuario'];
 if (!isset($usuario)) {
     header("location:../../index.php");
 }
+
 $conexiondb = conectardb();
 $sql = "SELECT id_cargo FROM `usuarios` WHERE usuario = '$usuario';";
 $result = mysqli_query($conexiondb, $sql);
-while ($usuario = mysqli_fetch_assoc($result)) {
-    if ($usuario['id_cargo'] != 1) {
-        header("location:../../index.php");
-    }
-}
-$usuario = $_SESSION['usuario'];
+
+
+
 $conexiondb = conectardb();
 $query = "SELECT * FROM cargo ORDER BY id ASC";
 $resultado = mysqli_query($conexiondb, $query);
+
+
 mysqli_close($conexiondb);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

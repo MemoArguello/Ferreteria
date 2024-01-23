@@ -1,30 +1,38 @@
 <?php
 include ('../config/baseDeDatos.php');
 
-$fechaActual = date("Y-m-d H:i:s");
-
-
 $conexiondb = conectardb();
 
-$query = "INSERT INTO caja (fecha_apertura, estado) VALUES
-        ('$fechaActual', 'Abierto')";
+// Verificar si hay una caja abierta
+$queryVerificar = "SELECT COUNT(*) as numCajasAbiertas FROM caja WHERE estado='Abierto'";
+$resultadoVerificar = mysqli_query($conexiondb, $queryVerificar);
 
-//$query2 = "INSERT INTO auditoria (id_usuario, evento, fecha) VALUES
-//('$usuario','Apertura de caja',now())";
+if ($resultadoVerificar) {
+    $fila = mysqli_fetch_assoc($resultadoVerificar);
+    $numCajasAbiertas = $fila['numCajasAbiertas'];
 
-$respuesta = mysqli_query($conexiondb, $query);
+    // Si no hay cajas abiertas, proceder a abrir una nueva caja
+    if ($numCajasAbiertas == 0) {
+        $fechaActual = date("Y-m-d H:i:s");
 
-//$respuesta2 = mysqli_query($conexiondb, $query2);
+        $queryInsertar = "INSERT INTO caja (fecha_apertura, estado) VALUES ('$fechaActual', 'Abierto')";
+        $respuesta = mysqli_query($conexiondb, $queryInsertar);
 
-
-if ($respuesta) {
-    header("Location: ../../Frontend/reportes/reporte_caja.php");
-    exit();
+        if ($respuesta) {
+            header("Location: ../../Frontend/reportes/reporte_caja.php");
+            exit();
+        } else {
+            header("Location: ../../Frontend/reportes/reporte_caja.php");
+            exit();
+        }
+    } else {
+        echo "<script>alert('Ya hay una caja Abierta');
+        window.location.href='../../Frontend/reportes/reporte_caja.php'</script>";
+    }
 } else {
-    header("Location: ../../Frontend/reportes/reporte_caja.php");
-    exit();
+    // Manejar errores en la consulta de verificación si es necesario
+    echo "Error al verificar cajas abiertas";
 }
+
 mysqli_close($conexiondb);
-
-
 ?>
