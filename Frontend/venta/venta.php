@@ -17,6 +17,21 @@ $sql = "SELECT id_cargo FROM `usuarios` WHERE usuario = '$usuario';";
 $result = mysqli_query($conexiondb, $sql);
 
 $usuario = $_SESSION['usuario'];
+
+// Consulta para obtener el ID del usuario a partir del nombre de usuario
+$queryUsuario = "SELECT id_usuario FROM usuarios WHERE usuario = '$usuario'";
+$resultadoUsuario = mysqli_query($conexiondb, $queryUsuario);
+
+// Verificar si se obtuvo el resultado
+if ($resultadoUsuario) {
+    // Obtener el ID del usuario
+    $usuarioInfo = mysqli_fetch_assoc($resultadoUsuario);
+    $idUsuario = $usuarioInfo['id_usuario'];
+} else {
+    // Manejar el error si la consulta no fue exitosa
+    echo "Error al obtener el ID del usuario.";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -241,6 +256,7 @@ $usuario = $_SESSION['usuario'];
                 </table>
 
                 <div class="row">
+                    <input type="hidden" name="id_usuario" id="" value='<?php echo $idUsuario[0]; ?>' readonly>                           
                     <input type="submit" value="Generar Factura">
                 </div>
             </form>

@@ -44,60 +44,73 @@ $resultado6 = mysqli_query($conexiondb, $query6);
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Quicksand&family=Roboto+Condensed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Quicksand&family=Roboto+Condensed:wght@300&display=swap');
 
-    body{
-        font-family: 'Open Sans', 'Quicksand', 'Roboto Condensed', sans-serif;
-
-    }
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    .card-head span {
-    font-size: 20px; /* Tamaño de fuente para los números */
-    font-weight: bold; /* Puedes ajustar el peso de la fuente según tu preferencia */
+body {
+    font-family: 'Open Sans', 'Quicksand', 'Roboto Condensed', sans-serif;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.card-head span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card img {
+    height: 120px;
+    width: 150px;
+}
+
+.card {
+    box-shadow: 0px 10px 10px -5px rgb(0 0 0 / 10%);
+    background: #ffffff;
+    padding: 40px;
+    max-width: 100%; /* Ensure the card doesn't exceed the width of the viewport */
+    margin: 0 auto; /* Center the card */
+}
+
+.card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #3421c0;
+}
+
+.analytics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    grid-gap: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.page-content {
+    padding: 1.3rem 1rem;
+    background: #f1f4f9;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .card {
+        padding: 20px;
+    }
 
     .card img {
-        height: 120px;
-        width: 150px;
+        height: auto;
+        width: 100%;
     }
-
-    .card {
-        box-shadow: 0px 10px 10px -5px rgb(0 0 0 / 10%);
-        background: #ffffff;
-        padding: 40px;
-        height: 200px;
-        width: 340px;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .card-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: #3421c0;
-    }
-
 
     .analytics {
-        font-family: 'Poppins', sans-serif;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 2rem;
-        margin-top: 0.5rem;
-        margin-bottom: 2rem;
+        grid-template-columns: 1fr; /* Single column on smaller screens */
     }
+}
 
-    .page-content {
-        padding: 1.3rem 1rem;
-        background: #f1f4f9;
-    }
-</style>
+    </style>
 </head>
 
 <body>
@@ -107,8 +120,8 @@ $resultado6 = mysqli_query($conexiondb, $query6);
     <section class="dashboard">
         <div class="top">
             <div class="topnav" id="myTopnav">
-                <a href="#" <?php if (basename($_SERVER['PHP_SELF']) == 'inicio.php') echo 'class="active"'; ?>>Inicio</a>
-                <a href="#" <?php if (basename($_SERVER['PHP_SELF']) == 'formulario_cliente.php') echo 'class="active"'; ?>>Auditoria</a>
+                <a href="./inicio.php" <?php if (basename($_SERVER['PHP_SELF']) == 'inicio.php') echo 'class="active"'; ?>>Inicio</a>
+                <a href="../reportes/reporte_auditoria.php" <?php if (basename($_SERVER['PHP_SELF']) == 'formulario_cliente.php') echo 'class="active"'; ?>>Auditoria</a>
             </div>
         </div>
         <br>
@@ -126,87 +139,96 @@ $resultado6 = mysqli_query($conexiondb, $query6);
                                 }
                             }
                             ?>
+                            <a href="../reportes/reporte_cliente.php" class="submitBotonInicio">Ver Detalles</a>
                         </span>
                         <img src="../IMG/client.png" class="" alt="...">
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-head">
-                    <span>
+                        <span>
 
-                        <?php
-                        while ($reserva = mysqli_fetch_assoc($resultado2)) {
-                            if ($reserva['total2'] == 1) {
-                            $cant = $reserva['total2'];    
-                            echo "<td align= 'center'>" . $reserva['total2'] . ' Producto Registrado' . "</td>";
-                            } else {
-                                echo "<td align= 'center'>" . $reserva['total2'] . ' Productos Registrados' . "</td>";
+                            <?php
+                            while ($reserva = mysqli_fetch_assoc($resultado2)) {
+                                if ($reserva['total2'] == 1) {
+                                    $cant = $reserva['total2'];
+                                    echo "<td align= 'center'>" . $reserva['total2'] . ' Producto Registrado' . "</td>";
+                                } else {
+                                    echo "<td align= 'center'>" . $reserva['total2'] . ' Productos Registrados' . "</td>";
+                                }
                             }
-                        }
-                        ?>
-                    </span>
+                            ?>
+                            <a href="../reportes/reporte_prod.php" class="submitBotonInicio">Ver Detalles</a>
+
+                        </span>
                         <img src="../IMG/producto.png" class="" alt="...">
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-head">
-                    <span>
+                        <span>
 
-                        <?php
-                        while ($reserva = mysqli_fetch_assoc($resultado3)) {
-                            if ($reserva['total3'] == 1) {
-                                echo "<td align= 'center'>" . $reserva['total3'] . ' Venta Realizado' . "</td>";
-                            } else {
-                                echo "<td align= 'center'>" . $reserva['total3'] . ' Ventas Realizadas' . "</td>";
+                            <?php
+                            while ($reserva = mysqli_fetch_assoc($resultado3)) {
+                                if ($reserva['total3'] == 1) {
+                                    echo "<td align= 'center'>" . $reserva['total3'] . ' Venta Realizado' . "</td>";
+                                } else {
+                                    echo "<td align= 'center'>" . $reserva['total3'] . ' Ventas Realizadas' . "</td>";
+                                }
                             }
-                        }
-                        ?>
-                                                </span>
+                            ?>
+                            <a href="../reportes/reporte_venta.php" class="submitBotonInicio">Ver Detalles</a>
+
+                        </span>
 
                         <img src="../IMG/img1.png" class="" alt="...">
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-head">
-                    <span>
+                        <span>
 
-                        <?php
-                        while ($reserva = mysqli_fetch_assoc($resultado4)) {
-                            if ($reserva['total4'] == 1) {
-                                echo "<td align= 'center'>" . $reserva['total4'] . ' Proveedor Registrado' . "</td>";
-                            } else {
-                                echo "<td align= 'center'>" . $reserva['total4'] . ' Proveedores Registrados' . "</td>";
+                            <?php
+                            while ($reserva = mysqli_fetch_assoc($resultado4)) {
+                                if ($reserva['total4'] == 1) {
+                                    echo "<td align= 'center'>" . $reserva['total4'] . ' Proveedor Registrado' . "</td>";
+                                } else {
+                                    echo "<td align= 'center'>" . $reserva['total4'] . ' Proveedores Registrados' . "</td>";
+                                }
                             }
-                        }
-                        ?>
-                                                </span>
+                            ?>
+                            <a href="../reportes/reporte_prov.php" class="submitBotonInicio">Ver Detalles</a>
+
+                        </span>
 
                         <img src="../IMG/img4.png" class="" alt="...">
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-head">
-                    <span>
+                        <span>
 
-                        <?php
-                        while ($reserva = mysqli_fetch_assoc($resultado5)) {
-                            echo "<td align= 'center'>" . $reserva['total5'] . ' Gs en Ventas Realizadas' . "</td>";
-                        }
-                        ?>
-                    </span>
+                            <?php
+                            while ($reserva = mysqli_fetch_assoc($resultado5)) {
+                                echo "<td align= 'center'>" . $reserva['total5'] . ' Gs en Ventas Realizadas' . "</td>";
+                            }
+                            ?>
+                           <a href="../reportes/reporte_caja.php" class="submitBotonInicio">Ver Detalles</a>
+                        </span>
                         <img src="../IMG/img3.png" class="" alt="...">
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-head">
-                    <span>
+                        <span>
 
-                        <?php
-                        while ($reserva = mysqli_fetch_assoc($resultado6)) {
-                            echo "<td align= 'center'>" . $reserva['total6'] . ' Gs en Compras Realizadas' . "</td>";
-                        }
-                        ?>
-                    </span>
+                            <?php
+                            while ($reserva = mysqli_fetch_assoc($resultado6)) {
+                                echo "<td align= 'center'>" . $reserva['total6'] . ' Gs en Compras Realizadas' . "</td>";
+                            }
+                            ?>
+                           <a href="../reportes/reporte_caja.php" class="submitBotonInicio">Ver Detalles</a>
+                        </span>
                         <img src="../IMG/img2.png" class="" alt="...">
                     </div>
                 </div>

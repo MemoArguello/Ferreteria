@@ -460,6 +460,18 @@ table.dataTable thead {
     background: linear-gradient(to right, #ffa600, #c9ab00);
     color: white;
 }
+
+.submitBotonInicio {
+    background-color: #3421C0;
+    border: none;
+    color: white;
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+  }
 .submitBoton {
     background-color: #4CAF50; /* verde */
     border: none;
@@ -496,6 +508,10 @@ table.dataTable thead {
     border-radius: 4px;
   }
 
+  .submitBotonInicio:hover{
+    background-color: #6252db;
+    transform: translateY(2px);
+  }
   .submitBotonStatus:hover{
     background-color: #c46f00;
     transform: translateY(2px);

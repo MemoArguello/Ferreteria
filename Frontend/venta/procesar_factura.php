@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $clienteId = $_POST["cliente"];
     $tipo = $_POST["tipo"];
     $fechaActual = date("Y-m-d H:i:s");
-
+    $usuario = $_POST["id_usuario"];
     // Conectar a la base de datos (ajusta las credenciales según tu configuración)
     $mysqli = new mysqli("localhost", "root", "", "ferreteria");
 
@@ -65,11 +65,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Calcular el nuevo ingreso sumando el monto anterior con el nuevo monto
         $nuevoIngreso = $ingresoActual + $total;
 
-        // Actualizar el ingreso en la tabla caja
-        $insertCaja = $mysqli->prepare("UPDATE caja SET ingreso = ? WHERE estado = 'Abierto'");
-        $insertCaja->bind_param("i", $nuevoIngreso);
-        $insertCaja->execute();
+        $evento = 'Venta de Productos';
 
+        $insertAuditoria = $mysqli->prepare("INSERT INTO auditoria (id_usuario, evento, fecha) VALUES (?, ?, ?)");
+        $insertAuditoria->bind_param("iss", $usuario, $evento, $fechaEvento);
+        $insertAuditoria->execute();
+        
+    
         // Confirmar la transacción
         $mysqli->commit();
 
