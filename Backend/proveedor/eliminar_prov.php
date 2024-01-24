@@ -11,10 +11,14 @@ if (empty($id_proveedor)) {
 
 $conexiondb = conectardb();
 
-$query = $conexiondb->prepare("DELETE FROM proveedores WHERE id_proveedor=?");
+try{
+$query = $conexiondb->prepare("DELETE * FROM proveedores WHERE id_proveedor=?");
 $query->bind_param("i", $id_proveedor);
 $query->execute();
-
+}catch (Exception){
+    echo "<script>alert('No se pudo eliminar el Proveedor');
+    window.location.href='../../Frontend/reportes/reporte_prov.php'</script>";
+} 
 if ($query->affected_rows > 0) {
     header("Location: ../../Frontend/reportes/reporte_prov.php");
     exit();

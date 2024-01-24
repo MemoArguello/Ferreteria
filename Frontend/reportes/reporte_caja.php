@@ -54,11 +54,11 @@ mysqli_close($conexiondb);
         </div>
         <div class="dash-content">
             <div class="container">
-            <div class="texto-formulario">
+                <div class="texto-formulario">
                     <h2>Cajas</h2>
                 </div>
                 <a href="../../Backend/caja/abrir.php" class="submitBoton">Abrir Caja</a>
-                
+
                 <div class="row">
                     <div class="col-lg-12">
                         <table id="tablaUsuarios" class="table-striped table-bordered" style="width: 100%">
@@ -153,7 +153,11 @@ mysqli_close($conexiondb);
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../../Backend/caja/cerrar.php?id_caja=' + row.id_caja + '" class="submitBotonStatus">Cerrar</a>';
+                                if (row.estado !== 'Cerrado') {
+                                    return '<a href="../venta/caja_cerrar.php?id_caja=' + row.id_caja + '" class="submitBotonStatus">Cerrar</a>';
+                                } else {
+                                    return '';
+                                }
                             }
                         },
                         {

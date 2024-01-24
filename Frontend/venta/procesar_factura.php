@@ -55,10 +55,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $insertDetalle->execute();
         }
 
-        $insertCaja = $mysqli->prepare("UPDATE INTO caja (ingreso)  VALUES (?) WHERE estado = 'Activo'");
-        $insertCaja->bind_param("i", $total);
+        // Obtener el ingreso actual de la caja
+        $obtenerIngreso = $mysqli->prepare("SELECT ingreso FROM caja WHERE estado = 'Abierto'");
+        $obtenerIngreso->execute();
+        $obtenerIngreso->bind_result($ingresoActual);
+        $obtenerIngreso->fetch();
+        $obtenerIngreso->close();
+
+        // Calcular el nuevo ingreso sumando el monto anterior con el nuevo monto
+        $nuevoIngreso = $ingresoActual + $total;
+
+        // Actualizar el ingreso en la tabla caja
+        $insertCaja = $mysqli->prepare("UPDATE caja SET ingreso = ? WHERE estado = 'Abierto'");
+        $insertCaja->bind_param("i", $nuevoIngreso);
         $insertCaja->execute();
-        $insertCaja->close();
+
         // Confirmar la transacción
         $mysqli->commit();
 

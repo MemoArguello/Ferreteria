@@ -17,8 +17,8 @@ $query1 = "SELECT COUNT(*) total1 FROM cargo";
 $query2 = "SELECT COUNT(*) total2 FROM productos";
 $query3 = "SELECT COUNT(*) total3 FROM facturas";
 $query4 = "SELECT COUNT(*) total4 FROM proveedores";
-$query5 = "SELECT sum(total) total5 FROM detalle_factura";
-$query6 = "SELECT SUM(id_usuario) total6 FROM usuarios";
+$query5 = "SELECT sum(ingreso) total5 FROM caja";
+$query6 = "SELECT sum(egreso) total6 FROM caja";
 
 
 $resultado1 = mysqli_query($conexiondb, $query1);
@@ -155,9 +155,9 @@ $resultado6 = mysqli_query($conexiondb, $query6);
                         <?php
                         while ($reserva = mysqli_fetch_assoc($resultado3)) {
                             if ($reserva['total3'] == 1) {
-                                echo "<td align= 'center'>" . $reserva['total3'] . ' Producto Registrado' . "</td>";
+                                echo "<td align= 'center'>" . $reserva['total3'] . ' Venta Realizado' . "</td>";
                             } else {
-                                echo "<td align= 'center'>" . $reserva['total3'] . ' Productos Registrados' . "</td>";
+                                echo "<td align= 'center'>" . $reserva['total3'] . ' Ventas Realizadas' . "</td>";
                             }
                         }
                         ?>

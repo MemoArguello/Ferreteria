@@ -5,8 +5,11 @@ $id_usuario = $_GET['id_usuario'];
 
 $conexiondb = conectardb();
 
-$query ="DELETE FROM usuarios WHERE id_usuario=".$id_usuario;
-
+try{$query ="DELETE FROM usuarios WHERE id_usuario=".$id_usuario;
+}catch (Exception){
+    echo "<script>alert('No se pudo eliminar el registro');
+    window.location.href='../../Frontend/reportes/reporte_cuenta.php'</script>";
+} 
 $respuesta= mysqli_query($conexiondb, $query);
 
 if ($respuesta) {

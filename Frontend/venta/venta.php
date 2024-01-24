@@ -144,6 +144,8 @@ $usuario = $_SESSION['usuario'];
                     </div>
                     <div class="col-75">
                         <select name="cliente" required>
+                        <option value="">Seleccione una opción</option>
+
                             <!-- Obtener la lista de clientes desde la base de datos o algún otro origen -->
                             <?php
                             // Aquí deberías tener código para conectarte a la base de datos y obtener la lista de clientes
@@ -166,6 +168,7 @@ $usuario = $_SESSION['usuario'];
                     </div>
                     <div class="col-75">
                         <select name="tipo" required>
+                            <option value="">Seleccione una opción</option>
                             <option value="Productos">Productos</option>
                             <option value="Servicios">Servicios</option>
                         </select>
@@ -182,7 +185,7 @@ $usuario = $_SESSION['usuario'];
                     </div>
                     <div class="col-75">
                         <select name="categoria" id="categoria" onchange="cargarProductos(this.value)" required>
-                            <!-- Obtener la lista de categorías desde la base de datos o algún otro origen -->
+                        <option value="">Seleccione una opción</option>
                             <?php
                             // Aquí deberías tener código similar para obtener la lista de categorías
                             $resultCategorias = $mysqli->query("SELECT id_categoria, descripcion FROM categorias");

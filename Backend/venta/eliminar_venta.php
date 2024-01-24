@@ -11,10 +11,15 @@ if (empty($id_factura)) {
 
 $conexiondb = conectardb();
 
+try{
 $query = $conexiondb->prepare("DELETE FROM facturas WHERE id_factura=?");
 $query->bind_param("i", $id_factura);
 $query->execute();
-
+}catch (Exception){
+    echo "<script>alert('No se pudo eliminar el Registro');
+    window.location.href='../../Frontend/reportes/reporte_venta.php'</script>";
+   
+}
 if ($query->affected_rows > 0) {
     echo "<script>alert('Registro Eliminado');
     window.location.href='../../Frontend/reportes/reporte_venta.php'</script>";

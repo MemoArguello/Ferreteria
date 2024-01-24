@@ -1,6 +1,6 @@
 <?php
 include '../config/baseDeDatos.php';
-if (empty($_POST['nombre_producto']) || empty($_POST['categoria']) || empty($_POST['lote']) || empty($_POST['stock']) || empty($_POST['precio']) || empty($_POST['precio_compra']) || empty($_POST['informacion'])){
+if (empty($_POST['nombre_producto']) || empty($_POST['categoria']) || empty($_POST['lote']) || empty($_POST['stock']) || empty($_POST['precio']) || empty($_POST['precio_compra']) || empty($_POST['id_proveedor']) || empty($_POST['informacion'])){
     echo "<script>alert('Complete los datos');
     window.location.href='../../Frontend/productos/registrar_productos.php'</script>";
     exit; 
@@ -37,9 +37,11 @@ if (empty($_POST['nombre_producto']) || empty($_POST['categoria']) || empty($_PO
             $query2 = "INSERT INTO productos (nombre_producto, categoria, lote, stock, precio, precio_compra, id_proveedor, informacion) VALUES 
                 ('$nombre', '$categoria', '$lote', '$stock', '$precio', '$precio_compra','$id_proveedor','$informacion')";
 
+            $query3 = "UPDATE caja SET egreso='" .$precio_compra. "'  WHERE estado = 'Abierto'";
             $respuesta2 = mysqli_query($conexiondb, $query2);
+            $respuesta3 = mysqli_query($conexiondb, $query3);
 
-            if ($respuesta2) {
+            if ($respuesta2 and $respuesta3) {
                     echo "<script>alert('Registro Exitoso');
                     window.location.href='../../Frontend/reportes/reporte_prod.php'</script>";
                 } else {
