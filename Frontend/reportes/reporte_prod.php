@@ -75,7 +75,8 @@ mysqli_close($conexiondb);
                                     <th>Categoria</th>
                                     <th>Lote</th>
                                     <th>Stock</th>
-                                    <th>Precio</th>
+                                    <th>Precio Venta</th>
+                                    <th>Precio Compra</th>
                                     <th>Proveedor</th>
                                     <th>Informacion</th>
                                     <th>Editar</th>
@@ -153,6 +154,9 @@ mysqli_close($conexiondb);
                         },
                         {
                             "data": "precio"
+                        },
+                        {
+                            "data": "precio_compra"
                         },
                         {
                             "data": "nombre_prov"

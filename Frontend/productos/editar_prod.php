@@ -20,7 +20,7 @@ $usuario = $_SESSION['usuario'];
 
 $id_producto = $_GET['id_producto'];
 $query3 ="SELECT productos.id_producto, productos.nombre_producto, productos.categoria, 
-        productos.lote, productos.stock, productos.precio, 
+        productos.lote, productos.stock, productos.precio, productos.precio_compra,
         proveedores.id_proveedor, productos.informacion, proveedores.nombre_prov, categorias.id_categoria, categorias.descripcion
         FROM productos JOIN proveedores
         ON proveedores.id_proveedor = productos.id_proveedor 
@@ -95,10 +95,18 @@ $producto = mysqli_fetch_row($resultado3);
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="lname">Precio</label>
+                        <label for="lname">Precio de Venta</label>
                     </div>      
                     <div class="col-75">
                         <input type="number" id="lname" name="precio" placeholder="" required value='<?php echo $producto[5]; ?>'>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="lname">Precio de Compra</label>
+                    </div>      
+                    <div class="col-75">
+                        <input type="number" id="lname" name="precio_compra" placeholder="" required value='<?php echo $producto[6]; ?>'>
                     </div>
                 </div>
                 <div class="row">
@@ -121,7 +129,7 @@ $producto = mysqli_fetch_row($resultado3);
                         <label for="lname">Informacion</label>
                     </div>      
                     <div class="col-75">
-                        <input type="text" id="lname" name="informacion" placeholder="" required value='<?php echo $producto[7]; ?>'>
+                        <input type="text" id="lname" name="informacion" placeholder="" required value='<?php echo $producto[8]; ?>'>
                     </div>
                 </div>
                 <br>

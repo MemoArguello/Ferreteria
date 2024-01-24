@@ -14,10 +14,10 @@ $usuario = $_SESSION['usuario'];
 
 $conexiondb = conectardb();
 $query1 = "SELECT COUNT(*) total1 FROM cargo";
-$query2 = "SELECT COUNT(*) total2 FROM usuarios";
-$query3 = "SELECT COUNT(*) total3 FROM usuarios";
-$query4 = "SELECT COUNT(*) total4 FROM usuarios";
-$query5 = "SELECT sum(id_usuario) total5 FROM usuarios";
+$query2 = "SELECT COUNT(*) total2 FROM productos";
+$query3 = "SELECT COUNT(*) total3 FROM facturas";
+$query4 = "SELECT COUNT(*) total4 FROM proveedores";
+$query5 = "SELECT sum(total) total5 FROM detalle_factura";
 $query6 = "SELECT SUM(id_usuario) total6 FROM usuarios";
 
 

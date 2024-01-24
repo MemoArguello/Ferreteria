@@ -55,6 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $insertDetalle->execute();
         }
 
+        $insertCaja = $mysqli->prepare("UPDATE INTO caja (ingreso)  VALUES (?) WHERE estado = 'Activo'");
+        $insertCaja->bind_param("i", $total);
+        $insertCaja->execute();
+        $insertCaja->close();
         // Confirmar la transacción
         $mysqli->commit();
 

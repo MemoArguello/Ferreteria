@@ -85,10 +85,18 @@ $usuario = $_SESSION['usuario'];
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="lname">Precio</label>
+                        <label for="lname">Precio de Venta</label>
                     </div>      
                     <div class="col-75">
                         <input type="number" id="lname" name="precio" placeholder="" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="lname">Precio de compra</label>
+                    </div>      
+                    <div class="col-75">
+                        <input type="number" id="lname" name="precio_compra" placeholder="" required>
                     </div>
                 </div>
                 <div class="row">

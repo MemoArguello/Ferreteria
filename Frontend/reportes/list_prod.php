@@ -18,7 +18,7 @@ $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 
 $consulta = "SELECT productos.id_producto, productos.nombre_producto, productos.categoria, 
-                    productos.lote, productos.stock, productos.precio, productos.informacion, 
+                    productos.lote, productos.stock, productos.precio, productos.precio_compra, productos.informacion, 
                     proveedores.id_proveedor, proveedores.nombre_prov, categorias.id_categoria, categorias.descripcion
                     FROM productos JOIN proveedores
                     ON proveedores.id_proveedor = productos.id_proveedor 
