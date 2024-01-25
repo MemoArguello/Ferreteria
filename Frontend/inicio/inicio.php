@@ -119,8 +119,9 @@ body {
     ?>
     <section class="dashboard">
         <div class="top">
-            <div class="topnav" id="myTopnav">
+            <div class="topnav" id="myTopnav">   
                 <a href="./inicio.php" <?php if (basename($_SERVER['PHP_SELF']) == 'inicio.php') echo 'class="active"'; ?>>Inicio</a>
+                <a href="./estadisticas.php" <?php if (basename($_SERVER['PHP_SELF']) == 'estadisticas.php') echo 'class="active"'; ?>>Estadisticas</a>
                 <a href="../reportes/reporte_auditoria.php" <?php if (basename($_SERVER['PHP_SELF']) == 'formulario_cliente.php') echo 'class="active"'; ?>>Auditoria</a>
             </div>
         </div>

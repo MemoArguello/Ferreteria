@@ -56,6 +56,7 @@ mysqli_close($conexiondb);
         <div class="top">
             <div class="topnav" id="myTopnav">
                 <a href="../inicio/inicio.php" <?php if (basename($_SERVER['PHP_SELF']) == 'inicio.php') echo 'class="active"'; ?>>Inicio</a>
+                <a href="../inicio/estadisticas.php" <?php if (basename($_SERVER['PHP_SELF']) == 'estadisticas.php') echo 'class="active"'; ?>>Estadisticas</a>
                 <a href="./reporte_auditoria.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_auditoria.php') echo 'class="active"'; ?>>Auditoria</a>
             </div>
         </div>

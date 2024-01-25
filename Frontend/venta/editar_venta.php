@@ -74,7 +74,7 @@ mysqli_close($conexiondb);
                         <label for="fname">Codigo de Factura</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="fname" name="codigo_factura" placeholder="" required value='<?php echo $venta[1]; ?>' readonly>
+                        <input type="text" id="fname" name="codigo_factura" placeholder="" required value='<?php echo $venta[1]; ?>'>
                     </div>
                 </div>
                 <div class="row">
@@ -87,10 +87,14 @@ mysqli_close($conexiondb);
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="lname">Tipo de Servicio</label>
+                        <label for="tipo">Tipo:</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="tipo" name="tipo" placeholder="" required value='<?php echo $venta[3]; ?>' readonly>
+                        <select name="tipo" required>
+                            <option value="">Seleccione una opción</option>
+                            <option value="Productos">Productos</option>
+                            <option value="Servicios">Servicios</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row">
