@@ -21,8 +21,7 @@ mysqli_close($conexiondb);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuentas</title>
-    <link rel="stylesheet" href="../CSS/login.css">
+    <title>Ventas</title>
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/registrar.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -134,7 +133,7 @@ mysqli_close($conexiondb);
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../configuracion/editar_cuenta.php?id_factura=' + row.id_factura + '" class="submitBoton">Editar</a>';
+                                return '<a href="../venta/editar_venta.php?id_factura=' + row.id_factura + '" class="submitBoton">Editar</a>';
                             }
                         },
                         {

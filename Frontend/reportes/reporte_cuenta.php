@@ -28,7 +28,6 @@ mysqli_close($conexiondb);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuentas</title>
-    <link rel="stylesheet" href="../CSS/login.css">
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/registrar.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -53,7 +52,7 @@ mysqli_close($conexiondb);
         </div>
         <div class="dash-content">
             <div class="container">
-                <div class="texto-formulario">
+                <div align="center">
                     <h2>Cuentas Existentes</h2>
                 </div>
                 <div class"row">

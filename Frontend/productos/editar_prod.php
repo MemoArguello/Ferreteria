@@ -122,7 +122,6 @@ $producto = mysqli_fetch_row($resultado3);
                             ?>
                         </select>
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-25">

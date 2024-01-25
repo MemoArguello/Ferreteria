@@ -22,8 +22,7 @@ mysqli_close($conexiondb);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuentas</title>
-    <link rel="stylesheet" href="../CSS/login.css">
+    <title>Facturas</title>
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/registrar.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -56,7 +55,7 @@ mysqli_close($conexiondb);
         </div>
         <div class="dash-content">
             <div class="container">
-                <div class="texto-formulario">
+                <div align="center">
                     <h2>Registros de Venta</h2>
                 </div>
                 <div class="row">
@@ -105,7 +104,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a Excel',
                             className: 'btn btn-success',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7]
                             }
                         },
                         {
@@ -114,7 +113,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a PDF',
                             className: 'btn btn-danger',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7]
                             }
                         },
                         {
@@ -123,7 +122,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Imprimir',
                             className: 'btn btn-info',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7]
                             }
                         },
                     ],

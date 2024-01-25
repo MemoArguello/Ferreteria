@@ -22,8 +22,7 @@ mysqli_close($conexiondb);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poroductos</title>
-    <link rel="stylesheet" href="../CSS/login.css">
+    <title>Auditoria</title>
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/registrar.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -62,8 +61,8 @@ mysqli_close($conexiondb);
         </div>
         <div class="dash-content">
             <div class="container">
-                <div class="texto-formulario">
-                    <h2>Registro de Actividades</h2>
+                <div align="center">
+                    <h1>Registro de Actividades</h1>
                 </div>
                 <div class"row">
                     <div class="col-lg-12">
@@ -130,7 +129,8 @@ mysqli_close($conexiondb);
                         "url": "list_auditoria.php",
                         "dataSrc": ""
                     },
-                    "columns": [{
+                    "columns": [
+                        {
                             "data": "id_auditoria"
                         },
                         {
