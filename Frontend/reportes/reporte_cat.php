@@ -22,7 +22,7 @@ mysqli_close($conexiondb);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
+    <title>Categoria</title>
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/registrar.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -32,25 +32,6 @@ mysqli_close($conexiondb);
     <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css">
     <!---datatables bootstrap 4 css-->
     <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.13.1/css/dataTables.bootstrap.css">
-    <style>
-        @media print {
-
-            /* Estilos para impresión */
-            body {
-                margin: 1cm;
-                /* Márgenes para la página impresa */
-            }
-
-            #tituloImpreso {
-                text-align: center;
-                /* Centrar el título al imprimir */
-                font-size: 18px;
-                /* Tamaño del texto del título */
-                margin-bottom: 10px;
-                /* Espacio después del título */
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -60,15 +41,15 @@ mysqli_close($conexiondb);
     <section class="dashboard">
         <div class="top">
             <div class="topnav" id="myTopnav">
-                <a href="./reporte_prod.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_prod.php') echo 'class="active"'; ?>>Productos</a>
-                <a href="../productos/registrar_productos.php" <?php if (basename($_SERVER['PHP_SELF']) == '../productos/registrar_productos') echo 'class="active"'; ?>>Registrar</a>
+                <a href="./reporte_prod.php" <?php if (basename($_SERVER['PHP_SELF']) == '../reportes/reporte_prov') echo 'class="active"'; ?>>Productos</a>
+                <a href="../productos/registrar_productos.php" <?php if (basename($_SERVER['PHP_SELF']) == 'registrar_productos.php') echo 'class="active"'; ?>>Registrar</a>
                 <a href="./reporte_cat.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_cat.php') echo 'class="active"'; ?>>Categorias</a>
             </div>
         </div>
         <div class="dash-content">
             <div class="container">
                 <div align="center">
-                    <h2>Listado de Productos</h2>
+                    <h2>Listado de Clientes</h2>
                 </div>
                 <div class"row">
                     <div class="col-lg-12">
@@ -76,13 +57,7 @@ mysqli_close($conexiondb);
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Nombre</th>
                                     <th>Categoria</th>
-                                    <th>Lote</th>
-                                    <th>Stock</th>
-                                    <th>Precio Venta</th>
-                                    <th>Precio Compra</th>
-                                    <th>Proveedor</th>
                                     <th>Editar</th>
                                     <th>Eliminar</th>
                                 </tr>
@@ -115,7 +90,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a Excel',
                             className: 'btn btn-success',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 7, 8]
+                                columns: [0, 1, 2, 3, 4, 5]
                             }
                         },
                         {
@@ -124,7 +99,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a PDF',
                             className: 'btn btn-danger',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 7, 8]
+                                columns: [0, 1, 2, 3, 4, 5]
                             }
                         },
                         {
@@ -133,48 +108,37 @@ mysqli_close($conexiondb);
                             titleAttr: 'Imprimir',
                             className: 'btn btn-info',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 7, 8]
+                                columns: [0, 1, 2, 3, 4, 5]
+                            }
+                        },
+                        {
+                            text: 'Registrar Categoria',
+                            className: 'btn btn-success',
+                            action: function() {
+                                window.location.href = '../productos/registrar_categoria.php';
                             }
                         },
                     ],
                     "ajax": {
-                        "url": "list_prod.php",
+                        "url": "list_categoria.php",
                         "dataSrc": ""
                     },
                     "columns": [{
-                            "data": "id_producto"
-                        },
-                        {
-                            "data": "nombre_producto"
+                            "data": "id_categoria"
                         },
                         {
                             "data": "descripcion"
                         },
                         {
-                            "data": "lote"
-                        },
-                        {
-                            "data": "stock"
-                        },
-                        {
-                            "data": "precio"
-                        },
-                        {
-                            "data": "precio_compra"
-                        },
-                        {
-                            "data": "nombre_prov"
-                        },
-                        {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../productos/editar_prod.php?id_producto=' + row.id_producto + '" class="submitBoton">Editar</a>';
+                                return '<a href="../productos/editar_categoria.php?id_categoria=' + row.id_categoria + '" class="submitBoton">Editar</a>';
                             }
                         },
                         {
                             "data": null,
                             "render": function(data, type, row) {
-                                return '<a href="../../Backend/producto/eliminar_prod.php?id_producto=' + row.id_producto + '" class="submitBotonEliminar">Borrar</a>';
+                                return '<a href="../../Backend/categoria/eliminar_categoria.php?id_categoria=' + row.id_categoria + '" class="submitBotonEliminar">Borrar</a>';
                             }
                         }
                     ]

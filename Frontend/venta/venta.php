@@ -142,7 +142,7 @@ if ($resultadoUsuario) {
         </div>
 
         <div class="dash-content">
-            <form action="procesar_factura.php" method="post" class="form_venta">
+            <form action="procesar_factura.php" method="post" class="form_vent">
                 <h1 align="center">Generar Factura</h1>
                 <div class="row">
                     <div class="col-25">
@@ -160,6 +160,7 @@ if ($resultadoUsuario) {
                     <div class="col-75">
                         <select name="cliente" required>
                         <option value="">Seleccione una opción</option>
+                            <option value="cliente-varios">Clientes-Varios</option>
 
                             <!-- Obtener la lista de clientes desde la base de datos o algún otro origen -->
                             <?php

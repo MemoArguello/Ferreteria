@@ -142,7 +142,7 @@ body {
                             ?>
                             <a href="../reportes/reporte_cliente.php" class="submitBotonInicio">Ver Detalles</a>
                         </span>
-                        <img src="../IMG/client.png" class="" alt="...">
+                        <img src="../IMG/rating_5939760.png" class="" alt="...">
                     </div>
                 </div>
                 <div class="card">
@@ -162,7 +162,7 @@ body {
                             <a href="../reportes/reporte_prod.php" class="submitBotonInicio">Ver Detalles</a>
 
                         </span>
-                        <img src="../IMG/producto.png" class="" alt="...">
+                        <img src="../IMG/boxes_6691160.png" class="" alt="...">
                     </div>
                 </div>
                 <div class="card">
@@ -181,8 +181,7 @@ body {
                             <a href="../reportes/reporte_venta.php" class="submitBotonInicio">Ver Detalles</a>
 
                         </span>
-
-                        <img src="../IMG/img1.png" class="" alt="...">
+                        <img src="../IMG/building_2542451.png" class="" alt="...">
                     </div>
                 </div>
                 <div class="card">
@@ -202,7 +201,7 @@ body {
 
                         </span>
 
-                        <img src="../IMG/img4.png" class="" alt="...">
+                        <img src="../IMG/warehouse_12766209.png" class="" alt="...">
                     </div>
                 </div>
                 <div class="card">
@@ -216,7 +215,7 @@ body {
                             ?>
                            <a href="../reportes/reporte_caja.php" class="submitBotonInicio">Ver Detalles</a>
                         </span>
-                        <img src="../IMG/img3.png" class="" alt="...">
+                        <img src="../IMG/shopping-bag_5939887.png" class="" alt="...">
                     </div>
                 </div>
                 <div class="card">
@@ -230,7 +229,7 @@ body {
                             ?>
                            <a href="../reportes/reporte_caja.php" class="submitBotonInicio">Ver Detalles</a>
                         </span>
-                        <img src="../IMG/img2.png" class="" alt="...">
+                        <img src="../IMG/dollar_2542439.png" class="" alt="...">
                     </div>
                 </div>
             </div>

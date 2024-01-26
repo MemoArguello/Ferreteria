@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto+Condensed:wght@300&display=swap');
 
 * {
-
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
@@ -15,16 +14,6 @@
     --fuente: 'Quicksand', sans-serif;
 }
 
-html {
-    box-sizing: border-box;
-}
-
-*,
-*::after,
-*::before {
-    box-sizing: inherit;
-}
-
 body {
     background: #2e323a;
     font-family: var(--fuente);
@@ -35,40 +24,9 @@ body {
 
 .contenedor {
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 700px;
     width: 100%;
     justify-content: center;
-}
-
-
-.imagen-formulario::before {
-    content: '';
-    position: absolute;
-    top: 10;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-}
-
-@media(min-width:768px) {
-    .imagen-formulario {
-        height: auto;
-        background-position: right;
-    }
-
-}
-
-@media(min-width:1200px) {
-    .imagen-formulario {
-        background-position: center;
-    }
-}
-
-@media(min-width:768px) {
-    .contenedor-formulario {
-        display: flex;
-    }
 }
 
 .formulario {
@@ -77,19 +35,10 @@ body {
     background-color: var(--azul);
 }
 
-.texto-formulario .input label,
-.password-olvidada a,
-.texto-formulario p {
-    color: var(--negro);
-}
-
+.texto-formulario h2,
+.texto-formulario p,
 .texto-formulario h3 {
-    font-size: 30px;
-    text-align: center;
-}
-
-.texto-formulario h2,h3 {
-    color: var(--azulGris)
+    color: var(--azulGris);
 }
 
 .texto-formulario h2 {
@@ -97,22 +46,20 @@ body {
     text-align: center;
 }
 
+.texto-formulario h3 {
+    font-size: 30px;
+    text-align: center;
+}
+
 .texto-formulario p {
     font-size: 22px;
     text-align: center;
 }
 
-.input label {
-    display: block;
-    font-size: 22px;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.password-olvidada a {
-    display: inline-block;
-    margin-top: 20px;
-    font-size: 22px;
+.input label,
+.password-olvidada a,
+.texto-formulario p {
+    color: var(--negro);
 }
 
 .input input {
@@ -132,117 +79,71 @@ body {
 }
 
 .input input[type="submit"]:hover {
-
     cursor: pointer;
     background-color: var(--azulOscuro);
 }
 
 .inputContainer {
     position: relative;
-    height: 45px;
-    width: 90%;
-    margin-bottom: 17px;
-}
-
-.signupFrm {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
-}
-
-.formu2 {
-    text-align: center;
-
-}
-
-.formu {
-    margin: 0px auto;
-}
-/*input */
-.inputContainer {
-position: relative;
-height: 45px;
-width: 90%;
-margin-bottom: 17px;
+    height: 60px; /* Ajusta la altura según tus preferencias */
+    width: 100%;
+    margin-bottom: 25px;
 }
 
 .input {
-position: absolute;
-top: 0px;
-left: 0px;
-height: 100%;
-width: 100%;
-border: 1px solid #DADCE0;
-border-radius: 0px;
-font-size: 16px;
-padding: 0 20px;
-outline: none;
-background: none;
-z-index: 1;
-}
-
-.input2 {
-position: absolute;
-top: 0px;
-left: 0px;
-width: 100%;
-border: 1px solid #DADCE0;
-border-radius: 7px;
-font-size: 16px;
-padding: 0 20px;
-outline: none;
-background: none;
-z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border: none; /* Quité el borde para un diseño más limpio */
+    border-bottom: 2px solid #DADCE0; /* Añadí un borde inferior */
+    font-size: 16px;
+    padding: 0 20px;
+    outline: none;
+    background: none;
+    z-index: 1;
+    transition: border-bottom 0.3s ease-in-out; /* Animación para el borde inferior */
 }
 
 .label {
-position: absolute;
-top: 15px;
-left: 15px;
-padding: 0 4px;
-background-color: white;
-color: #686767;
-font-size: 16px;
-transition: 0.5s;
-z-index: 0;
+    position: absolute;
+    top: 15px;
+    left: 20px; /* Ajusté la posición para que no esté pegada al borde */
+    padding: 0 4px;
+    background-color: var(--azul);
+    color: #686767;
+    font-size: 16px;
+    transition: 0.5s;
+    z-index: 0;
 }
 
-.input:focus + .label {
-top: -7px;
-left: 3px;
-z-index: 10;
-font-size: 14px;
-font-weight: 600;
-color: #3421C0;
-}
-
+.input:focus + .label,
 .input:not(:placeholder-shown) + .label {
-top: -7px;
-left: 3px;
-z-index: 10;
-font-size: 14px;
-font-weight: 600;
+    top: -25px; /* Ajusté la posición al enfocar */
+    font-size: 14px;
+    font-weight: 600;
+    color: #3421C0;
 }
 
 .input:focus {
-border: 0px solid #3421C0;
+    border-bottom: 2px solid #3421C0; /* Color del borde inferior al enfocar */
 }
-/*botones */
+
 .submitBtn {
-display: block;
-margin-left: auto;
-padding: 15px 30px;
-border: none;
-background-color: #3421C0;
-color: white;
-border-radius: 1px;
-cursor: pointer;
-font-size: 16px;
-margin-top: 30px;
+    display: block;
+    margin-left: auto;
+    padding: 15px 30px;
+    border: none;
+    background-color: #3421C0;
+    color: white;
+    border-radius: 1px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 30px;
 }
 
 .submitBtn:hover {
-background-color: #1602af;
-transform: translateY(-2px);
+    background-color: #1602af;
+    transform: translateY(-2px);
 }

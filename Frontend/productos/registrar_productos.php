@@ -38,6 +38,7 @@ $usuario = $_SESSION['usuario'];
             <div class="topnav" id="myTopnav">
                 <a href="../reportes/reporte_prod.php" <?php if (basename($_SERVER['PHP_SELF']) == '../reportes/reporte_prov') echo 'class="active"'; ?>>Productos</a>
                 <a href="./registrar_productos.php" <?php if (basename($_SERVER['PHP_SELF']) == 'registrar_productos.php') echo 'class="active"'; ?>>Registrar</a>
+                <a href="../reportes/reporte_cat.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_cat.php') echo 'class="active"'; ?>>Categorias</a>
             </div>
         </div>
 
@@ -112,14 +113,6 @@ $usuario = $_SESSION['usuario'];
                             }
                             ?>
                         </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="lname">Informacion</label>
-                    </div>      
-                    <div class="col-75">
-                        <input type="text" id="lname" name="informacion" placeholder="" required>
                     </div>
                 </div>
                 <br>

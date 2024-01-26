@@ -33,9 +33,20 @@ body {
   padding: 20px 40px;
   box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
 }
+.form_vent{
+  padding: 30px 40px;
+
+}
 
 .form_venta {
+  margin: 5%;
+  text-align: left;
+  background-color: rgb(214, 214, 214);
+  width: 1000px;
+  height: 300px;
+  border-radius: 0px;
   padding: 30px 40px;
+
 }
 
 .formRecepcion {

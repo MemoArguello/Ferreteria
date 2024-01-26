@@ -1,32 +1,23 @@
 <?php
-include '../../Backend/config/baseDeDatos.php';
+include '../config/baseDeDatos.php';
 
-$id_proveedor = isset($_GET['id_proveedor']) ? mysqli_real_escape_string(conectardb(), $_GET['id_proveedor']) : '';
-
-if (empty($id_proveedor)) {
-    echo "<script>alert('ID de proveedor no válido');
-    window.location.href='../../Frontend/reportes/reporte_prov.php'</script>";
-    exit();
-}
-
+$id_proveedor = $_GET['id_proveedor'];
 $conexiondb = conectardb();
 
-try{
-$query = $conexiondb->prepare("DELETE * FROM proveedores WHERE id_proveedor=?");
-$query->bind_param("i", $id_proveedor);
-$query->execute();
-}catch (Exception){
-    echo "<script>alert('No se pudo eliminar el Proveedor');
-    window.location.href='../../Frontend/reportes/reporte_prov.php'</script>";
-} 
-if ($query->affected_rows > 0) {
-    header("Location: ../../Frontend/reportes/reporte_prov.php");
-    exit();
-} else {
-    echo "<script>alert('No se pudo Eliminar');
-    window.location.href='../../Frontend/reportes/reporte_prov.php'</script>";
-}
+try {
+    $query = "DELETE FROM proveedores WHERE id_proveedor=" . $id_proveedor;
+    $respuesta = mysqli_query($conexiondb, $query);
 
-$query->close();
-mysqli_close($conexiondb);
+    if ($respuesta) {
+        echo "<script>alert('Proveedor Eliminado'); window.location.href='../../Frontend/reportes/reporte_prov.php'</script>";
+    } else {
+        echo "<script>alert('No se pudo Eliminar'); window.location.href='../../Frontend/reportes/reporte_prov.php'</script>";
+    }
+} catch (Exception $e) {
+    // Si ocurre una excepción, mostrar un mensaje de error
+    echo "<script>alert('No se pudo Eliminar'); window.location.href='../../Frontend/reportes/reporte_prov.php'</script>";
+} finally {
+    // Cerrar la conexión
+    mysqli_close($conexiondb);
+}
 ?>
