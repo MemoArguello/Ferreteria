@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2023 a las 17:29:37
+-- Tiempo de generación: 26-01-2024 a las 22:32:11
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.5
 
@@ -14,6 +14,47 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `ferreteria`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `auditoria`
+--
+
+CREATE TABLE `auditoria` (
+  `id_auditoria` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `evento` text NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `auditoria`
+--
+
+INSERT INTO `auditoria` (`id_auditoria`, `id_usuario`, `evento`, `fecha`) VALUES
+(6, 7, 'Venta de Productos', '2024-01-24 20:17:50'),
+(7, 7, 'Venta de Productos', '2024-01-25 17:35:12'),
+(8, 7, 'Venta de Productos', '2024-01-25 17:35:33'),
+(9, 7, 'Venta de Productos', '2024-01-25 18:50:24'),
+(10, 7, 'Venta de Productos', '2024-01-25 18:52:15'),
+(11, 7, 'Venta de Productos', '2024-01-26 14:26:29');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `caja`
+--
+
+CREATE TABLE `caja` (
+  `id_caja` int(11) NOT NULL,
+  `fecha_apertura` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha_cierre` datetime NOT NULL,
+  `ingreso` float NOT NULL,
+  `egreso` float NOT NULL,
+  `saldo_cierre` float NOT NULL,
+  `estado` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -31,8 +72,26 @@ CREATE TABLE `cargo` (
 --
 
 INSERT INTO `cargo` (`id`, `descripcion`) VALUES
-(1, 'Administrador'),
-(2, 'Recepcion');
+(1, 'Administrador/a'),
+(2, 'Cajero/a');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categorias`
+--
+
+CREATE TABLE `categorias` (
+  `id_categoria` int(11) NOT NULL,
+  `descripcion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id_categoria`, `descripcion`) VALUES
+(7, 'Herramientas de Mano');
 
 -- --------------------------------------------------------
 
@@ -321,10 +380,9 @@ CREATE TABLE `cliente` (
   `id_cliente` int(11) NOT NULL,
   `cedula` text NOT NULL,
   `nombre` text NOT NULL,
-  `apellido` text NOT NULL,
   `ruc` text NOT NULL,
-  `celular` text NOT NULL,
-  `ciudad` text NOT NULL
+  `id_departamento` int(11) NOT NULL,
+  `id_ciudad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -387,17 +445,48 @@ INSERT INTO `departamentos` (`id_departamento`, `nombre`, `capital`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `detalle_factura`
+--
+
+CREATE TABLE `detalle_factura` (
+  `id_detalle` int(11) NOT NULL,
+  `id_factura` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `costo_unitario` decimal(10,2) NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `estado` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `facturas`
+--
+
+CREATE TABLE `facturas` (
+  `id_factura` int(11) NOT NULL,
+  `codigo_factura` varchar(50) NOT NULL,
+  `cliente` int(11) NOT NULL,
+  `tipo` varchar(50) NOT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `productos`
 --
 
 CREATE TABLE `productos` (
   `id_producto` int(11) NOT NULL,
-  `categoria` text NOT NULL,
+  `nombre_producto` text NOT NULL,
+  `categoria` int(11) NOT NULL,
   `lote` text NOT NULL,
   `stock` int(11) NOT NULL,
   `precio` int(11) NOT NULL,
-  `id_proveedor` int(11) NOT NULL,
-  `informacion` text NOT NULL
+  `precio_compra` int(11) NOT NULL,
+  `id_proveedor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -410,11 +499,9 @@ CREATE TABLE `proveedores` (
   `id_proveedor` int(11) NOT NULL,
   `nombre_prov` text NOT NULL,
   `ruc` text NOT NULL,
-  `razon_social` text NOT NULL,
-  `celular` text NOT NULL,
   `telefono` text NOT NULL,
-  `distrito` text NOT NULL,
-  `direccion` text NOT NULL
+  `departamento` int(11) NOT NULL,
+  `distrito` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -436,17 +523,37 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `correo`, `usuario`, `codigo`, `id_cargo`) VALUES
-(1, 'prueba@gmail.com', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 1);
+(7, 'admin@gmail.com', 'Admin', '827ccb0eea8a706c4c34a16891f84e7b', 1),
+(10, 'prueba@gmail.com', 'cajero1', '827ccb0eea8a706c4c34a16891f84e7b', 2);
 
 --
 -- Índices para tablas volcadas
 --
 
 --
+-- Indices de la tabla `auditoria`
+--
+ALTER TABLE `auditoria`
+  ADD PRIMARY KEY (`id_auditoria`),
+  ADD KEY `auditoria_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `caja`
+--
+ALTER TABLE `caja`
+  ADD PRIMARY KEY (`id_caja`);
+
+--
 -- Indices de la tabla `cargo`
 --
 ALTER TABLE `cargo`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id_categoria`);
 
 --
 -- Indices de la tabla `ciudades`
@@ -459,7 +566,9 @@ ALTER TABLE `ciudades`
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`id_cliente`);
+  ADD PRIMARY KEY (`id_cliente`),
+  ADD KEY `departamento` (`id_departamento`,`id_ciudad`),
+  ADD KEY `cliente_ciudad` (`id_ciudad`);
 
 --
 -- Indices de la tabla `datos_ferreteria`
@@ -475,17 +584,35 @@ ALTER TABLE `departamentos`
   ADD PRIMARY KEY (`id_departamento`);
 
 --
+-- Indices de la tabla `detalle_factura`
+--
+ALTER TABLE `detalle_factura`
+  ADD PRIMARY KEY (`id_detalle`),
+  ADD KEY `id_factura` (`id_factura`),
+  ADD KEY `id_producto` (`id_producto`);
+
+--
+-- Indices de la tabla `facturas`
+--
+ALTER TABLE `facturas`
+  ADD PRIMARY KEY (`id_factura`),
+  ADD KEY `cliente` (`cliente`);
+
+--
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id_producto`),
-  ADD KEY `id_proveedor` (`id_proveedor`);
+  ADD KEY `id_proveedor` (`id_proveedor`),
+  ADD KEY `categoria` (`categoria`);
 
 --
 -- Indices de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  ADD PRIMARY KEY (`id_proveedor`);
+  ADD PRIMARY KEY (`id_proveedor`),
+  ADD KEY `departamento` (`departamento`),
+  ADD KEY `distrito` (`distrito`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -499,10 +626,28 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `auditoria`
+--
+ALTER TABLE `auditoria`
+  MODIFY `id_auditoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `caja`
+--
+ALTER TABLE `caja`
+  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `ciudades`
@@ -514,7 +659,7 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `datos_ferreteria`
@@ -529,14 +674,44 @@ ALTER TABLE `departamentos`
   MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT de la tabla `detalle_factura`
+--
+ALTER TABLE `detalle_factura`
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT de la tabla `facturas`
+--
+ALTER TABLE `facturas`
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `auditoria`
+--
+ALTER TABLE `auditoria`
+  ADD CONSTRAINT `auditoria_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
 
 --
 -- Filtros para la tabla `ciudades`
@@ -545,10 +720,44 @@ ALTER TABLE `ciudades`
   ADD CONSTRAINT `depa_ciudad` FOREIGN KEY (`id_departamento`) REFERENCES `departamentos` (`id_departamento`);
 
 --
+-- Filtros para la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD CONSTRAINT `cliente_ciudad` FOREIGN KEY (`id_ciudad`) REFERENCES `ciudades` (`id_ciudad`),
+  ADD CONSTRAINT `cliente_depar` FOREIGN KEY (`id_departamento`) REFERENCES `departamentos` (`id_departamento`);
+
+--
 -- Filtros para la tabla `datos_ferreteria`
 --
 ALTER TABLE `datos_ferreteria`
   ADD CONSTRAINT `ciudad_ferr` FOREIGN KEY (`ciudad`) REFERENCES `ciudades` (`id_ciudad`);
+
+--
+-- Filtros para la tabla `detalle_factura`
+--
+ALTER TABLE `detalle_factura`
+  ADD CONSTRAINT `detalle_factura_ibfk_1` FOREIGN KEY (`id_factura`) REFERENCES `facturas` (`id_factura`),
+  ADD CONSTRAINT `detalle_factura_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`);
+
+--
+-- Filtros para la tabla `facturas`
+--
+ALTER TABLE `facturas`
+  ADD CONSTRAINT `facturas_ibfk_1` FOREIGN KEY (`cliente`) REFERENCES `cliente` (`id_cliente`);
+
+--
+-- Filtros para la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `categoria_producto` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id_categoria`),
+  ADD CONSTRAINT `proveedor_produc` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedor`);
+
+--
+-- Filtros para la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  ADD CONSTRAINT `departamento_prov` FOREIGN KEY (`departamento`) REFERENCES `departamentos` (`id_departamento`),
+  ADD CONSTRAINT `distrito_prov` FOREIGN KEY (`distrito`) REFERENCES `ciudades` (`id_ciudad`);
 
 --
 -- Filtros para la tabla `usuarios`
