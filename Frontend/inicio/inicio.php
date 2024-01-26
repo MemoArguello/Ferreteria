@@ -13,7 +13,7 @@ $result = mysqli_query($conexiondb, $sql);
 $usuario = $_SESSION['usuario'];
 
 $conexiondb = conectardb();
-$query1 = "SELECT COUNT(*) total1 FROM cargo";
+$query1 = "SELECT COUNT(*) total1 FROM cliente";
 $query2 = "SELECT COUNT(*) total2 FROM productos";
 $query3 = "SELECT COUNT(*) total3 FROM facturas";
 $query4 = "SELECT COUNT(*) total4 FROM proveedores";

@@ -21,7 +21,7 @@ $usuario = $_SESSION['usuario'];
 $id_producto = $_GET['id_producto'];
 $query3 ="SELECT productos.id_producto, productos.nombre_producto, productos.categoria, 
         productos.lote, productos.stock, productos.precio, productos.precio_compra,
-        proveedores.id_proveedor, productos.informacion, proveedores.nombre_prov, categorias.id_categoria, categorias.descripcion
+        proveedores.id_proveedor, proveedores.nombre_prov, categorias.id_categoria, categorias.descripcion
         FROM productos JOIN proveedores
         ON proveedores.id_proveedor = productos.id_proveedor 
         JOIN categorias ON categorias.id_categoria = productos.categoria where id_producto = $id_producto";
@@ -69,6 +69,7 @@ $producto = mysqli_fetch_row($resultado3);
                     </div>
                     <div class="col-75">
                         <select id="proveedor" name="categoria" required>
+                        <option value="">Seleccione una opción</option>
                             <?php
                             while ($categoria = mysqli_fetch_assoc($resultado2)) {
                                 echo "<option value='" . $categoria['id_categoria'] . "'>" . $categoria['descripcion'] . "</option>";
@@ -115,20 +116,13 @@ $producto = mysqli_fetch_row($resultado3);
                     </div>
                     <div class="col-75">
                         <select id="proveedor" name="id_proveedor" onchange="getCiudades(this.value)" required>
+                        <option value="">Seleccione una opción</option>
                             <?php
                             while ($proveedor = mysqli_fetch_assoc($resultado)) {
                                 echo "<option value='" . $proveedor['id_proveedor'] . "'>" . $proveedor['nombre_prov'] . "</option>";
                             }
                             ?>
                         </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="lname">Informacion</label>
-                    </div>      
-                    <div class="col-75">
-                        <input type="text" id="lname" name="informacion" placeholder="" required value='<?php echo $producto[8]; ?>'>
                     </div>
                 </div>
                 <br>

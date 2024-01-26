@@ -44,12 +44,12 @@ $categoria = mysqli_fetch_row($resultado3);
             <div class="topnav" id="myTopnav">
                 <a href="../reportes/reporte_prod.php" <?php if (basename($_SERVER['PHP_SELF']) == '../reportes/reporte_prov') echo 'class="active"'; ?>>Productos</a>
                 <a href="./registrar_productos.php" <?php if (basename($_SERVER['PHP_SELF']) == 'registrar_productos.php') echo 'class="active"'; ?>>Registrar</a>
-                <a href="./registrar_categoria.php" <?php if (basename($_SERVER['PHP_SELF']) == 'registrar_categoria.php') echo 'class="active"'; ?>>Categoria</a>
+                <a href="../reportes/reporte_cat.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_cat.php') echo 'class="active"'; ?>>Categorias</a>
             </div>
         </div>
 
         <div class="dash-content">
-            <form action="../../Backend/categoria/guardar_categoria.php" class="formRecepcion" method="POST">
+            <form action="../../Backend/categoria/guardar_categoria.php" class="form_venta" method="POST">
                 <h1 align="center">Editar Categoria</h1>
                 <div class="row">
                     <div class="col-25">
