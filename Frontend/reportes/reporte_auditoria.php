@@ -23,8 +23,6 @@ mysqli_close($conexiondb);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auditoria</title>
-    <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/registrar.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -32,123 +30,131 @@ mysqli_close($conexiondb);
     <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css">
     <!---datatables bootstrap 4 css-->
     <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.13.1/css/dataTables.bootstrap.css">
-    <style>
-        @media print {
-            /* Estilos para impresión */
-            body {
-                margin: 1cm; /* Márgenes para la página impresa */
-            }
-
-            #tituloImpreso {
-                text-align: center; /* Centrar el título al imprimir */
-                font-size: 18px; /* Tamaño del texto del título */
-                margin-bottom: 10px; /* Espacio después del título */
-            }
-        }
-    </style>
+    <link href="../IMG/nut_5361285.png" rel="icon">
+<style>
+    table.dataTable thead {
+    background: linear-gradient(to right, #8593ff, #79ace9);
+    color: white;
+}
+</style>
 </head>
 
 <body>
     <?php
     include($_SERVER['DOCUMENT_ROOT'] . '/Sistema_Ferreteria/Frontend/dashboard/inicio.php');
     ?>
-    <section class="dashboard">
-        <div class="top">
-            <div class="topnav" id="myTopnav">
-                <a href="../inicio/inicio.php" <?php if (basename($_SERVER['PHP_SELF']) == 'inicio.php') echo 'class="active"'; ?>>Inicio</a>
-                <a href="../inicio/estadisticas.php" <?php if (basename($_SERVER['PHP_SELF']) == 'estadisticas.php') echo 'class="active"'; ?>>Estadisticas</a>
-                <a href="./reporte_auditoria.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_auditoria.php') echo 'class="active"'; ?>>Auditoria</a>
-            </div>
-        </div>
-        <div class="dash-content">
-            <div class="container">
-                <div align="center">
-                    <h1>Registro de Actividades</h1>
+    <section id="content">
+        <main>        
+                <div class="left">
+                    <nav class="nav">
+                    <ul class="breadcrumb">
+                        <li>
+                            <a class="active" href="../inicio/inicio.php">Inicio</a>
+                        </li>
+                    </ul>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a class="active" href="../inicio/estadisticas.php">Estadisticas</a>
+                        </li>
+                    </ul>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a class="active" href="../reportes/reporte_auditoria.php">Auditoria</a>
+                        </li>
+                    </ul>
+                    </nav>
                 </div>
-                <div class"row">
-                    <div class="col-lg-12">
-                        <table id="tablaUsuarios" class="table-striped table-bordered" style="width: 100%">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Usuario</th>
-                                    <th>Actividad</th>
-                                    <th>Fecha</th>
-                                </tr>
-                            </thead>
-                        </table>
+            <div class="table-data">
+                <div class="container">
+                    <div class="titulo" align="center">
+                        <h1>Registro de Actividades</h1>
+                    </div>
+                    <div class"row">
+                        <div class="col-lg-12">
+                            <table id="tablaUsuarios" class="table-striped table-bordered" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Usuario</th>
+                                        <th>Actividad</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--Jquery. popper.js, Bootstrap JS-->
-        <script src="jquery/jquery-3.5.1.min.js"></script>
-        <script src="popper/popper.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <!--Datatables JS-->
-        <script type="text/javascript" src="datatables/datatables.min.js"></script>
-        <!--Para usar botones en datatables JS-->
-        <script src="datatables/Buttons-2.3.2/js/dataTables.buttons.js"></script>
-        <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>
-        <script src="datatables/pdfmake-0.1.36/pdfmake.js"></script>
-        <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
-        <script src="datatables/Buttons-2.3.2/js/buttons.html5.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#tablaUsuarios').DataTable({
-                    responsive: "true",
-                    dom: 'Bfrtilp',
-                    buttons: [{
-                            extend: 'excelHtml5',
-                            text: 'Excel',
-                            titleAttr: 'Exportar a Excel',
-                            className: 'btn btn-success',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3]
-                            }
+            <!--Jquery. popper.js, Bootstrap JS-->
+            <script src="jquery/jquery-3.5.1.min.js"></script>
+            <script src="popper/popper.min.js"></script>
+            <script src="bootstrap/js/bootstrap.min.js"></script>
+            <!--Datatables JS-->
+            <script type="text/javascript" src="datatables/datatables.min.js"></script>
+            <!--Para usar botones en datatables JS-->
+            <script src="datatables/Buttons-2.3.2/js/dataTables.buttons.js"></script>
+            <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>
+            <script src="datatables/pdfmake-0.1.36/pdfmake.js"></script>
+            <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+            <script src="datatables/Buttons-2.3.2/js/buttons.html5.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#tablaUsuarios').DataTable({
+                        responsive: "true",
+                        dom: 'Bfrtilp',
+                        buttons: [{
+                                extend: 'excelHtml5',
+                                text: 'Excel',
+                                titleAttr: 'Exportar a Excel',
+                                className: 'btn btn-success',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3]
+                                }
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                text: 'PDF',
+                                titleAttr: 'Exportar a PDF',
+                                className: 'btn btn-danger',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3]
+                                }
+                            },
+                            {
+                                extend: 'print',
+                                text: 'Imprimir',
+                                titleAttr: 'Imprimir',
+                                className: 'btn btn-info',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3]
+                                }
+                            },
+                        ],
+                        "ajax": {
+                            "url": "list_auditoria.php",
+                            "dataSrc": ""
                         },
-                        {
-                            extend: 'pdfHtml5',
-                            text: 'PDF',
-                            titleAttr: 'Exportar a PDF',
-                            className: 'btn btn-danger',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3]
-                            }
-                        },
-                        {
-                            extend: 'print',
-                            text: 'Imprimir',
-                            titleAttr: 'Imprimir',
-                            className: 'btn btn-info',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3]
-                            }
-                        },
-                    ],
-                    "ajax": {
-                        "url": "list_auditoria.php",
-                        "dataSrc": ""
-                    },
-                    "columns": [
-                        {
-                            "data": "id_auditoria"
-                        },
-                        {
-                            "data": "usuario"
-                        },
-                        {
-                            "data": "evento"
-                        },
-                        {
-                            "data": "fecha"
-                        },
-                    ]
+                        "columns": [{
+                                "data": "id_auditoria"
+                            },
+                            {
+                                "data": "usuario"
+                            },
+                            {
+                                "data": "evento"
+                            },
+                            {
+                                "data": "fecha"
+                            },
+                        ]
+                    });
                 });
-            });
-        </script>
-        </div>
+            </script>
+            </div>
+        </main>
     </section>
+    <script src="../dashboard/script.js"></script>
+
 </body>
 
 </html>

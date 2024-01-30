@@ -44,15 +44,14 @@ $valores = [$totalClientes, $totalProductos, $totalVentas, $totalProveedores];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-    <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/stiles.css">
-    <link rel="stylesheet" href="../CSS/registrar.css">
+    <title>Estadisticas</title>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="../CSS/dash.css">
+    <link href="../IMG/nut_5361285.png" rel="icon">
 
 </head>
 
@@ -60,17 +59,27 @@ $valores = [$totalClientes, $totalProductos, $totalVentas, $totalProveedores];
     <?php
     include($_SERVER['DOCUMENT_ROOT'] . '/Sistema_Ferreteria/Frontend/dashboard/inicio.php');
     ?>
-    <section class="dashboard">
-        <div class="top">
-            <div class="topnav" id="myTopnav">
-                <a href="./inicio.php" <?php if (basename($_SERVER['PHP_SELF']) == 'inicio.php') echo 'class="active"'; ?>>Inicio</a>
-                <a href="./estadisticas.php" <?php if (basename($_SERVER['PHP_SELF']) == 'estadisticas.php') echo 'class="active"'; ?>>Estadisticas</a>
-                <a href="../reportes/reporte_auditoria.php" <?php if (basename($_SERVER['PHP_SELF']) == 'formulario_cliente.php') echo 'class="active"'; ?>>Auditoria</a>
-            </div>
-        </div>
-        <br>
-        <div class="dash-content">
-
+    <section id="content">
+        <main>
+                <div class="left">
+                    <nav class="nav">
+                        <ul class="breadcrumb">
+                            <li>
+                                <a class="active" href="./inicio.php">Inicio</a>
+                            </li>
+                        </ul>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="./estadisticas.php" <?php if (basename($_SERVER['PHP_SELF']) == 'estadisticas.php') echo 'class="active"'; ?>>Estadisticas</a>
+                            </li>
+                        </ul>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a class="active" href="../reportes/reporte_auditoria.php">Auditoria</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             <div>
                 <canvas id="myChart"></canvas>
             </div>
@@ -101,8 +110,9 @@ $valores = [$totalClientes, $totalProductos, $totalVentas, $totalProveedores];
                     }
                 });
             </script>
-        </div>
+        </main>
         <section>
+            <script src="../dashboard/script.js"></script>
 </body>
 
 </html>
