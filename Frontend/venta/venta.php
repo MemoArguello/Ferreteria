@@ -40,22 +40,26 @@ if ($resultadoUsuario) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venta</title>
-    <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/stiles.css">
-    <link rel="stylesheet" href="../CSS/registrar.css">
+    <title>Ventas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../IMG/nut_5361285.png" rel="icon">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
     <style>
+        .form_vent {
+            padding: 30px 40px;
+            font-family: 'Poppins', sans-serif;
+
+        }
+
         label {
             display: block;
             margin-bottom: 8px;
         }
 
         .boton {
-            width: 15%;
+            width: 10%;
             background-color: #4CAF50;
             color: white;
             padding: 12px 20px;
@@ -69,12 +73,28 @@ if ($resultadoUsuario) {
             background-color: #008604;
         }
 
+        .boton2 {
+            width: 10%;
+            background-color: #3421C0;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+        .boton2:hover {
+            background-color: #22119d;
+        }
+
         input {
             float: right;
-            width: 30%;
+            width: 100%;
             padding: 8px;
-            margin-bottom: 16px;
             box-sizing: border-box;
+            border-radius: 10px;
+            border: none;
         }
 
         select,
@@ -83,6 +103,8 @@ if ($resultadoUsuario) {
             padding: 8px;
             margin-bottom: 16px;
             box-sizing: border-box;
+            border-radius: 10px;
+            border: none;
         }
 
         table {
@@ -98,9 +120,11 @@ if ($resultadoUsuario) {
             background-color: #ccc;
 
         }
-        td{
+
+        td {
             background-color: white;
         }
+
         th,
         td {
             padding: 10px;
@@ -132,160 +156,181 @@ if ($resultadoUsuario) {
     <?php
     include($_SERVER['DOCUMENT_ROOT'] . '/Sistema_Ferreteria/Frontend/dashboard/inicio.php');
     ?>
-    <section class="dashboard">
-        <div class="top">
-            <div class="topnav" id="myTopnav">
-                <a href="./venta.php" <?php if (basename($_SERVER['PHP_SELF']) == 'venta.php') echo 'class="active"'; ?>>Venta</a>
-                <a href="../reportes/reporte_venta.php" <?php if (basename($_SERVER['PHP_SELF']) == 'registrar_productos.php') echo 'class="active"'; ?>>Registros Venta</a> 
-                <a href="../reportes/reporte_factura.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_factura.php') echo 'class="active"'; ?>>Facturas</a>
+    <section id="content">
+        <main>
+                <div class="left">
+                    <nav class="nav">
+                        <ul class="breadcrumb">
+                            <li>
+                                <a class="active" href="./venta.php">Venta</a>
+                            </li>
+                        </ul>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a class="active" href="../reportes/reporte_venta.php">Listado</a>
+                            </li>
+                        </ul>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a class="active" href="../reportes/reporte_factura.php">Facturas</a>
+                            </li>
+                        </ul>
+                    </nav>
             </div>
-        </div>
+            <div class="table-data">
+                <div class="container">
 
-        <div class="dash-content">
-            <form action="procesar_factura.php" method="post" class="form_vent">
-                <h1 align="center">Generar Factura</h1>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="codigo_factura">Código de factura:</label>
-                    </div>
-                    <div class="col-75">
-                        <input type="text" name="codigo_factura" required>
-                    </div>
+                    <form action="procesar_factura.php" method="post" class="form_vent">
+                        <div class="left">
+                            <h1>Generar Factura</h1>
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="codigo_factura">Código de factura:</label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" name="codigo_factura" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="cliente">Cliente:</label>
+                            </div>
+                            <div class="col-75">
+                                <select name="cliente" required>
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="cliente-varios">Clientes-Varios</option>
+
+                                    <!-- Obtener la lista de clientes desde la base de datos o algún otro origen -->
+                                    <?php
+                                    // Aquí deberías tener código para conectarte a la base de datos y obtener la lista de clientes
+                                    // Puedes usar mysqli o PDO para ello
+                                    // Ejemplo con mysqli:
+                                    $mysqli = new mysqli("localhost", "root", "", "ferreteria");
+                                    $result = $mysqli->query("SELECT id_cliente, nombre FROM cliente");
+
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<option value='{$row['id_cliente']}'>{$row['nombre']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="tipo">Tipo:</label>
+                            </div>
+                            <div class="col-75">
+                                <select name="tipo" required>
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="Productos">Productos</option>
+                                    <option value="Servicios">Servicios</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="left">
+                            <h3>Formulario de Productos:</h3>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="categoria">Categoría:</label>
+                            </div>
+                            <div class="col-75">
+                                <select name="categoria" id="categoria" onchange="cargarProductos(this.value)" required>
+                                    <option value="">Seleccione una opción</option>
+                                    <?php
+                                    // Aquí deberías tener código similar para obtener la lista de categorías
+                                    $resultCategorias = $mysqli->query("SELECT id_categoria, descripcion FROM categorias");
+
+                                    while ($rowCategoria = $resultCategorias->fetch_assoc()) {
+                                        echo "<option value='{$rowCategoria['id_categoria']}'>{$rowCategoria['descripcion']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Dentro de la sección del formulario -->
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="producto">Producto:</label>
+                            </div>
+                            <div class="col-75">
+                                <select name="producto[]" id="producto" required>
+                                    <option value="" disabled selected>Selecciona primero la categoría</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="cantidad">Cantidad:</label>
+                            </div>
+                            <div class="col-75">
+                                <input type="number" name="cantidad[]" min="1" required>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <input type="button" class="boton" value="Agregar" onclick="agregarProducto()">
+                        </div>
+
+                        <!-- Tabla para mostrar los productos seleccionados -->
+                        <table border="1">
+                            <thead>
+                                <tr>
+                                    <th>Cantidad</th>
+                                    <th>Producto</th>
+                                    <th>Costo</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla_productos">
+                                <!-- Aquí se mostrarán los productos seleccionados -->
+                            </tbody>
+                        </table>
+
+                        <div class="row">
+                            <input type="hidden" name="id_usuario" id="" value='<?php echo $idUsuario[0]; ?>' readonly>
+                            <br>
+                            <input type="submit" class="boton2" value="Vender">
+                        </div>
+                    </form>
                 </div>
+            </div>
+        </main>
 
-                <div class="row">
-                    <div class="col-25">
-                        <label for="cliente">Cliente:</label>
-                    </div>
-                    <div class="col-75">
-                        <select name="cliente" required>
-                        <option value="">Seleccione una opción</option>
-                            <option value="cliente-varios">Clientes-Varios</option>
+        <script>
+            function cargarProductos(idCategoria) {
+                // Aquí puedes realizar una solicitud AJAX para cargar los productos de la categoría seleccionada
+                // Puedes utilizar JavaScript puro o alguna biblioteca como jQuery
+                // ...
 
-                            <!-- Obtener la lista de clientes desde la base de datos o algún otro origen -->
-                            <?php
-                            // Aquí deberías tener código para conectarte a la base de datos y obtener la lista de clientes
-                            // Puedes usar mysqli o PDO para ello
-                            // Ejemplo con mysqli:
-                            $mysqli = new mysqli("localhost", "root", "", "ferreteria");
-                            $result = $mysqli->query("SELECT id_cliente, nombre FROM cliente");
+                // Ejemplo con jQuery:
+                $.ajax({
+                    url: 'cargar_productos.php',
+                    method: 'GET',
+                    data: {
+                        id_categoria: idCategoria
+                    },
+                    success: function(data) {
+                        // Actualizar el contenido del select de productos
+                        $('#producto').html(data);
+                    }
+                });
+            }
 
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<option value='{$row['id_cliente']}'>{$row['nombre']}</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-25">
-                        <label for="tipo">Tipo:</label>
-                    </div>
-                    <div class="col-75">
-                        <select name="tipo" required>
-                            <option value="">Seleccione una opción</option>
-                            <option value="Productos">Productos</option>
-                            <option value="Servicios">Servicios</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <h3>Formulario de Productos:</h3>
-                </div>
-
-                <div class="row">
-                    <div class="col-25">
-                        <label for="categoria">Categoría:</label>
-                    </div>
-                    <div class="col-75">
-                        <select name="categoria" id="categoria" onchange="cargarProductos(this.value)" required>
-                        <option value="">Seleccione una opción</option>
-                            <?php
-                            // Aquí deberías tener código similar para obtener la lista de categorías
-                            $resultCategorias = $mysqli->query("SELECT id_categoria, descripcion FROM categorias");
-
-                            while ($rowCategoria = $resultCategorias->fetch_assoc()) {
-                                echo "<option value='{$rowCategoria['id_categoria']}'>{$rowCategoria['descripcion']}</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Dentro de la sección del formulario -->
-                <div class="row">
-                    <div class="col-25">
-                        <label for="producto">Producto:</label>
-                    </div>
-                    <div class="col-75">
-                        <select name="producto[]" id="producto" required>
-                            <option value="" disabled selected>Selecciona primero la categoría</option>
-                        </select>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-25">
-                        <label for="cantidad">Cantidad:</label>
-                    </div>
-                    <div class="col-75">
-                        <input type="number" name="cantidad[]" min="1" required>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <input type="button" class="boton" value="Agregar" onclick="agregarProducto()">
-                </div>
-
-                <!-- Tabla para mostrar los productos seleccionados -->
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th>Cantidad</th>
-                            <th>Producto</th>
-                            <th>Costo</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla_productos">
-                        <!-- Aquí se mostrarán los productos seleccionados -->
-                    </tbody>
-                </table>
-
-                <div class="row">
-                    <input type="hidden" name="id_usuario" id="" value='<?php echo $idUsuario[0]; ?>' readonly>                           
-                    <input type="submit" value="Generar Factura">
-                </div>
-            </form>
-
-
-            <script>
-                function cargarProductos(idCategoria) {
-                    // Aquí puedes realizar una solicitud AJAX para cargar los productos de la categoría seleccionada
-                    // Puedes utilizar JavaScript puro o alguna biblioteca como jQuery
-                    // ...
-
-                    // Ejemplo con jQuery:
-                    $.ajax({
-                        url: 'cargar_productos.php',
-                        method: 'GET',
-                        data: {
-                            id_categoria: idCategoria
-                        },
-                        success: function(data) {
-                            // Actualizar el contenido del select de productos
-                            $('#producto').html(data);
-                        }
-                    });
-                }
-
-                // Puedes agregar más funciones JavaScript según sea necesario para manejar la lógica del formulario
-            </script>
+            // Puedes agregar más funciones JavaScript según sea necesario para manejar la lógica del formulario
+        </script>
 </body>
+<script src="../dashboard/script.js"></script>
+
 <script>
     function agregarProducto() {
         var productoSelect = document.getElementsByName('producto[]')[0];

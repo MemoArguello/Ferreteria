@@ -17,16 +17,27 @@ $sql = "SELECT id_cargo FROM `usuarios` WHERE usuario = '$usuario';";
 $result = mysqli_query($conexiondb, $sql);
 
 $usuario = $_SESSION['usuario'];
+$queryUsuario = "SELECT id_usuario FROM usuarios WHERE usuario = '$usuario'";
+$resultadoUsuario = mysqli_query($conexiondb, $queryUsuario);
+
+// Verificar si se obtuvo el resultado
+if ($resultadoUsuario) {
+    // Obtener el ID del usuario
+    $usuarioInfo = mysqli_fetch_assoc($resultadoUsuario);
+    $idUsuario = $usuarioInfo['id_usuario'];
+} else {
+    // Manejar el error si la consulta no fue exitosa
+    echo "Error al obtener el ID del usuario.";
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proveedor</title>
-    <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/stiles.css">
-    <link rel="stylesheet" href="../CSS/registrar.css">
+    <title>Proveedores</title>
     <script>
         function getCiudades(departamentoId) {
             var xhttp = new XMLHttpRequest();
@@ -40,84 +51,101 @@ $usuario = $_SESSION['usuario'];
         }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../IMG/nut_5361285.png" rel="icon">
 </head>
+
 <body>
-<?php 
-        include($_SERVER['DOCUMENT_ROOT'] . '/Sistema_Ferreteria/Frontend/dashboard/inicio.php');
+    <?php
+    include($_SERVER['DOCUMENT_ROOT'] . '/Sistema_Ferreteria/Frontend/dashboard/inicio.php');
     ?>
-        <section class="dashboard">
-        <div class="top">
-            <div class="topnav" id="myTopnav">
-                <a href="../reportes/reporte_prov.php" <?php if (basename($_SERVER['PHP_SELF']) == '../reportes/reporte_prov') echo 'class="active"'; ?>>Proveedores</a>
-                <a href="./agg_proveedor.php" <?php if (basename($_SERVER['PHP_SELF']) == 'agg_proveedor.php') echo 'class="active"'; ?>>Registrar</a>
+    <section id="content">
+        <main>
+                <div class="left">
+                    <nav class="nav">
+                        <ul class="breadcrumb">
+                            <li>
+                                <a class="active" href="../reportes/reporte_prov.php">Proveedores</a>
+                            </li>
+                        </ul>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a class="active" href="./agg_proveedor.php">Registrar</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            <div class="table-data">
+                <div class="container">
+                    <form action="../../Backend/proveedor/guardar_prov.php" class="form_vent" method="POST">
+                        <h1 align="center">Registrar Proveedor</h1>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="fname">Nombre del Proveedor</label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" id="fname" name="nombre_prov" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="lname">RUC</label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" id="lname" name="ruc" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="lname">Telefono</label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" id="lname" name="telefono" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="country">Departamento</label>
+                            </div>
+                            <div class="col-75">
+                                <select id="departamento" name="id_departamento" onchange="getCiudades(this.value)" required>
+                                    <option value="">Seleccione una opción</option>
+                                    <?php
+                                    while ($departamento = mysqli_fetch_assoc($resultado)) {
+                                        echo "<option value='" . $departamento['id_departamento'] . "'>" . $departamento['nombre'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="country">Distrito</label>
+                            </div>
+                            <div class="col-75">
+                                <select id="ciudad" name="id_ciudad" required>
+                                    <option value="">Seleccione una opción</option> <!-- Opción en blanco -->
+                                    <?php
+                                    while ($ciudad = mysqli_fetch_assoc($resultado2)) {
+                                        echo "<option value='" . $ciudad['id_ciudad'] . "'>" . $ciudad['nombre'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <input type="hidden" name="id_usuario" id="" value='<?php echo $idUsuario[0]; ?>' readonly>
+                            <input type="hidden" name="editar" id="" value='no' readonly>
+                            <input type="submit" value="Guardar" class="boton2">
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-
-        <div class="dash-content">
-            <form action="../../Backend/proveedor/guardar_prov.php" class="formRecepcion" method="POST">
-                <h1 align="center">Registrar Proveedor</h1>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="fname">Nombre del Proveedor</label>
-                    </div>
-                    <div class="col-75">
-                        <input type="text" id="fname" name="nombre_prov" placeholder="" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="lname">RUC</label>
-                    </div>
-                    <div class="col-75">
-                        <input type="text" id="lname" name="ruc" placeholder="" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="lname">Telefono</label>
-                    </div>      
-                    <div class="col-75">
-                        <input type="text" id="lname" name="telefono" placeholder="" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="country">Departamento</label>
-                    </div>
-                    <div class="col-75">
-                        <select id="departamento" name="id_departamento" onchange="getCiudades(this.value)" required>
-                            <option value="">Seleccione una opción</option>
-                            <?php
-                            while ($departamento = mysqli_fetch_assoc($resultado)) {
-                                echo "<option value='" . $departamento['id_departamento'] . "'>" . $departamento['nombre'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="country">Distrito</label>
-                    </div>
-                    <div class="col-75">
-                        <select id="ciudad" name="id_ciudad" required>
-                            <option value="">Seleccione una opción</option> <!-- Opción en blanco -->
-                            <?php
-                            while ($ciudad = mysqli_fetch_assoc($resultado2)) {
-                                echo "<option value='" . $ciudad['id_ciudad'] . "'>" . $ciudad['nombre'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <input type="hidden" name="editar" id="" value='no' readonly>
-                    <input type="submit" value="Guardar">
-                </div>
-            </form>
-        </div>
+            <main>
     </section>
+    <script src="../dashboard/script.js"></script>
+
 </body>
+
 </html>

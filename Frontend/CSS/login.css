@@ -8,7 +8,7 @@
 :root {
     --azul: #ffffff;
     --azulOscuro: rgb(238, 238, 238);
-    --azulGris: #3421C0;
+    --azulGris: #3c91e6;
     --blanco: #e6e5e5;
     --negro: rgb(0, 0, 0);
     --fuente: 'Quicksand', sans-serif;
@@ -38,7 +38,7 @@ body {
 .texto-formulario h2,
 .texto-formulario p,
 .texto-formulario h3 {
-    color: var(--azulGris);
+    color: #3c91e6;
 }
 
 .texto-formulario h2 {
@@ -107,7 +107,6 @@ body {
 }
 
 .label {
-    position: absolute;
     top: 15px;
     left: 20px; /* Ajusté la posición para que no esté pegada al borde */
     padding: 0 4px;
@@ -123,11 +122,11 @@ body {
     top: -25px; /* Ajusté la posición al enfocar */
     font-size: 14px;
     font-weight: 600;
-    color: #3421C0;
+    color: #3c91e6;
 }
 
 .input:focus {
-    border-bottom: 2px solid #3421C0; /* Color del borde inferior al enfocar */
+    border-bottom: 2px solid #3c91e6; /* Color del borde inferior al enfocar */
 }
 
 .submitBtn {

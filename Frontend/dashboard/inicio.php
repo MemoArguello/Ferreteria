@@ -1,95 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
 	<meta charset="UTF-8">
-	<title>Inicio</title>
-	<link rel="stylesheet" href="../CSS/stiles.css">
-	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-	<script>
-		$(document).ready(function(){
-			$(".hamburger").click(function(){
-			  $(".wrapper").toggleClass("active")
-			})
-		});
-	</script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="../CSS/dash.css">
+
+	<title>Ferreteria</title>
 </head>
+
 <body>
 
-<div class="wrapper">
 
-	<div class="top_navbar">
-		<div class="logo">
-			<a href="../inicio/inicio.php">FERRETERIA</a>
-		</div>
-	</div>
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="../inicio/inicio.php" class="brand">
+			<i class='bx bxs-store-alt' style='color:#3c91e6'></i>
+			<span class="text">Ferreteria</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="">
+				<a href="../inicio/inicio.php">
+					<i class='bx bx-home' style='color:#3c91e6'></i>
+					<span class="text">Inicio</span>
+				</a>
+			</li>
+			<li>
+				<a href="../venta/venta.php">
+					<i class='bx bxs-shopping-bag-alt' style='color:#3c91e6'></i>
+					<span class="text">Ventas</span>
+				</a>
+			</li>
+			<li>
+				<a href="../reportes/reporte_prod.php">
+					<i class='bx bx-cart' style='color:#3c91e6'></i>
+					<span class="text">Productos</span>
+				</a>
+			</li>
+			<li>
+				<a href="../reportes/reporte_prov.php">
+					<i class='bx bxs-package' style='color:#3c91e6'></i>
+					<span class="text">Proveedores</span>
+				</a>
+			</li>
+			<li>
+				<a href="../reportes/reporte_caja.php">
+						<i class='bx bx-dollar-circle' style='color:#3c91e6'></i>
+						<span class="text">Caja</span>
+				</a>
+			</li>
+			<li>
+				<a href="../reportes/reporte_cliente.php">
+					<i class='bx bx-group' style='color:#3c91e6'></i>
+					<span class="text">Clientes</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="../reportes/reporte_cuenta.php">
+					<i class='bx bxs-cog' style='color:#3c91e6'></i>
+					<span class="text">Configuracion</span>
+				</a>
+			</li>
+			<li>
+				<a href="../../Backend/validacion/cerrar_sesion.php" class="logout">
+					<i class='bx bxs-log-out-circle'></i>
+					<span class="text">Cerrar Sesión</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
 
-	<div class="main_body">
-		
-		<div class="sidebar_menu">
-	        	<ul>
-		          <li>
-		            <a href="../inicio/inicio.php">
-		              <span class="icon">
-		              	<i class="uil uil-estate"></i></span>
-		              <span class="list">Inicio</span>
-		            </a>
-		          </li>
-		          <li>
-		            <a href="../venta/venta.php">
-		              <span class="icon"><i class="lar la-money-bill-alt"></i></span>
-		              <span class="list">Ventas</span>
-		            </a>
-		          </li>
-				  <li>
-		            <a href="../reportes/reporte_prod.php">
-		              <span class="icon"><i class="las la-hammer"></i></span>
-		              <span class="list">Productos</span>
-		            </a>
-		          </li>
-		          <li>
-		            <a href="../reportes/reporte_prov.php">
-		              <span class="icon"><i class="las la-truck"></i></span>
-		              <span class="list">Proveedores</span>
-		            </a>
-		          </li>
-		          <li>
-		            <a href="../reportes/reporte_caja.php">
-		              <span class="icon"><i class="las la-coins"></i></span>
-		              <span class="list">Caja</span>
-		            </a>
-		          </li>
-				  <li>
-		            <a href="../reportes/reporte_cliente.php">
-		              <span class="icon"><i class="las la-user"></i></span>
-		              <span class="list">Clientes</span>
-		            </a>
-		          </li>
-				  <li>
-		            <a href="../reportes/reporte_cuenta.php">
-		              <span class="icon"><i class="las la-cog"></i></span>
-		              <span class="list">Configuracion</span>
-		            </a>
-		          </li>
-				  <ul class="inner__sidebar_menu">
-				  <li>
-		            <a>
-		              <span class="icon"><i class="uil uil-user"></i></span>
-		              <span class="list"><?php echo "Usuario: $usuario"; ?></span>
-		            </a>
-		          </li>
-				  <li>
-		            <a href="../../Backend/validacion/cerrar_sesion.php">
-		              <span class="icon"><i class="las la-sign-out-alt"></i></span>
-		              <span class="list">Cerrar Sesión</span>
-		            </a>
-		          </li>
-				</ul>
-		        </ul>
-	        </div>
-	</div>
-</div>
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu'></i>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="profile">
+				<img src="../IMG/shopping-bag_5939887.png">
+			</a>
+		</nav>
+
+	</section>
+
+
+	<script src="script.js"></script>
 </body>
+
 </html>

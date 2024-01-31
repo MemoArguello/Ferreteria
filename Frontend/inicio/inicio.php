@@ -19,6 +19,8 @@ $query3 = "SELECT COUNT(*) total3 FROM facturas";
 $query4 = "SELECT COUNT(*) total4 FROM proveedores";
 $query5 = "SELECT sum(ingreso) total5 FROM caja";
 $query6 = "SELECT sum(egreso) total6 FROM caja";
+$query7 = "SELECT COUNT(*) total7 FROM auditoria";
+$query8 = "SELECT COUNT(*) total8 FROM usuarios";
 
 
 $resultado1 = mysqli_query($conexiondb, $query1);
@@ -27,6 +29,8 @@ $resultado3 = mysqli_query($conexiondb, $query3);
 $resultado4 = mysqli_query($conexiondb, $query4);
 $resultado5 = mysqli_query($conexiondb, $query5);
 $resultado6 = mysqli_query($conexiondb, $query6);
+$resultado7 = mysqli_query($conexiondb, $query7);
+$resultado8 = mysqli_query($conexiondb, $query8);
 
 
 
@@ -150,6 +154,38 @@ $resultado6 = mysqli_query($conexiondb, $query6);
                         while ($reserva = mysqli_fetch_assoc($resultado6)) {
                             echo "<h3>" . $reserva['total6'] . "</h3>";
                             echo "<p>Gs en Compras Realizadas</p>";
+                        }
+                        ?>
+                    </span>
+                </li>
+                <li>
+                    <img src="../IMG/website_5939821.png" alt="" class="card">
+                    <span class="text">
+                        <?php
+                        while ($reserva = mysqli_fetch_assoc($resultado7)) {
+                            if ($reserva['total7'] == 1) {
+                                echo "<h3>" . $reserva['total7'] . "</h3>";
+                                echo "<p>Actividad Registrada</p>";
+                            } else {
+                                echo "<h3>" . $reserva['total7'] . "</h3>";
+                                echo "<p>Actividades Registradas</p>";
+                            }
+                        }                       
+                        ?>
+                    </span>
+                </li>
+                <li>
+                    <img src="../IMG/member-card_5939951.png" alt="" class="card">
+                    <span class="text">
+                        <?php
+                        while ($reserva = mysqli_fetch_assoc($resultado8)) {
+                            if ($reserva['total8'] == 1) {
+                                echo "<h3>" . $reserva['total8'] . "</h3>";
+                                echo "<p>Usuario Registrado</p>";
+                            } else {
+                                echo "<h3>" . $reserva['total8'] . "</h3>";
+                                echo "<p>Usuarios Registrados</p>";
+                            }
                         }
                         ?>
                     </span>

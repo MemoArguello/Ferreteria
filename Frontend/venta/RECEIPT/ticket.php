@@ -13,12 +13,15 @@
     require "./conexion.php";
 
     $id = $_GET['id_detalle'];
-    $stmt = $connect->prepare("SELECT detalle_factura.id_detalle, detalle_factura.id_factura, detalle_factura.id_producto, 
-    detalle_factura.cantidad, detalle_factura.costo_unitario, detalle_factura.total, 
-    facturas.id_factura, facturas.codigo_factura, facturas.cliente, productos.id_producto,
-    productos.nombre_producto, cliente.id_cliente, cliente.nombre, cliente.cedula FROM detalle_factura JOIN facturas 
+    $stmt = $connect->prepare("SELECT detalle_factura.id_detalle, detalle_factura.id_factura, 
+    detalle_factura.id_producto, detalle_factura.cantidad, detalle_factura.costo_unitario, 
+    detalle_factura.total, facturas.id_factura, facturas.codigo_factura, facturas.cliente,
+    productos.id_producto, productos.nombre_producto, cliente.id_cliente, cliente.nombre,
+    cliente.cedula, ciudades.id_ciudad, ciudades.nombre AS nombreCiudad FROM detalle_factura JOIN facturas 
     ON facturas.id_factura =  detalle_factura.id_factura JOIN productos 
-    ON productos.id_producto = detalle_factura.id_producto JOIN cliente ON cliente.id_cliente = facturas.cliente WHERE id_detalle= '$id'");
+    ON productos.id_producto = detalle_factura.id_producto 
+    JOIN cliente ON cliente.id_cliente = facturas.cliente JOIN ciudades ON ciudades.id_ciudad = cliente.id_ciudad
+    WHERE id_detalle= '$id'");
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $stmt->execute();
 
@@ -28,7 +31,7 @@
     $pdf->SetFont('Arial','',9);
     $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","RUC: 0000000000"),0,'C',false);
     $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Direccion Mil Viviendas, Ayolas"),0,'C',false);
-    $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Teléfono: 00000000"),0,'C',false);
+    $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Cedula: 00000000"),0,'C',false);
     $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Email: correo@ejemplo.com"),0,'C',false);
 
     $pdf->Ln(1);
@@ -36,8 +39,8 @@
     $pdf->Ln(5);
 
     $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Fecha: ".date("d/m/Y", strtotime("13-09-2022"))." ".date("h:s A")),0,'C',false);
-    $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Caja Nro: 1"),0,'C',false);
-    $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Cajero: Carlos Alfaro"),0,'C',false);
+    $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Caja: 1"),0,'C',false);
+    $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Cajero: Nombre"),0,'C',false);
     $pdf->SetFont('Arial','B',10);
     $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1",strtoupper("Ticket Nro: 1")),0,'C',false);
     $pdf->SetFont('Arial','',9);
@@ -49,7 +52,7 @@
     $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1", "Cliente: " . $row['nombre']),0,'C',false);
     $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Cedula: " .$row['cedula']),0,'C',false);
     $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Teléfono: 00000000"),0,'C',false);
-    $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Dirección: San Salvador, El Salvador, Centro America"),0,'C',false);
+    $pdf->MultiCell(0,5,iconv("UTF-8", "ISO-8859-1","Ciudad: " . $row['nombreCiudad']),0,'C',false);
 
     $pdf->MultiCell(0,4,iconv("UTF-8", "ISO-8859-1","Producto: ".$row['nombre_producto']),0,'C',false);
 
@@ -89,7 +92,7 @@
     # Impuestos & totales #
     $pdf->Cell(18,5,iconv("UTF-8", "ISO-8859-1",""),0,0,'C');
     $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1","SUBTOTAL"),0,0,'C');
-    $pdf->Cell(32,5,iconv("UTF-8", "ISO-8859-1","+ $70.00 USD"),0,0,'C');
+    $pdf->Cell(32,5,iconv("UTF-8", "ISO-8859-1",$row['total']),0,0,'C');
 
     $pdf->Ln(5);
 
@@ -105,25 +108,10 @@
 
     $pdf->Cell(18,5,iconv("UTF-8", "ISO-8859-1",""),0,0,'C');
     $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1","TOTAL A PAGAR"),0,0,'C');
-    $pdf->Cell(32,5,iconv("UTF-8", "ISO-8859-1","$70.00 USD"),0,0,'C');
+    $pdf->Cell(32,5,iconv("UTF-8", "ISO-8859-1",$row['total']),0,0,'C');
+
 
     $pdf->Ln(5);
-    
-    $pdf->Cell(18,5,iconv("UTF-8", "ISO-8859-1",""),0,0,'C');
-    $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1","TOTAL PAGADO"),0,0,'C');
-    $pdf->Cell(32,5,iconv("UTF-8", "ISO-8859-1","$100.00 USD"),0,0,'C');
-
-    $pdf->Ln(5);
-
-    $pdf->Cell(18,5,iconv("UTF-8", "ISO-8859-1",""),0,0,'C');
-    $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1","CAMBIO"),0,0,'C');
-    $pdf->Cell(32,5,iconv("UTF-8", "ISO-8859-1","$30.00 USD"),0,0,'C');
-
-    $pdf->Ln(5);
-
-    $pdf->Cell(18,5,iconv("UTF-8", "ISO-8859-1",""),0,0,'C');
-    $pdf->Cell(22,5,iconv("UTF-8", "ISO-8859-1","USTED AHORRA"),0,0,'C');
-    $pdf->Cell(32,5,iconv("UTF-8", "ISO-8859-1","$0.00 USD"),0,0,'C');
 
     $pdf->Ln(10);
 

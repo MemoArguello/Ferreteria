@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-01-2024 a las 22:32:11
+-- Tiempo de generación: 31-01-2024 a las 23:04:39
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.5
 
@@ -33,12 +33,34 @@ CREATE TABLE `auditoria` (
 --
 
 INSERT INTO `auditoria` (`id_auditoria`, `id_usuario`, `evento`, `fecha`) VALUES
-(6, 7, 'Venta de Productos', '2024-01-24 20:17:50'),
-(7, 7, 'Venta de Productos', '2024-01-25 17:35:12'),
-(8, 7, 'Venta de Productos', '2024-01-25 17:35:33'),
-(9, 7, 'Venta de Productos', '2024-01-25 18:50:24'),
-(10, 7, 'Venta de Productos', '2024-01-25 18:52:15'),
-(11, 7, 'Venta de Productos', '2024-01-26 14:26:29');
+(12, 7, 'Venta de Productos', '2024-01-30 14:44:25'),
+(13, 7, 'Venta de Productos', '2024-01-30 17:08:52'),
+(14, 7, 'Se editó una venta', '2024-01-31 23:04:56'),
+(15, 7, 'Registro de Proveedor', '2024-01-31 23:13:06'),
+(22, 7, 'Registro de Proveedor', '2024-01-31 23:18:30'),
+(23, 7, 'Registro de Producto', '2024-01-31 23:32:18'),
+(29, 7, 'Apertura de Caja', '2024-01-31 23:48:39'),
+(40, 7, 'Clausura de Caja', '2024-01-31 23:57:11'),
+(42, 7, 'Clausura de Caja', '2024-01-31 23:57:27'),
+(46, 7, 'Apertura de Caja', '2024-02-01 00:01:21'),
+(47, 7, 'Clausura de Caja', '2024-02-01 00:01:25'),
+(48, 7, 'Se eliminó una Caja', '2024-02-01 00:01:28'),
+(50, 7, 'Registro de Cliente', '2024-02-01 00:19:56'),
+(51, 7, 'Registro de Cliente', '2024-02-01 00:21:05'),
+(52, 7, 'Registro de Cliente', '2024-02-01 00:21:31'),
+(53, 7, 'Registro de Cliente', '2024-02-01 00:22:17'),
+(54, 7, 'Apertura de Caja', '2024-02-01 00:30:08'),
+(55, 7, 'Registro de Producto', '2024-02-01 00:38:07'),
+(56, 7, 'Registro de Proveedor', '2024-02-01 00:38:38'),
+(57, 7, 'Registro de Proveedor', '2024-02-01 00:39:13'),
+(58, 7, 'Registro de Proveedor', '2024-02-01 00:40:43'),
+(59, 7, 'Registro de Producto', '2024-02-01 00:59:51'),
+(60, 7, 'Registro de Producto', '2024-02-01 01:00:24'),
+(61, 7, 'Registro de Producto', '2024-02-01 01:01:06'),
+(62, 7, 'Registro de Producto', '2024-02-01 01:07:01'),
+(63, 7, 'Registro de Producto', '2024-02-01 01:07:31'),
+(64, 7, 'Registro de Cliente', '2024-02-01 01:18:31'),
+(65, 7, 'Venta de Productos', '2024-01-31 21:48:21');
 
 -- --------------------------------------------------------
 
@@ -55,6 +77,13 @@ CREATE TABLE `caja` (
   `saldo_cierre` float NOT NULL,
   `estado` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `caja`
+--
+
+INSERT INTO `caja` (`id_caja`, `fecha_apertura`, `fecha_cierre`, `ingreso`, `egreso`, `saldo_cierre`, `estado`) VALUES
+(37, '2024-01-31 21:07:31', '0000-00-00 00:00:00', 0, 31000, 0, 'Abierto');
 
 -- --------------------------------------------------------
 
@@ -91,7 +120,14 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id_categoria`, `descripcion`) VALUES
-(7, 'Herramientas de Mano');
+(7, 'Herramientas de Mano'),
+(8, 'Escaleras'),
+(9, 'Herramientas de Construccion'),
+(13, 'Herramientas para construccion e instaladores'),
+(19, 'Herramientas manuales para huerto y jardin'),
+(29, 'Componentes diversos'),
+(30, 'Productos de fijacion y sellado'),
+(44, 'Alicates');
 
 -- --------------------------------------------------------
 
@@ -385,6 +421,18 @@ CREATE TABLE `cliente` (
   `id_ciudad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id_cliente`, `cedula`, `nombre`, `ruc`, `id_departamento`, `id_ciudad`) VALUES
+(27, '213213', 'Juan Lopez', ' 23213', 9, 185),
+(28, '1234567', 'Leo Messi', '2132133', 9, 186),
+(30, '213213', 'Mariana Lopez', '2313123', 8, 163),
+(31, '21312312', 'Roberto Lopez', '123213123', 9, 188),
+(32, '213213123', 'Maria Acosta', '123123', 9, 184),
+(33, '23121312', 'Juan Acosta', '3423423', 9, 185);
+
 -- --------------------------------------------------------
 
 --
@@ -458,6 +506,13 @@ CREATE TABLE `detalle_factura` (
   `estado` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `detalle_factura`
+--
+
+INSERT INTO `detalle_factura` (`id_detalle`, `id_factura`, `id_producto`, `cantidad`, `costo_unitario`, `total`, `estado`) VALUES
+(53, 75, 50, 3, '60000.00', '180000.00', '');
+
 -- --------------------------------------------------------
 
 --
@@ -471,6 +526,13 @@ CREATE TABLE `facturas` (
   `tipo` varchar(50) NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `facturas`
+--
+
+INSERT INTO `facturas` (`id_factura`, `codigo_factura`, `cliente`, `tipo`, `fecha_creacion`) VALUES
+(75, '234324', 30, 'Productos', '2024-02-01 01:48:21');
 
 -- --------------------------------------------------------
 
@@ -489,6 +551,49 @@ CREATE TABLE `productos` (
   `id_proveedor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id_producto`, `nombre_producto`, `categoria`, `lote`, `stock`, `precio`, `precio_compra`, `id_proveedor`) VALUES
+(27, 'Destornillador Phillips', 7, 'L12312312', 40, 30000, 20000, 11),
+(28, 'Llave ajustable', 44, 'L213213', 40, 45000, 31000, 12),
+(29, 'Destornillador Phillips', 7, 'L12345', 100, 45000, 35000, 7),
+(30, 'Martillo de garra', 7, 'L12346', 80, 60000, 48000, 11),
+(31, 'Llave ajustable', 7, 'L12347', 120, 55000, 44000, 12),
+(32, 'Cuchillo de uso general', 7, 'L12348', 90, 40000, 32000, 13),
+(33, 'Alicate de punta fina', 7, 'L12349', 110, 50000, 40000, 7),
+(34, 'Escalera de aluminio de 6 escalones', 8, 'L12350', 30, 80000, 64000, 11),
+(35, 'Escalera extensible de 10 escalones', 8, 'L12351', 20, 120000, 96000, 12),
+(36, 'Escalera de tijera de fibra de vidrio', 8, 'L12352', 25, 95000, 76000, 13),
+(37, 'Escalera telescopica de aluminio', 8, 'L12353', 35, 70000, 56000, 7),
+(38, 'Escalera articulada de 4x4 escalones', 8, 'L12354', 28, 110000, 88000, 11),
+(39, 'Paleta de albañil', 9, 'L12355', 50, 35000, 28000, 12),
+(40, 'Hormigonera electrica', 9, 'L12356', 8, 300000, 240000, 13),
+(41, 'Pala de punta', 9, 'L12357', 45, 40000, 32000, 7),
+(42, 'Carretilla de obra', 9, 'L12358', 20, 90000, 72000, 11),
+(43, 'Cincel para concreto', 9, 'L12359', 55, 42000, 33600, 12),
+(44, 'Nivel laser', 13, 'L12360', 15, 150000, 120000, 13),
+(45, 'Sierra de azulejos', 13, 'L12361', 12, 110000, 88000, 7),
+(46, 'Martillo demoledor', 13, 'L12362', 8, 180000, 144000, 11),
+(47, 'Taladro percutor', 13, 'L12363', 18, 75000, 60000, 12),
+(48, 'Atornillador inalambrico', 13, 'L12364', 20, 65000, 52000, 13),
+(49, 'Podadora de ramas para jardin', 29, 'L1001', 50, 85000, 68000, 7),
+(50, 'Pala para jardinero', 29, 'L1002', 30, 60000, 48000, 11),
+(51, 'Cortasetos manual', 29, 'L1003', 40, 75000, 60000, 12),
+(52, 'Rastrillo para jardin', 29, 'L1004', 25, 55000, 44000, 13),
+(53, 'Tijeras de podar', 29, 'L1005', 35, 70000, 56000, 7),
+(54, 'Conector electrico universal', 29, 'L2001', 100, 45000, 36000, 11),
+(55, 'Adaptador de corriente', 29, 'L2002', 80, 55000, 44000, 12),
+(56, 'Interruptor de luz', 29, 'L2003', 120, 40000, 32000, 13),
+(57, 'Cable de conexion', 29, 'L2004', 90, 50000, 40000, 7),
+(58, 'Fusible de seguridad', 29, 'L2005', 110, 48000, 38400, 11),
+(59, 'Tornillo de acero inoxidable', 30, 'L3001', 200, 120000, 96000, 12),
+(60, 'Adhesivo para madera', 30, 'L3002', 150, 95000, 76000, 13),
+(61, 'Clavo de alta resistencia', 30, 'L3003', 180, 110000, 88000, 7),
+(62, 'Cinta de doble cara', 30, 'L3004', 130, 80000, 64000, 11),
+(63, 'Sellador de silicona', 30, 'L3005', 160, 90000, 72000, 12);
+
 -- --------------------------------------------------------
 
 --
@@ -503,6 +608,16 @@ CREATE TABLE `proveedores` (
   `departamento` int(11) NOT NULL,
   `distrito` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `proveedores`
+--
+
+INSERT INTO `proveedores` (`id_proveedor`, `nombre_prov`, `ruc`, `telefono`, `departamento`, `distrito`) VALUES
+(7, 'Paraguayans Products', '13123', '12313213', 1, 1),
+(11, 'Pandolfo S.A', '21321321', '12345678', 9, 185),
+(12, 'Importadora Boggiani S.A', '213123', '23123123', 8, 163),
+(13, 'San Carlos Ferretería', '213213', '123123123', 11, 20);
 
 -- --------------------------------------------------------
 
@@ -629,13 +744,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `auditoria`
 --
 ALTER TABLE `auditoria`
-  MODIFY `id_auditoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_auditoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT de la tabla `caja`
 --
 ALTER TABLE `caja`
-  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `cargo`
@@ -647,7 +762,7 @@ ALTER TABLE `cargo`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `ciudades`
@@ -659,7 +774,7 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `datos_ferreteria`
@@ -677,25 +792,25 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

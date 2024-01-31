@@ -58,6 +58,9 @@ body.dark{
 ::-webkit-scrollbar-thumb:hover {
     background: #ffffff;
 }
+.titulo{
+    color: #3421c0;
+}
 
 body.dark::-webkit-scrollbar-thumb:hover,
 body.dark .activity-data::-webkit-scrollbar-thumb:hover{
