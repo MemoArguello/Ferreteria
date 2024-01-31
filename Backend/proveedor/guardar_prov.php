@@ -11,15 +11,17 @@ if (empty($_POST['nombre_prov']) || empty($_POST['ruc']) || empty($_POST['telefo
         $ruc = $_POST['ruc'];
         $telefono = $_POST['telefono'];
         $editar = $_POST['editar'];
-
+        $usuario = $_POST["id_usuario"];
+        $fechaActual = date("Y-m-d H:i:s");
+        $evento = 'Registro de Proveedor';
         $conexiondb = conectardb();
 
         if ($editar == "si") {
+            
             $id_proveedor = $_POST['id_proveedor'];
             $query = "UPDATE proveedores SET nombre_prov='" . $nombre_prov . "', ruc='" . $ruc . "', telefono ='" . $telefono . "' WHERE id_proveedor='" . $id_proveedor . "'";
             
             $respuesta = mysqli_query($conexiondb, $query);
-
             if ($respuesta) {
                     echo "<script>alert('Se editó correctamente');
                     window.location.href='../../Frontend/reportes/reporte_prov.php'</script>";
@@ -36,7 +38,11 @@ if (empty($_POST['nombre_prov']) || empty($_POST['ruc']) || empty($_POST['telefo
 
             $respuesta2 = mysqli_query($conexiondb, $query2);
 
-            if ($respuesta2) {
+            $query3 = "INSERT INTO auditoria (id_usuario, evento, fecha) VALUES 
+                ('$usuario', '$evento', '$fechaActual')";
+            $respuesta3 = mysqli_query($conexiondb, $query3);
+
+            if ($respuesta3 and $respuesta2) {
                     echo "<script>alert('Registro Exitoso');
                     window.location.href='../../Frontend/reportes/reporte_prov.php'</script>";
                 } else {

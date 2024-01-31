@@ -1,25 +1,29 @@
 <?php
 include '../config/baseDeDatos.php';
 
-$id_caja = $_GET['id_caja'];
+$id_caja = $_POST['id_caja'];
 $ingreso = $_POST['ingreso'];
 $egreso = $_POST['egreso'];
 $saldo_cierre = $ingreso - $egreso;
 $estado = 'Cerrado';
 
 $fechaActual = date("Y-m-d H:i:s");
-
+$evento = 'Clausura de Caja';
+$usuario = $_POST["id_usuario"];
 $conexiondb = conectardb();
 
 $id_caja = $_POST['id_caja'];
 $query = "UPDATE caja SET fecha_cierre='" . $fechaActual . "',estado='" .$estado . "', saldo_cierre='" .$saldo_cierre . "' WHERE id_caja=" . $id_caja;
 
-// Verificar si la preparación de la consulta fue exitosa
-    // Asociar parámetros y ejecutar la actualización
     $respuesta = mysqli_query($conexiondb, $query);
 
+    $query4 = "INSERT INTO auditoria (id_usuario, evento, fecha) VALUES 
+    ('$usuario', '$evento', '$fechaActual')";
+
+$respuesta4 = mysqli_query($conexiondb, $query4);
+
     // Verificar si la actualización fue exitosa
-    if ($respuesta) {
+    if ($respuesta and $respuesta4) {
         header("Location: ../../Frontend/reportes/reporte_caja.php");
         exit();
     } else {

@@ -12,7 +12,8 @@ if (empty($_POST['nombre_producto']) || empty($_POST['categoria']) || empty($_PO
         $precio = $_POST['precio'];
         $precio_compra = $_POST['precio_compra'];
         $editar = $_POST['editar'];
-
+        $fechaActual = date("Y-m-d H:i:s");
+        $evento = 'Registro de Producto';
         $conexiondb = conectardb();
 
         if ($editar == "si") {
@@ -32,6 +33,7 @@ if (empty($_POST['nombre_producto']) || empty($_POST['categoria']) || empty($_PO
                 }
 
         } else {
+            $usuario = $_POST["id_usuario"];
             $id_proveedor = $_POST['id_proveedor'];
             $query2 = "INSERT INTO productos (nombre_producto, categoria, lote, stock, precio, precio_compra, id_proveedor) VALUES 
                 ('$nombre', '$categoria', '$lote', '$stock', '$precio', '$precio_compra','$id_proveedor')";
@@ -40,7 +42,11 @@ if (empty($_POST['nombre_producto']) || empty($_POST['categoria']) || empty($_PO
             $respuesta2 = mysqli_query($conexiondb, $query2);
             $respuesta3 = mysqli_query($conexiondb, $query3);
 
-            if ($respuesta2 and $respuesta3) {
+            $query4 = "INSERT INTO auditoria (id_usuario, evento, fecha) VALUES 
+                ('$usuario', '$evento', '$fechaActual')";
+            $respuesta4 = mysqli_query($conexiondb, $query4);
+
+            if ($respuesta2 and $respuesta3 and $respuesta4) {
                     echo "<script>alert('Registro Exitoso');
                     window.location.href='../../Frontend/reportes/reporte_prod.php'</script>";
                 } else {
