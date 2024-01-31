@@ -23,8 +23,6 @@ mysqli_close($conexiondb);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categoria</title>
-    <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/registrar.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -32,24 +30,44 @@ mysqli_close($conexiondb);
     <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css">
     <!---datatables bootstrap 4 css-->
     <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.13.1/css/dataTables.bootstrap.css">
-</head>
+    <link href="../IMG/nut_5361285.png" rel="icon">
+    <style>
+    table.dataTable thead {
+    background: linear-gradient(to right, #8593ff, #79ace9);
+    color: white;
+    }
+    </style>
+    </head>
 
 <body>
     <?php
     include($_SERVER['DOCUMENT_ROOT'] . '/Sistema_Ferreteria/Frontend/dashboard/inicio.php');
     ?>
-    <section class="dashboard">
-        <div class="top">
-            <div class="topnav" id="myTopnav">
-                <a href="./reporte_prod.php" <?php if (basename($_SERVER['PHP_SELF']) == '../reportes/reporte_prov') echo 'class="active"'; ?>>Productos</a>
-                <a href="../productos/registrar_productos.php" <?php if (basename($_SERVER['PHP_SELF']) == 'registrar_productos.php') echo 'class="active"'; ?>>Registrar</a>
-                <a href="./reporte_cat.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_cat.php') echo 'class="active"'; ?>>Categorias</a>
-            </div>
-        </div>
-        <div class="dash-content">
+    <section id="content">
+        <main>
+                <div class="left">
+                    <nav class="nav">
+                    <ul class="breadcrumb">
+                        <li>
+                            <a class="active" href="./reporte_prod.php">Productos</a>
+                        </li>
+                    </ul>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a class="active" href="../productos/registrar_productos.php">Registrar</a>
+                        </li>
+                    </ul>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a class="active" href="./reporte_cat.php">Categorias</a>
+                        </li>
+                    </ul>
+                    </nav>
+                </div>
+        <div class="table-data">
             <div class="container">
-                <div align="center">
-                    <h2>Listado de Clientes</h2>
+                <div class="titulo" align="center">
+                    <h2>Listado de Categorias</h2>
                 </div>
                 <div class"row">
                     <div class="col-lg-12">
@@ -65,7 +83,7 @@ mysqli_close($conexiondb);
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
         <!--Jquery. popper.js, Bootstrap JS-->
         <script src="jquery/jquery-3.5.1.min.js"></script>
@@ -90,7 +108,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a Excel',
                             className: 'btn btn-success',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5]
+                                columns: [0, 1]
                             }
                         },
                         {
@@ -99,7 +117,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Exportar a PDF',
                             className: 'btn btn-danger',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5]
+                                columns: [0, 1]
                             }
                         },
                         {
@@ -108,7 +126,7 @@ mysqli_close($conexiondb);
                             titleAttr: 'Imprimir',
                             className: 'btn btn-info',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5]
+                                columns: [0, 1]
                             }
                         },
                         {
@@ -146,7 +164,10 @@ mysqli_close($conexiondb);
             });
         </script>
         </div>
+        </main>
     </section>
+    <script src="../dashboard/script.js"></script>
+
 </body>
 
 </html>

@@ -23,8 +23,6 @@ mysqli_close($conexiondb);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
-    <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/registrar.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -32,23 +30,11 @@ mysqli_close($conexiondb);
     <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css">
     <!---datatables bootstrap 4 css-->
     <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.13.1/css/dataTables.bootstrap.css">
+    <link href="../IMG/nut_5361285.png" rel="icon">
     <style>
-        @media print {
-
-            /* Estilos para impresión */
-            body {
-                margin: 1cm;
-                /* Márgenes para la página impresa */
-            }
-
-            #tituloImpreso {
-                text-align: center;
-                /* Centrar el título al imprimir */
-                font-size: 18px;
-                /* Tamaño del texto del título */
-                margin-bottom: 10px;
-                /* Espacio después del título */
-            }
+        table.dataTable thead {
+            background: linear-gradient(to right, #8593ff, #79ace9);
+            color: white;
         }
     </style>
 </head>
@@ -57,17 +43,30 @@ mysqli_close($conexiondb);
     <?php
     include($_SERVER['DOCUMENT_ROOT'] . '/Sistema_Ferreteria/Frontend/dashboard/inicio.php');
     ?>
-    <section class="dashboard">
-        <div class="top">
-            <div class="topnav" id="myTopnav">
-                <a href="./reporte_prod.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_prod.php') echo 'class="active"'; ?>>Productos</a>
-                <a href="../productos/registrar_productos.php" <?php if (basename($_SERVER['PHP_SELF']) == '../productos/registrar_productos') echo 'class="active"'; ?>>Registrar</a>
-                <a href="./reporte_cat.php" <?php if (basename($_SERVER['PHP_SELF']) == 'reporte_cat.php') echo 'class="active"'; ?>>Categorias</a>
-            </div>
-        </div>
-        <div class="dash-content">
+    <section id="content">
+    <main>
+                <div class="left">
+                    <nav class="nav">
+                        <ul class="breadcrumb">
+                            <li>
+                                <a class="active" href="./reporte_prod.php">Productos</a>
+                            </li>
+                        </ul>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a class="active" href="../productos/registrar_productos.php">Registrar</a>
+                            </li>
+                        </ul>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a class="active" href="./reporte_cat.php">Categorias</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            <div class="table-data">
             <div class="container">
-                <div align="center">
+                <div class="titulo" align="center">
                     <h2>Listado de Productos</h2>
                 </div>
                 <div class"row">
@@ -182,7 +181,8 @@ mysqli_close($conexiondb);
             });
         </script>
         </div>
+        </main>
     </section>
+    <script src="../dashboard/script.js"></script>
 </body>
-
 </html>
