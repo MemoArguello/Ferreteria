@@ -4,6 +4,8 @@ define("APPURL", "http://localhost/sistema_ferreteria");
 define("EMPRESA","ferreteria");
 
 $PaginaActual = basename($_SERVER['PHP_SELF']); // Obtener el nombre del archivo PHP actual
+$inicio = ['inicio.php', 'estadisticas.php', 'reporte_auditoria.php'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,11 +13,12 @@ $PaginaActual = basename($_SERVER['PHP_SELF']); // Obtener el nombre del archivo
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= EMPRESA ?></title>
-    <link href="../IMG/nut_5361285.png" rel="icon">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="../CSS/dash.css">
+    <link href="<?=APPURL?>/Frontend/IMG/nut_5361285.png" rel="icon">
+    <link rel="stylesheet" href="<?=APPURL?>/Frontend/CSS/dash.css">
+    <link rel="stylesheet" href="<?=APPURL?>/Frontend/CSS/datatable.css">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <script src="../path/to/scripts.js" defer></script> <!-- Asegúrate de que la ruta sea correcta -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap5.css">
 </head>
 <body>
 <!-- SIDEBAR -->
@@ -25,7 +28,7 @@ $PaginaActual = basename($_SERVER['PHP_SELF']); // Obtener el nombre del archivo
         <span class="text">Ferreteria</span>
     </a>
     <ul class="side-menu top">
-        <li class="<?= ($PaginaActual == 'inicio.php') ? 'active' : '' ?>">
+        <li class="<?= in_array($PaginaActual, $inicio) ? 'active' : '' ?>">
             <a href="../inicio/inicio.php">
                 <i class='bx bx-home' style='color:#3c91e6'></i>
                 <span class="text">Inicio</span>
@@ -91,11 +94,9 @@ $PaginaActual = basename($_SERVER['PHP_SELF']); // Obtener el nombre del archivo
         <input type="checkbox" id="switch-mode" hidden>
         <label for="switch-mode" class="switch-mode mode-toggle"></label>
         <a href="#" class="profile">
-            <img src="../IMG/shopping-bag_5939887.png">
+            <img src="<?=APPURL?>/Frontend/IMG/shopping-bag_5939887.png">
         </a>
     </nav>
 </section>
-</body>
-</html>
 
 

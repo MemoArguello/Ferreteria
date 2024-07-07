@@ -6,36 +6,35 @@ $usuario = $_SESSION['usuario'];
 if (!isset($usuario)) {
     header("location:../../index.php");
 }
-$conexiondb = conectardb();
-$sql = "SELECT id_cargo FROM `usuarios` WHERE usuario = '$usuario';";
-$result = mysqli_query($conexiondb, $sql);
+$stmt = $conn->prepare("SELECT id_cargo FROM `usuarios` WHERE usuario = :usuario");
+$stmt->bindParam(":usuario", $usuario);
+$stmt->execute();
+$id_cargo = $stmt->fetch(PDO::FETCH_ASSOC)['id_cargo'];
 
-$usuario = $_SESSION['usuario'];
+$queries = [
+    "SELECT COUNT(*) total1 FROM cliente",
+    "SELECT COUNT(*) total2 FROM productos",
+    "SELECT COUNT(*) total3 FROM facturas",
+    "SELECT COUNT(*) total4 FROM proveedores",
+    "SELECT sum(ingreso) total5 FROM caja",
+    "SELECT sum(egreso) total6 FROM caja"
+];
 
-$conexiondb = conectardb();
-$query1 = "SELECT COUNT(*) total1 FROM cliente";
-$query2 = "SELECT COUNT(*) total2 FROM productos";
-$query3 = "SELECT COUNT(*) total3 FROM facturas";
-$query4 = "SELECT COUNT(*) total4 FROM proveedores";
-$query5 = "SELECT sum(ingreso) total5 FROM caja";
-$query6 = "SELECT sum(egreso) total6 FROM caja";
+$valores = [];
+foreach ($queries as $query) {
+    $stmt = $conn->query($query);
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    $valores[] = array_values($resultado)[0];
+}
 
+$totalClientes = $valores[0];
+$totalProductos = $valores[1];
+$totalVentas = $valores[2];
+$totalProveedores = $valores[3];
+$totalVentasGs = $valores[4];
+$totalComprasGs = $valores[5];
+?>
 
-$resultado1 = mysqli_query($conexiondb, $query1);
-$resultado2 = mysqli_query($conexiondb, $query2);
-$resultado3 = mysqli_query($conexiondb, $query3);
-$resultado4 = mysqli_query($conexiondb, $query4);
-$resultado5 = mysqli_query($conexiondb, $query5);
-$resultado6 = mysqli_query($conexiondb, $query6);
-
-$totalClientes = mysqli_fetch_assoc($resultado1)['total1'];
-$totalProductos = mysqli_fetch_assoc($resultado2)['total2'];
-$totalVentas = mysqli_fetch_assoc($resultado3)['total3'];
-$totalProveedores = mysqli_fetch_assoc($resultado4)['total4'];
-$totalVentasGs = mysqli_fetch_assoc($resultado5)['total5'];
-$totalComprasGs = mysqli_fetch_assoc($resultado6)['total6'];
-
-$valores = [$totalClientes, $totalProductos, $totalVentas, $totalProveedores];
 
 ?>
     <section id="content">

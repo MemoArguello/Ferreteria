@@ -5,7 +5,7 @@ require "../../backend/config/baseDeDatos.php";
 
 if(!isset($_SESSION['usuario'])){
     header("location:../../index.php");
-    exit(); // Asegura que no se ejecute más código después del redireccionamiento
+    exit(); 
 }
 
 $usuario = $_SESSION['usuario'];

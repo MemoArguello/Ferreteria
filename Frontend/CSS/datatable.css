@@ -1,0 +1,59 @@
+/* Estilos para DataTables */
+#listado_wrapper {
+    padding: 40px; /* Espaciado interior */
+    border: 1px solid #ddd; /* Borde */
+}
+
+#listado th,
+#listado td {
+    text-align: left; /* Alineación del texto */
+    vertical-align: middle; /* Alineación vertical */
+}
+
+/* Alineación del campo de búsqueda */
+#listado_filter {
+    display: flex;
+    align-items: center;
+}
+
+#listado_filter label {
+    margin-right: 10px; /* Espacio entre el texto "Buscar" y el campo de búsqueda */
+}
+
+#listado_filter input[type="search"] {
+    width: 250px; /* Ancho del campo de búsqueda */
+    padding: 8px; /* Espaciado interior */
+    border: 1px solid #ccc; /* Borde del campo de búsqueda */
+    border-radius: 4px; /* Borde redondeado */
+    box-shadow: none; /* Sin sombra */
+}
+
+#listado_length select {
+    width: 100px; /* Ancho del select para mostrar entradas */
+    padding: 5px; /* Espaciado interior */
+}
+
+.dt-paging-button.page-item .page-link {
+    color: #007bff; /* Color del texto del enlace de paginación */
+    border: 1px solid #007bff; /* Borde del enlace de paginación */
+    padding: 6px 12px; /* Espaciado interior del enlace de paginación */
+    margin: 0 2px; /* Margen entre enlaces de paginación */
+    border-radius: 4px; /* Borde redondeado del enlace de paginación */
+}
+
+.dt-paging-button.page-item.active .page-link {
+    background-color: #007bff; /* Color de fondo del enlace de paginación activo */
+    border-color: #007bff; /* Color del borde del enlace de paginación activo */
+    color: #fff; /* Color del texto del enlace de paginación activo */
+}
+
+/* Asegura que los números de página estén en una fila horizontal */
+.dt-paging-button.page-item {
+    display: inline-block; /* Mostrar elementos de paginación en línea */
+    margin-bottom: 4px; /* Espacio entre elementos */
+}
+
+/* Centrado del paginador */
+.dt-paging.paging_full_numbers {
+    text-align: center; /* Centra el paginador */
+}
