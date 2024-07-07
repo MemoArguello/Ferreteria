@@ -14,9 +14,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($mysqli->connect_error) {
         die("Error en la conexión a la base de datos: " . $mysqli->connect_error);
     }
-    function obtenerCostoProducto($idProducto) {
-        global $mysqli;  // Asegúrate de que $mysqli esté disponible en este contexto
 
+    // Iniciar una transacción para garantizar la consistencia de la base de datos
+    $mysqli->begin_transaction();
+    function obtenerCostoProducto($idProducto) {
+        global $mysqli;
+    
         $query = "SELECT precio FROM productos WHERE id_producto = ?";
         
         $stmt = $mysqli->prepare($query);
@@ -31,9 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         return $costo;
     }
-    // Iniciar una transacción para garantizar la consistencia de la base de datos
-    $mysqli->begin_transaction();
-
+    
     try {
         $insertFactura = $mysqli->prepare("INSERT INTO facturas (codigo_factura, cliente, tipo, fecha_creacion) VALUES (?, ?, ?, ?)");
         $insertFactura->bind_param("siss", $codigoFactura, $clienteId, $tipo, $fechaActual);
@@ -46,6 +47,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         foreach ($productos as $key => $idProducto) {
             $cantidad = $cantidades[$key];
+
+            // Obtener el stock actual del producto
+            $stockActual = obtenerStockProducto($idProducto);
+
+            // Verificar si hay suficiente stock disponible
+            if ($cantidad > $stockActual) {
+                throw new Exception("No hay suficiente stock disponible para el producto con ID $idProducto");
+            }
+
+            // Actualizar el stock del producto
+            $nuevoStock = $stockActual - $cantidad;
+            actualizarStockProducto($idProducto, $nuevoStock);
 
             $costoUnitario = obtenerCostoProducto($idProducto);
             $total = $cantidad * $costoUnitario;
@@ -70,8 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insertAuditoria = $mysqli->prepare("INSERT INTO auditoria (id_usuario, evento, fecha) VALUES (?, ?, ?)");
         $insertAuditoria->bind_param("iss", $usuario, $evento, $fechaEvento);
         $insertAuditoria->execute();
-        
-    
+
         // Confirmar la transacción
         $mysqli->commit();
 
@@ -90,4 +102,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Manejar el error de solicitud incorrecta
     echo "Error en la solicitud.";
 }
-?>
+
+// Función para obtener el stock actual del producto
+function obtenerStockProducto($idProducto) {
+    global $mysqli;
+
+    $query = "SELECT stock FROM productos WHERE id_producto = ?";
+
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("i", $idProducto);
+    $stmt->execute();
+    $stmt->bind_result($stock);
+    $stmt->fetch();
+    $stmt->close();
+
+    return $stock;
+}
+
+// Función para actualizar el stock del producto
+function actualizarStockProducto($idProducto, $nuevoStock) {
+    global $mysqli;
+
+    $query = "UPDATE productos SET stock = ? WHERE id_producto = ?";
+
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("ii", $nuevoStock, $idProducto);
+    $stmt->execute();
+    $stmt->close();
+}
