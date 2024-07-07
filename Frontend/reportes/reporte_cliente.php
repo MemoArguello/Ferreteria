@@ -6,11 +6,12 @@ $usuario = $_SESSION['usuario'];
 if (empty($usuario)) {
     header("location:../../index.php");
 }
-$sql = $conn->query("SELECT id_cargo FROM `usuarios` WHERE usuario = '$usuario'");
+$sql = $conn->query("SELECT cliente.id_cliente, cliente.cedula, cliente.nombre, cliente.ruc, departamentos.nombre AS nombre_d, ciudades.nombre AS nombre_c FROM cliente JOIN departamentos ON departamentos.id_departamento = cliente.id_departamento
+                    JOIN ciudades ON ciudades.id_ciudad = cliente.id_ciudad");
 $sql->execute();
 
-$query = $conn->query("SELECT * FROM cargo ORDER BY id ASC");
-$query->execute();
+$clientes = $sql->fetchAll(PDO::FETCH_OBJ);
+
 ?>
     <section id="content">
         <main>
@@ -35,10 +36,10 @@ $query->execute();
                     </div>
                     <div class"row">
                         <div class="col-lg-12">
-                            <table id="example" class="table table-striped nowrap" style="width:100%">
+                            <table id="listado" class="table table-striped nowrap" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
+                                        <th>N°</th>
                                         <th>Cedula</th>
                                         <th>Nombre</th>
                                         <th>RUC</th>
@@ -48,6 +49,20 @@ $query->execute();
                                         <th>Eliminar</th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                <?php $i=1; foreach($clientes as $cliente):?>
+                                    <tr>
+                                        <td><?=$i++?></td>
+                                        <td><?=$cliente->cedula?></td>
+                                        <td><?=$cliente->nombre?></td>
+                                        <td><?=$cliente->ruc?></td>
+                                        <td><?=$cliente->nombre_d?></td>
+                                        <td><?=$cliente->nombre_c?></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                <?php endforeach;?>
+                                </tbody>
                             </table>
                         </div>
                     </div>
