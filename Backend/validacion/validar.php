@@ -6,12 +6,11 @@ $_SESSION['usuario']=$usuario;
 
 include '../config/baseDeDatos.php';
 
-$conexiondb = conectardb();
 
-$consulta= "SELECT * FROM usuarios where usuario ='$usuario' and codigo='$codigo'";
-$resultado=mysqli_query($conexiondb,$consulta);
+$consulta= $conn->query("SELECT * FROM usuarios where usuario ='$usuario' and codigo='$codigo'");
+$consulta->execute();
 
-$filas=mysqli_fetch_array($resultado);
+$filas=$consulta->fetch(PDO::FETCH_ASSOC);
 
 if($codigo == isset($filas['codigo'])){
     if(($filas['id_cargo'])==1){ //administrador

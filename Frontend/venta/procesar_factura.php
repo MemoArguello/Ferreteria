@@ -50,8 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $costoUnitario = obtenerCostoProducto($idProducto);
             $total = $cantidad * $costoUnitario;
 
-            $insertDetalle = $mysqli->prepare("INSERT INTO detalle_factura (id_factura, id_producto, cantidad, costo_unitario, total) VALUES (?, ?, ?, ?, ?)");
-            $insertDetalle->bind_param("iiidd", $facturaId, $idProducto, $cantidad, $costoUnitario, $total);
+            $insertDetalle = $mysqli->prepare("INSERT INTO detalle_factura (id_factura, producto, cantidad, costo_unitario, total) VALUES (?, ?, ?, ?, ?)");
+            $insertDetalle->bind_param("iiidd", $facturaId, $producto, $cantidad, $costoUnitario, $total);
             $insertDetalle->execute();
         }
 

@@ -1,6 +1,7 @@
+<?php require "../../include/header.php" ?>
+<?php require "../../backend/config/baseDeDatos.php"?>
 <?php
-session_start();
-include '../../Backend/config/baseDeDatos.php';
+
 
 $usuario = $_SESSION['usuario'];
 if (!isset($usuario)) {
@@ -34,203 +35,6 @@ if ($resultadoUsuario) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ventas</title>
-    <link href="../IMG/nut_5361285.png" rel="icon">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="../CSS/dash.css">
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-
-    <style>
-        .form_vent {
-            padding: 30px 40px;
-            font-family: 'Poppins', sans-serif;
-
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .boton {
-            width: 10%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            float: right;
-        }
-
-        .boton:hover {
-            background-color: #008604;
-        }
-
-        .boton2 {
-            width: 10%;
-            background-color: #3421C0;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            float: right;
-        }
-
-        .boton2:hover {
-            background-color: #22119d;
-        }
-
-        input {
-            float: right;
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: none;
-        }
-
-        select,
-        textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: none;
-        }
-
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid #ccc;
-            background-color: #ccc;
-
-        }
-
-        td {
-            background-color: white;
-        }
-
-        th,
-        td {
-            padding: 10px;
-            text-align: left;
-        }
-
-
-
-        @media screen and (max-width: 600px) {
-            form {
-                margin: 10px;
-                padding: 10px;
-            }
-
-            input,
-            select,
-            textarea {
-                margin-bottom: 8px;
-            }
-
-            table {
-                margin-top: 10px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    	<!-- SIDEBAR -->
-        <section id="sidebar">
-		<a href="../inicio/inicio.php" class="brand">
-			<i class='bx bxs-store-alt' style='color:#3c91e6'></i>
-			<span class="text">Ferreteria</span>
-		</a>
-		<ul class="side-menu top">
-			<li class="">
-				<a href="../inicio/inicio.php">
-					<i class='bx bx-home' style='color:#3c91e6'></i>
-					<span class="text">Inicio</span>
-				</a>
-			</li>
-			<li class="active">
-				<a href="../venta/venta.php">
-					<i class='bx bxs-shopping-bag-alt' style='color:#3c91e6'></i>
-					<span class="text">Ventas</span>
-				</a>
-			</li>
-			<li class="">
-				<a href="../reportes/reporte_prod.php">
-					<i class='bx bx-cart' style='color:#3c91e6'></i>
-					<span class="text">Productos</span>
-				</a>
-			</li>
-			<li>
-				<a href="../reportes/reporte_prov.php">
-					<i class='bx bxs-package' style='color:#3c91e6'></i>
-					<span class="text">Proveedores</span>
-				</a>
-			</li>
-			<li class="">
-				<a href="../reportes/reporte_caja.php">
-						<i class='bx bx-dollar-circle' style='color:#3c91e6'></i>
-						<span class="text">Caja</span>
-				</a>
-			</li>
-			<li>
-				<a href="../reportes/reporte_cliente.php">
-					<i class='bx bx-group' style='color:#3c91e6'></i>
-					<span class="text">Clientes</span>
-				</a>
-			</li>
-		</ul>
-		<ul class="side-menu">
-			<li>
-				<a href="../reportes/reporte_cuenta.php">
-					<i class='bx bxs-cog' style='color:#3c91e6'></i>
-					<span class="text">Configuracion</span>
-				</a>
-			</li>
-			<li>
-				<a href="../../Backend/validacion/cerrar_sesion.php" class="logout">
-					<i class='bx bxs-log-out-circle'></i>
-					<span class="text">Cerrar Sesión</span>
-				</a>
-			</li>
-		</ul>
-	</section>
-	<!-- SIDEBAR -->
-	<!-- CONTENT -->
-	<section id="content">
-		<!-- NAVBAR -->
-		<nav>
-			<i class='bx bx-menu'></i>
-			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
-				</div>
-			</form>
-			<input type="checkbox" id="switch-mode" hidden>
-			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="profile">
-				<img src="../IMG/shopping-bag_5939887.png">
-			</a>
-		</nav>
-	</section>
     <section id="content">
         <main>
                 <div class="left">
@@ -275,13 +79,7 @@ if ($resultadoUsuario) {
                             <div class="col-75">
                                 <select name="cliente" required>
                                     <option value="">Seleccione una opción</option>
-                                    <option value="cliente-varios">Clientes-Varios</option>
-
-                                    <!-- Obtener la lista de clientes desde la base de datos o algún otro origen -->
                                     <?php
-                                    // Aquí deberías tener código para conectarte a la base de datos y obtener la lista de clientes
-                                    // Puedes usar mysqli o PDO para ello
-                                    // Ejemplo con mysqli:
                                     $mysqli = new mysqli("localhost", "root", "", "ferreteria");
                                     $result = $mysqli->query("SELECT id_cliente, nombre FROM cliente");
 

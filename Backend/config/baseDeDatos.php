@@ -1,29 +1,21 @@
 <?php
-function conectardb() {
-    $servidor = 'localhost';
-    $usuario = 'root';
-    $contraseña = '';
-    $db = 'ferreteria';
 
-    // Establecer la conexión
-    $conexion = mysqli_connect($servidor, $usuario, $contraseña, $db);
+    try{
+        //host
+        define("HOST", "Localhost");
 
-    // Verificar si la conexión fue exitosa
-    if (!$conexion) {
-        die('Error de conexión: ' . mysqli_connect_error());
+        //dbname
+        define("DBNAME", "ferreteria");
+
+        //user
+        define("USER", "root");
+
+        //pass
+        define("PASS", "");
+
+        $conn = new PDO("mysql:host=".HOST.";dbname=".DBNAME."",USER, PASS);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }catch(PDOException $Exception){
+        echo $Exception->getMessage();
     }
 
-    // Configurar el juego de caracteres de la conexión
-    mysqli_set_charset($conexion, 'utf8');
-
-    return $conexion;
-}
-
-// Ejemplo de uso
-$conexion = conectardb();
-
-// Realizar operaciones con la base de datos...
-
-// Cerrar la conexión
-mysqli_close($conexion);
-?>

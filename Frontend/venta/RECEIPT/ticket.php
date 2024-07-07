@@ -22,6 +22,7 @@
     ON productos.id_producto = detalle_factura.id_producto 
     JOIN cliente ON cliente.id_cliente = facturas.cliente JOIN ciudades ON ciudades.id_ciudad = cliente.id_ciudad
     WHERE id_detalle= '$id'");
+    
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $stmt->execute();
 
