@@ -6,10 +6,6 @@ $usuario = $_SESSION['usuario'];
 if (!isset($usuario)) {
     header("location:../../index.php");
 }
-$stmt = $conn->prepare("SELECT id_cargo FROM `usuarios` WHERE usuario = :usuario");
-$stmt->bindParam(":usuario", $usuario);
-$stmt->execute();
-$id_cargo = $stmt->fetch(PDO::FETCH_ASSOC)['id_cargo'];
 
 $queries = [
     "SELECT COUNT(*) total1 FROM cliente",
