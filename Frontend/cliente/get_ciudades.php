@@ -1,14 +1,18 @@
 <?php
-include '../../Backend/config/baseDeDatos.php';
+require "../../backend/config/baseDeDatos.php";
 
-$departamentoId = $_GET['departamento_id'];
+if (isset($_GET['id_departamento'])) {
+    $id_departamento = $_GET['id_departamento'];
 
-$conexiondb = conectardb();
-$query = "SELECT * FROM ciudades WHERE id_departamento = '$departamentoId'";
-$resultado = mysqli_query($conexiondb, $query);
+    try {
+        $query = $conn->prepare("SELECT * FROM ciudades WHERE id_departamento = :id_departamento");
+        $query->bindParam(':id_departamento', $id_departamento);
+        $query->execute();
+        $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
 
-echo "<option value=''>Seleccione una opción</option>";
-while ($ciudad = mysqli_fetch_assoc($resultado)) {
-    echo "<option value='" . $ciudad['id_ciudad'] . "'>" . $ciudad['nombre'] . "</option>";
+        echo json_encode($resultado);
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
 }
 ?>

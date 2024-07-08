@@ -566,8 +566,46 @@ body {
 	color: var(--dark);	
 }
 
+.menu, .pdf {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block; /* Cambiado a inline-block para que estén en la misma línea */
+}
 
+.menu li, .pdf li {
+    display: inline-block;
+    margin-right: 10px;
+}
 
+.menu li a, .pdf li a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    background-color: #1474db;
+	color: #ffffff;
+    border-radius: 5px;
+}
+
+.menu li a:hover, .pdf li a:hover {
+    background-color: rgba(0, 123, 255, 0.8); /* Color de fondo al pasar el mouse */
+}
+
+.menu li a.active-button, .pdf li a.active-button {
+    background-color: #0056b3; /* Color de fondo activo */
+}
+
+.pdf li a {
+    background-color: #40AD55; /* Color de fondo para los botones del PDF */
+}
+
+.pdf li a:hover {
+    background-color: #048a0b; /* Color de fondo al pasar el mouse para los botones del PDF */
+}
+
+.pdf li a.active-button {
+    background-color: #048a0b; /* Color de fondo activo para los botones del PDF */
+}
 
 
 #content main .table-data {

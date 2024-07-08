@@ -6,30 +6,28 @@ $usuario = $_SESSION['usuario'];
 if (!isset($usuario)) {
     header("location:../../index.php");
 }
-$conexiondb = conectardb();
-$query = "SELECT * FROM proveedores";
-$resultado = mysqli_query($conexiondb, $query);
+try {
+    // Consulta a proveedores
+    $query = $conn->query("SELECT * FROM proveedores");
+    $query->execute();
+    $resultado1 = $query->fetchAll(PDO::FETCH_ASSOC);
 
-$query2 = "SELECT * FROM categorias";
-$resultado2 = mysqli_query($conexiondb, $query2);
+    // Consulta a categorías
+    $query2 = $conn->query("SELECT * FROM categorias");
+    $query2->execute();
+    $resultado2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 
-$sql = "SELECT id_cargo FROM `usuarios` WHERE usuario = '$usuario';";
-$result = mysqli_query($conexiondb, $sql);
+    //obtener usuario para auditoria
+    $consulta= $conn->query("SELECT id_usuario FROM usuarios where usuario ='$usuario'");
+    $consulta->execute();
+    
+    $resultado3 =$consulta->fetch(PDO::FETCH_ASSOC);
 
-$usuario = $_SESSION['usuario'];
-$queryUsuario = "SELECT id_usuario FROM usuarios WHERE usuario = '$usuario'";
-$resultadoUsuario = mysqli_query($conexiondb, $queryUsuario);
-
-// Verificar si se obtuvo el resultado
-if ($resultadoUsuario) {
-    // Obtener el ID del usuario
-    $usuarioInfo = mysqli_fetch_assoc($resultadoUsuario);
-    $idUsuario = $usuarioInfo['id_usuario'];
-} else {
-    // Manejar el error si la consulta no fue exitosa
-    echo "Error al obtener el ID del usuario.";
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
     exit();
 }
+
 ?>
     <section id="content">
         <main>
@@ -74,7 +72,7 @@ if ($resultadoUsuario) {
                                 <select id="proveedor" name="categoria" required>
                                     <option value="">Seleccione una opción</option>
                                     <?php
-                                    while ($categoria = mysqli_fetch_assoc($resultado2)) {
+                                    foreach ($resultado2 as $categoria) {
                                         echo "<option value='" . $categoria['id_categoria'] . "'>" . $categoria['descripcion'] . "</option>";
                                     }
                                     ?>
@@ -121,7 +119,7 @@ if ($resultadoUsuario) {
                                 <select id="proveedor" name="id_proveedor" onchange="getCiudades(this.value)" required>
                                     <option value="">Seleccione una opción</option>
                                     <?php
-                                    while ($proveedor = mysqli_fetch_assoc($resultado)) {
+                                    foreach ($resultado1 as $proveedor) {
                                         echo "<option value='" . $proveedor['id_proveedor'] . "'>" . $proveedor['nombre_prov'] . "</option>";
                                     }
                                     ?>
@@ -130,7 +128,7 @@ if ($resultadoUsuario) {
                         </div>
                         <br>
                         <div class="row">
-                            <input type="hidden" name="id_usuario" id="" value='<?php echo $idUsuario[0]; ?>' readonly>
+                            <input type="hidden" name="id_usuario" id="" value='<?= $resultado3['id_usuario'] ?>' readonly>
                             <input type="hidden" name="editar" id="" value='no' readonly>
                             <input type="submit" value="Guardar" class="boton2">
                         </div>

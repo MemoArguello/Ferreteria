@@ -63,7 +63,7 @@ $resultado8 = $query8->fetch(PDO::FETCH_ASSOC);
                             </li>
                         </ul>
                     </nav>
-                </div>
+        </div>
         <ul class="box-info">
             <li>
                 <img src="../IMG/rating_5939760.png" alt="" class="card ">

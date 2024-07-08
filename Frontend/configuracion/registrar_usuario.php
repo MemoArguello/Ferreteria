@@ -6,14 +6,14 @@ $usuario = $_SESSION['usuario'];
 if (!isset($usuario)) {
     header("location:../../index.php");
 }
-$conexiondb = conectardb();
-$sql = "SELECT id_cargo FROM `usuarios` WHERE usuario = '$usuario';";
-$result = mysqli_query($conexiondb, $sql);
-$usuario = $_SESSION['usuario'];
-$conexiondb = conectardb();
-$query = "SELECT * FROM cargo ORDER BY id ASC";
-$resultado = mysqli_query($conexiondb, $query);
-mysqli_close($conexiondb);
+$sql = $conn->query("SELECT id_cargo FROM `usuarios` WHERE usuario = '$usuario'");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+
+$query = $conn->query("SELECT * FROM cargo ORDER BY id ASC");
+$query->execute();
+$resultado = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
     <section id="content">
         <main>
@@ -41,7 +41,7 @@ mysqli_close($conexiondb);
                                 <label for="fname">Correo Electronico</label>
                             </div>
                             <div class="col-75">
-                                <input type="text" id="fname" name="correo">
+                                <input type="text" id="fname" name="correo" required>
                             </div>
                         </div>
                         <div class="row">
@@ -49,7 +49,7 @@ mysqli_close($conexiondb);
                                 <label for="lname">Nombre de Usuario</label>
                             </div>
                             <div class="col-75">
-                                <input type="text" id="lname" name="usuario">
+                                <input type="text" id="lname" name="usuario" required>
                             </div>
                         </div>
                         <div class="row">
@@ -57,7 +57,7 @@ mysqli_close($conexiondb);
                                 <label for="lname">Contraseña</label>
                             </div>
                             <div class="col-75">
-                                <input type="password" id="lname" name="codigo" >
+                                <input type="password" id="lname" name="codigo"  required>
                             </div>
                         </div>
                         <div class="row">
@@ -65,7 +65,7 @@ mysqli_close($conexiondb);
                                 <label for="lname">Confirmar Contraseña</label>
                             </div>
                             <div class="col-75">
-                                <input type="password" id="lname" name="ccodigo" >
+                                <input type="password" id="lname" name="ccodigo"  required>
                             </div>
                         </div>
                         <div class="row">
@@ -73,10 +73,10 @@ mysqli_close($conexiondb);
                                 <label for="country">Cargo</label>
                             </div>
                             <div class="col-75">
-                                <select id="country" name="id_cargo">
+                                <select id="country" name="id_cargo" required>
                                     <option value="">Seleccione una opción</option> <!-- Opción en blanco -->
                                     <?php
-                                    while ($cargo = mysqli_fetch_assoc($resultado)) {
+                                    foreach ($resultado as $cargo) {
                                         echo "<option value='" . $cargo['id'] . "'>" . $cargo['descripcion'] . "</option>";
                                     }
                                     ?>
@@ -93,9 +93,4 @@ mysqli_close($conexiondb);
             </div>
         </main>
     </section>
-
-    <script src="../dashboard/script.js"></script>
-
-</body>
-
-</html>
+<?php require "../../include/footer.php" ?>

@@ -4,7 +4,14 @@ define("APPURL", "http://localhost/sistema_ferreteria");
 define("EMPRESA","ferreteria");
 
 $PaginaActual = basename($_SERVER['PHP_SELF']); // Obtener el nombre del archivo PHP actual
+
 $inicio = ['inicio.php', 'estadisticas.php', 'reporte_auditoria.php'];
+$ventas = ['venta.php', 'reporte_venta.php', 'reporte_factura.php'];
+$productos = ['reporte_prod.php', 'registrar_productos.php', 'reporte_cat.php', 'registrar_categoria.php'];
+$proveedores = ['reporte_prov.php', 'agg_proveedor.php'];
+$caja = ['inicio.php', 'estadisticas.php', 'reporte_auditoria.php'];
+$clientes = ['reporte_cliente.php', 'formulario_cliente.php', 'reporte_auditoria.php'];
+$configuracion = ['reporte_cuenta.php', 'registrar_usuario.php'];
 
 ?>
 <!DOCTYPE html>
@@ -34,19 +41,19 @@ $inicio = ['inicio.php', 'estadisticas.php', 'reporte_auditoria.php'];
                 <span class="text">Inicio</span>
             </a>
         </li>
-        <li class="<?= ($PaginaActual == 'venta.php') ? 'active' : '' ?>">
+        <li class="<?= in_array($PaginaActual, $ventas) ? 'active' : '' ?>">
             <a href="../venta/venta.php">
                 <i class='bx bxs-shopping-bag-alt' style='color:#3c91e6'></i>
                 <span class="text">Ventas</span>
             </a>
         </li>
-        <li class="<?= ($PaginaActual == 'reporte_prod.php') ? 'active' : '' ?>">
+        <li class="<?= in_array($PaginaActual, $productos) ? 'active' : '' ?>">
             <a href="../reportes/reporte_prod.php">
                 <i class='bx bx-cart' style='color:#3c91e6'></i>
                 <span class="text">Productos</span>
             </a>
         </li>
-        <li class="<?= ($PaginaActual == 'reporte_prov.php') ? 'active' : '' ?>">
+        <li class="<?= in_array($PaginaActual, $proveedores) ? 'active' : '' ?>">
             <a href="../reportes/reporte_prov.php">
                 <i class='bx bxs-package' style='color:#3c91e6'></i>
                 <span class="text">Proveedores</span>
@@ -58,7 +65,7 @@ $inicio = ['inicio.php', 'estadisticas.php', 'reporte_auditoria.php'];
                 <span class="text">Caja</span>
             </a>
         </li>
-        <li class="<?= ($PaginaActual == 'reporte_cliente.php') ? 'active' : '' ?>">
+        <li class="<?= in_array($PaginaActual, $clientes) ? 'active' : '' ?>">
             <a href="../reportes/reporte_cliente.php">
                 <i class='bx bx-group' style='color:#3c91e6'></i>
                 <span class="text">Clientes</span>
@@ -66,7 +73,7 @@ $inicio = ['inicio.php', 'estadisticas.php', 'reporte_auditoria.php'];
         </li>
     </ul>
     <ul class="side-menu">
-        <li class="<?= ($PaginaActual == 'reporte_cuenta.php') ? 'active' : '' ?>">
+        <li class="<?= in_array($PaginaActual, $configuracion) ? 'active' : '' ?>">
             <a href="../reportes/reporte_cuenta.php">
                 <i class='bx bxs-cog' style='color:#3c91e6'></i>
                 <span class="text">Configuracion</span>
@@ -98,5 +105,6 @@ $inicio = ['inicio.php', 'estadisticas.php', 'reporte_auditoria.php'];
         </a>
     </nav>
 </section>
+
 
 

@@ -54,9 +54,11 @@ $totalComprasGs = $valores[5];
                         </ul>
                     </nav>
                 </div>
-            <div>
-                <canvas id="myChart"></canvas>
-            </div>
+                <ul class="box-info">
+                    <div>
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </ul>
 
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

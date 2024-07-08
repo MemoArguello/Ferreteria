@@ -53,7 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Verificar si hay suficiente stock disponible
             if ($cantidad > $stockActual) {
-                throw new Exception("No hay suficiente stock disponible para el producto con ID $idProducto");
+                echo "<script>alert('No hay suficiente stock disponible para el producto');
+                window.location.href='./venta.php'</script>";
             }
 
             // Actualizar el stock del producto
@@ -63,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $costoUnitario = obtenerCostoProducto($idProducto);
             $total = $cantidad * $costoUnitario;
 
-            $insertDetalle = $mysqli->prepare("INSERT INTO detalle_factura (id_factura, producto, cantidad, costo_unitario, total) VALUES (?, ?, ?, ?, ?)");
+            $insertDetalle = $mysqli->prepare("INSERT INTO detalle_factura (id_factura, productos, cantidad, costo_unitario, total) VALUES (?, ?, ?, ?, ?)");
             $insertDetalle->bind_param("iiidd", $facturaId, $producto, $cantidad, $costoUnitario, $total);
             $insertDetalle->execute();
         }

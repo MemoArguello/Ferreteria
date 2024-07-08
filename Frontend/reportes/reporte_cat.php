@@ -38,6 +38,16 @@ $categoriaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                 <div class="titulo" align="center">
                     <h2>Listado de Categorias</h2>
                 </div>
+                <ul class="menu">
+                        <li>
+                            <a class="active" href="../productos/registrar_categoria.php">Registrar</a>
+                        </li>
+                </ul>
+                <ul class="pdf">
+                        <li>
+                            <a class="active" href="./reporte_cat.php">Reporte PDF</a>
+                        </li>
+                </ul>
                 <div class"row">
                     <div class="col-lg-12">
                         <table id="listado" class="table-striped table-bordered" style="width: 100%">

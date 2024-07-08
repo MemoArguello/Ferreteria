@@ -8,8 +8,10 @@ if (!isset($usuario)) {
     header("location:../../index.php");
     exit();
 }
+$consulta= $conn->query("SELECT * FROM usuarios where usuario ='$usuario'");
+$consulta->execute();
 
-
+$resultado=$consulta->fetch(PDO::FETCH_ASSOC);
 ?>
 <style>
 
@@ -241,7 +243,7 @@ if (!isset($usuario)) {
                         </table>
                     </div>
                     <div class="row">
-                        <input type="hidden" name="id_usuario" value='<?php echo $idUsuario; ?>' readonly>
+                        <input type="hidden" name="id_usuario" value='<?= $resultado['id_usuario'] ?>' readonly>
                         <br>
                         <input type="submit" class="boton2" value="Vender">
                     </div>

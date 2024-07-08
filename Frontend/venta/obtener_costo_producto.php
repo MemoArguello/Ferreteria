@@ -1,30 +1,23 @@
 <?php
+include '../../Backend/config/baseDeDatos.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["productoId"])) {
-    // Obtener el costo del producto desde la base de datos
-    $mysqli = new mysqli("localhost", "root", "", "ferreteria");
-
     $productoId = $_GET["productoId"];
-    $query = "SELECT precio FROM productos WHERE id_producto = ?";
-   
-    if ($stmt = $mysqli->prepare($query)) {
-        $stmt->bind_param("i", $productoId);
-        $stmt->execute();
-        $stmt->bind_result($costo);
-
-        if ($stmt->fetch()) {
-            echo $costo;
+    
+    try {
+        $consulta = $conn->query("SELECT precio FROM productos WHERE id_producto = $productoId");
+        $consulta->execute();
+        $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+        
+        if ($resultado) {
+            echo $resultado['precio'];
         } else {
             echo "Error: No se encontró el costo del producto.";
         }
-
-        $stmt->close();
-    } else {
-        echo "Error en la preparación de la consulta.";
+    } catch (PDOException $e) {
+        echo "Error en la preparación de la consulta: " . $e->getMessage();
     }
-
-    $mysqli->close();
 } else {
     echo "Error en la solicitud.";
 }
-?>
+
