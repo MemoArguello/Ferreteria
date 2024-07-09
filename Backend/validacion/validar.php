@@ -1,42 +1,49 @@
-<?php 
-  session_start(); // Asegúrate de que la sesión está iniciada
+<?php
+session_start();
 
-  if(isset($_SESSION['usuario'])){
-    header("location: ".APPURL."");
-    exit;
-  }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verifica que los campos necesarios estén presentes
+    if (isset($_POST['usuario']) && isset($_POST['codigo'])) {
+        // Obtiene los datos del formulario
+        $usuario = $_POST['usuario'];
+        $codigo = md5($_POST['codigo']);
 
-  if(isset($_POST['submit'])){
-    if(empty($_POST['email']) OR empty($_POST['codigo'])){
-      echo "<script>alert('Rellene todos los campos, Por favor')</script>";
-    } else {
-      $email = $_POST['email'];
-      $codigo = $_POST['codigo'];
+        // Conexión a la base de datos
+        include '../config/baseDeDatos.php';
 
-      // Preparar la consulta con PDO
-      $login = $conn->prepare("SELECT * FROM usuarios WHERE email = :email");
-      $login->execute([':email' => $email]);
+        // Consulta segura con PDO
+        $consulta = $conn->prepare("SELECT * FROM usuarios WHERE usuario = :usuario AND codigo = :codigo");
+        $consulta->execute([':usuario' => $usuario, ':codigo' => $codigo]);
 
-      // Obtener el resultado
-      $fetch = $login->fetch(PDO::FETCH_ASSOC);
+        // Obtener el resultado
+        $filas = $consulta->fetch(PDO::FETCH_ASSOC);
 
-      // Verificar si se encontró el usuario y si la contraseña es correcta
-      if($login->rowCount() > 0){
-          if(password_verify($codigo, $fetch['codigo'])){
-            // Almacenar los datos del usuario en la sesión
-            $_SESSION['usuario'] = $fetch['nombreUsuario'];
-            $_SESSION['email'] = $fetch['email'];
-            $_SESSION['id_user'] = $fetch['id_usuario'];
+        if ($filas) {
+            $_SESSION['usuario'] = $usuario;
 
-            // Redirigir al usuario
-            header("location: ".APPURL."");
+            // Verificar el id_cargo del usuario
+            if ($filas['id_cargo'] == 1) { // Administrador
+                header("Location: ../../Frontend/inicio/inicio.php");
+                exit;
+            } else if ($filas['id_cargo'] == 2) { // Recepcionista
+                header("Location: ../../Frontend/inicio/inicio.php");
+                exit;
+            } else {
+                echo "<script>alert('No existe cuenta');
+                window.location.href='../../index.php';</script>";
+                exit;
+            }
+        } else {
+            echo "<script>alert('No existe cuenta');
+            window.location.href='../../index.php';</script>";
             exit;
-          } else {
-            echo "<script>alert('Email o Contraseña Incorrecta')</script>";
-          }        
-      } else {
-        echo "<script>alert('Email o Contraseña Incorrecta')</script>";
-      }
+        }
+    } else {
+        echo "<script>alert('Por favor, rellene todos los campos');
+        window.location.href='../../index.php';</script>";
+        exit;
     }
-  }
-?>
+} else {
+    header("Location: ../../index.php");
+    exit;
+}

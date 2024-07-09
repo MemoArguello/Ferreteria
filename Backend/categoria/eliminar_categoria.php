@@ -1,23 +1,23 @@
 <?php
 include '../config/baseDeDatos.php';
 
-$id_categoria = $_GET['id_categoria'];
-$conexiondb = conectardb();
+$id_categoria = $_POST['id'];
 
 try {
-    $query = "DELETE FROM categorias WHERE id_categoria=" . $id_categoria;
-    $respuesta = mysqli_query($conexiondb, $query);
+    // Preparar la consulta con una declaración preparada para evitar inyecciones SQL
+    $query = $conn->prepare("DELETE FROM categorias WHERE id_categoria = :id_categoria");
+    $query->bindParam(':id_categoria', $id_categoria, PDO::PARAM_INT);
 
-    if ($respuesta) {
-        echo "<script>alert('Categoria Eliminada'); window.location.href='../../Frontend/reportes/reporte_cat.php'</script>";
+    // Ejecutar la consulta
+    if ($query->execute()) {
+        echo "<script>alert('Categoría Eliminada'); window.location.href='../../Frontend/reportes/reporte_cat.php'</script>";
     } else {
-        echo "<script>alert('No se pudo Eliminar'); window.location.href='../../Frontend/reportes/reporte_cat.php'</script>";
+        echo "<script>alert('No se pudo eliminar la categoría'); window.location.href='../../Frontend/reportes/reporte_cat.php'</script>";
     }
 } catch (Exception $e) {
     // Si ocurre una excepción, mostrar un mensaje de error
-    echo "<script>alert('No se pudo Eliminar'); window.location.href='../../Frontend/reportes/reporte_cat.php'</script>";
+    echo "<script>alert('No se pudo eliminar la categoría porque esta relacionada'); window.location.href='../../Frontend/reportes/reporte_cat.php'</script>";
 } finally {
-    // Cerrar la conexión
-    mysqli_close($conexiondb);
+    // Cerrar la conexión si es necesario (PDO cierra automáticamente las conexiones)
 }
 ?>

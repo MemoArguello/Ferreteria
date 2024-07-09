@@ -1,27 +1,27 @@
 <?php
-session_start();
-include '../../Backend/config/baseDeDatos.php';
+require "../../include/header.php";
+require '../../Backend/config/baseDeDatos.php';
 
 $usuario = $_SESSION['usuario'];
 if (!isset($usuario)) {
     header("location:../../index.php");
 }
-$conexiondb = conectardb();
-$query = "SELECT * FROM proveedores";
-$resultado = mysqli_query($conexiondb, $query);
+$query = $conn->query("SELECT * FROM proveedores");
+$query->execute();
 
-$query2 = "SELECT * FROM categorias";
-$resultado2 = mysqli_query($conexiondb, $query2);
+$resultado = $query->fetchAll(PDO::FETCH_OBJ);
 
-$sql = "SELECT id_cargo FROM `usuarios` WHERE usuario = '$usuario';";
-$result = mysqli_query($conexiondb, $sql);
+$query2 = $conn->query("SELECT * FROM categorias");
+$query2->execute();
 
-$usuario = $_SESSION['usuario'];
+$resultado2 = $query2->fetchAll(PDO::FETCH_OBJ);
 
-$id_categoria = $_GET['id_categoria'];
-$query3 = "SELECT categorias.id_categoria, categorias.descripcion FROM categorias where id_categoria = $id_categoria";
-$resultado3 = mysqli_query($conexiondb, $query3);
-$categoria = mysqli_fetch_row($resultado3);
+$id_categoria = $_GET['id'];
+$query3 = $conn->query("SELECT categorias.id_categoria, categorias.descripcion FROM categorias where id_categoria = $id_categoria");
+$query3->execute();
+
+$resultado3 = $query3->fetch(PDO::FETCH_OBJ);
+
 
 ?>
 <!DOCTYPE html>
@@ -37,84 +37,6 @@ $categoria = mysqli_fetch_row($resultado3);
 </head>
 
 <body>
-    	<!-- SIDEBAR -->
-        <section id="sidebar">
-		<a href="../inicio/inicio.php" class="brand">
-			<i class='bx bxs-store-alt' style='color:#3c91e6'></i>
-			<span class="text">Ferreteria</span>
-		</a>
-		<ul class="side-menu top">
-			<li class="">
-				<a href="../inicio/inicio.php">
-					<i class='bx bx-home' style='color:#3c91e6'></i>
-					<span class="text">Inicio</span>
-				</a>
-			</li>
-			<li>
-				<a href="../venta/venta.php">
-					<i class='bx bxs-shopping-bag-alt' style='color:#3c91e6'></i>
-					<span class="text">Ventas</span>
-				</a>
-			</li>
-			<li class="active">
-				<a href="../reportes/reporte_prod.php">
-					<i class='bx bx-cart' style='color:#3c91e6'></i>
-					<span class="text">Productos</span>
-				</a>
-			</li>
-			<li>
-				<a href="../reportes/reporte_prov.php">
-					<i class='bx bxs-package' style='color:#3c91e6'></i>
-					<span class="text">Proveedores</span>
-				</a>
-			</li>
-			<li class="">
-				<a href="../reportes/reporte_caja.php">
-						<i class='bx bx-dollar-circle' style='color:#3c91e6'></i>
-						<span class="text">Caja</span>
-				</a>
-			</li>
-			<li>
-				<a href="../reportes/reporte_cliente.php">
-					<i class='bx bx-group' style='color:#3c91e6'></i>
-					<span class="text">Clientes</span>
-				</a>
-			</li>
-		</ul>
-		<ul class="side-menu">
-			<li>
-				<a href="../reportes/reporte_cuenta.php">
-					<i class='bx bxs-cog' style='color:#3c91e6'></i>
-					<span class="text">Configuracion</span>
-				</a>
-			</li>
-			<li>
-				<a href="../../Backend/validacion/cerrar_sesion.php" class="logout">
-					<i class='bx bxs-log-out-circle'></i>
-					<span class="text">Cerrar Sesión</span>
-				</a>
-			</li>
-		</ul>
-	</section>
-	<!-- SIDEBAR -->
-	<!-- CONTENT -->
-	<section id="content">
-		<!-- NAVBAR -->
-		<nav>
-			<i class='bx bx-menu'></i>
-			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
-				</div>
-			</form>
-			<input type="checkbox" id="switch-mode" hidden>
-			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="profile">
-				<img src="../IMG/shopping-bag_5939887.png">
-			</a>
-		</nav>
-	</section>
     <section id="content">
         <main>
             <div class="left">
@@ -146,12 +68,12 @@ $categoria = mysqli_fetch_row($resultado3);
                                 <label for="fname">Nombre de la Categoria</label>
                             </div>
                             <div class="col-75">
-                                <input type="text" id="fname" name="descripcion" placeholder="" required value='<?php echo $categoria[1]; ?>'>
+                                <input type="text" id="fname" name="descripcion" placeholder="" required value='<?php echo $resultado3->descripcion; ?>'>
                             </div>
                         </div>
                         <br>
                         <div class="row">
-                            <input type="hidden" name="id_categoria" id="" value='<?php echo $categoria[0]; ?>' readonly>
+                            <input type="hidden" name="id_categoria" id="" value='<?php echo $resultado3->id_categoria; ?>' readonly>
                             <input type="hidden" name="editar" id="" value='si' readonly>
                             <input type="submit" value="Guardar" class="boton2">
                         </div>
@@ -160,8 +82,4 @@ $categoria = mysqli_fetch_row($resultado3);
             </div>
         </main>
     </section>
-    <script src="../dashboard/script.js"></script>
-
-</body>
-
-</html>
+	<?php require "../../include/footer.php" ?>

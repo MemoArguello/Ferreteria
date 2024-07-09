@@ -64,8 +64,15 @@ $categoriaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                     <tr>
                                         <td><?=$i++?></td>
                                         <td><?=$categoria->descripcion?></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>
+                                            <a class="submitBoton" href="../productos/editar_categoria.php?id=<?=$categoria->id_categoria?>">Editar</a>
+                                        </td>
+                                        <td>
+                                            <form action="../../Backend/categoria/eliminar_categoria.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
+                                                <input type="hidden" name="id" value="<?=$categoria->id_categoria?>">
+                                                <button type="submit" class="submitBotonEliminar">Eliminar</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>

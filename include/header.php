@@ -7,7 +7,7 @@ $PaginaActual = basename($_SERVER['PHP_SELF']); // Obtener el nombre del archivo
 
 $inicio = ['inicio.php', 'estadisticas.php', 'reporte_auditoria.php'];
 $ventas = ['venta.php', 'reporte_venta.php', 'reporte_factura.php'];
-$productos = ['reporte_prod.php', 'registrar_productos.php', 'reporte_cat.php', 'registrar_categoria.php'];
+$productos = ['reporte_prod.php', 'registrar_productos.php', 'reporte_cat.php', 'registrar_categoria.php','editar_categoria.php'];
 $proveedores = ['reporte_prov.php', 'agg_proveedor.php'];
 $caja = ['inicio.php', 'estadisticas.php', 'reporte_auditoria.php'];
 $clientes = ['reporte_cliente.php', 'formulario_cliente.php', 'reporte_auditoria.php'];
