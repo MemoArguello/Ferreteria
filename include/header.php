@@ -11,7 +11,7 @@ $productos = ['reporte_prod.php', 'registrar_productos.php', 'reporte_cat.php', 
 $proveedores = ['reporte_prov.php', 'agg_proveedor.php'];
 $caja = ['inicio.php', 'estadisticas.php', 'reporte_auditoria.php'];
 $clientes = ['reporte_cliente.php', 'formulario_cliente.php', 'reporte_auditoria.php'];
-$configuracion = ['reporte_cuenta.php', 'registrar_usuario.php'];
+$configuracion = ['reporte_cuenta.php', 'registrar_usuario.php','editar_cuenta.php' ,'editar_contraseña.php'];
 
 ?>
 <!DOCTYPE html>

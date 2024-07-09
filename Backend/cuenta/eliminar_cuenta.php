@@ -1,25 +1,19 @@
 <?php
 include '../../Backend/config/baseDeDatos.php';
 
-$id_usuario = $_GET['id_usuario'];
-$conexiondb = conectardb();
+$id_usuario = $_POST['id'];
 
 try {
-    $query = "DELETE FROM usuarios WHERE id_usuario=" . $id_usuario;
-    $respuesta = mysqli_query($conexiondb, $query);
+    $query = $conn->prepare("DELETE FROM usuarios WHERE id_usuario = :id_usuario");
+    $query->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
 
-    if ($respuesta) {
-        echo "<script>alert('Usuario Eliminado');
-        window.location.href='../../Frontend/reportes/reporte_cuenta.php'</script>";
+    if ($query->execute()) {
+        echo "<script>alert('Usuario Eliminado'); window.location.href='../../Frontend/reportes/reporte_cuenta.php'</script>";
     } else {
-        echo "<script>alert('No se pudo Eliminar');
-        window.location.href='../../Frontend/reportes/reporte_cuenta.php'</script>";
+        echo "<script>alert('No se pudo eliminar el usuario'); window.location.href='../../Frontend/reportes/reporte_cuenta.php'</script>";
     }
 } catch (Exception $e) {
-    // Si ocurre una excepción, mostrar un mensaje de error
-    echo "<script>alert('No se pudo Eliminar');
-    window.location.href='../../Frontend/reportes/reporte_cuenta.php'</script>";} finally {
-    // Cerrar la conexión
-    mysqli_close($conexiondb);
+    echo "<script>alert('No se pudo eliminar el usuario porque esta relacionada'); window.location.href='../../Frontend/reportes/reporte_cuenta.php'</script>";
+} finally {
 }
 ?>

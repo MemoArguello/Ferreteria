@@ -41,8 +41,9 @@ $usuariosTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                         <th>Correo</th>
                                         <th>Usuario</th>
                                         <th>Cargo</th>
-                                        <th>Editar</th>
-                                        <th>Eliminar</th>
+                                        <th>Contraseña</th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,8 +53,21 @@ $usuariosTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                         <td><?=$usuario->correo?></td>
                                         <td><?=$usuario->usuario?></td>
                                         <td><?=$usuario->cargo?></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>
+                                            <a align="center" class="submitBotonPass" href="../configuracion/editar_contraseña.php?id=<?=$usuario->id_usuario?>"></a>
+                                        </td>
+                                        <td>
+                                            <a class="submitBotonEditar" href="../configuracion/editar_cuenta.php?id=<?=$usuario->id_usuario?>"></a>
+                                        </td>
+                                        <td>
+                                            <form action="../../Backend/cuenta/eliminar_cuenta.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
+                                                <input type="hidden" name="id" value="<?=$usuario->id_usuario?>">
+                                                <button type="submit" class="submitBotonEliminar">
+                                    
+                                                </button>
+                                            </form>
+                                        </td>
+
                                     </tr>
                                     <?php endforeach;?>
                                 </tbody>

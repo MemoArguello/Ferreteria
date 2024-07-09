@@ -17,6 +17,17 @@
 	font-size: 16px;
 	border-radius: 4px;
   }
+  .submitBotonEditar {
+    background-color: transparent; /* Hacer el fondo transparente */
+    border: none;
+    padding: 0; /* Eliminar el padding */
+    display: inline-block;
+    background: url('../IMG/edit.png') no-repeat center; /* Ruta al ícono */
+    background-size: 38px 38px; /* Tamaño del ícono */
+    width: 40px; /* Ancho del botón */
+    height: 40px; /* Altura del botón */
+    cursor: pointer; /* Cambiar el cursor a pointer */
+  }
   .submitBotonPagado {
 	background-color: #0400ff; /* verde */
 	border: none;
@@ -29,28 +40,31 @@
 	border-radius: 4px;
   }
   .submitBotonEliminar {
-	background-color: #f44336; /* Rojo */
-	border: none;
-	color: white;
-	padding: 5px 12px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	border-radius: 4px;
-  }
+    background-color: transparent; /* Hacer el fondo transparente */
+    border: none;
+    padding: 0; /* Eliminar el padding */
+    display: inline-block;
+    background: url('../IMG/delete.png') no-repeat center center; /* Ruta al ícono, centrado vertical y horizontalmente */
+    background-size: 35px 35px; /* Tamaño del ícono */
+    width: 35px; /* Ancho del botón */
+    height: 35px; /* Altura del botón */
+    cursor: pointer; /* Cambiar el cursor a pointer */
+}
+
   
-  .submitBotonPass {
-	background-color: #008CBA;
-	border: none;
-	color: white;
-	padding: 5px 15px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	border-radius: 4px;
-  }
+.submitBotonPass {
+    display: inline-block;
+    width: 30px; /* Ancho del botón */
+    height: 30px; /* Altura del botón */
+    text-align: center; /* Centrar texto */
+    line-height: 30px; /* Alinear verticalmente el contenido */
+    background: url('../IMG/pass.png') no-repeat center center; /* Ruta al ícono, centrado vertical y horizontalmente */
+    background-size: 100% auto; /* Tamaño del ícono */
+    cursor: pointer; /* Cambiar el cursor a pointer */
+    border: none; /* Quitar el borde */
+    padding: 0; /* Quitar el padding */
+}
+
   .submitBotonClose {
 	background-color: #008CBA;
 	border: none;
@@ -106,14 +120,7 @@
 	background-color: #15ff00;
 	transform: translateY(2px);
   }
-  .submitBotonEliminar:hover {
-	background-color: rgb(255, 0, 0);
-	transform: translateY(2px);
-  }
-  .submitBotonPass:hover {
-	background-color: #1100ff;
-	transform: translateY(2px);
-  }
+
   .submitBotonClose:hover {
 	background-color: #1100ff;
 	transform: translateY(2px);
@@ -190,19 +197,27 @@ body {
 	overflow-x: hidden;
 }
 .boton2 {
-	width: 10%;
-	background-color: #3421C0;
-	color: white;
-	padding: 12px 20px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	float: right;
+    width: 100%; /* Ajustar el ancho al 100% en pantallas pequeñas */
+    background-color: #3421C0;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block; /* Hacer que el botón sea un bloque para aplicar márgenes automáticamente */
+    margin: auto; /* Centrar horizontalmente */
 }
 
 .boton2:hover {
-	background-color: #0f0d80;
+    background-color: #0f0d80;
 }
+
+@media screen and (min-width: 768px) {
+    .boton2 {
+        width: auto; /* Restablecer el ancho automático en pantallas grandes */
+    }
+}
+
 .boton3 {
 	width: 10%;
 	background-color: #16cccc;

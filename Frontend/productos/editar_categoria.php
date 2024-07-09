@@ -82,4 +82,4 @@ $resultado3 = $query3->fetch(PDO::FETCH_OBJ);
             </div>
         </main>
     </section>
-	<?php require "../../include/footer.php" ?>
+<?php require "../../include/footer.php" ?>
