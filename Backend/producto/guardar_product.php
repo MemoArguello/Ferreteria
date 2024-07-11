@@ -15,11 +15,12 @@ if (empty($_POST['nombre_producto']) || empty($_POST['categoria']) || empty($_PO
     $editar = $_POST['editar'];
     $fechaActual = date("Y-m-d H:i:s");
     $evento = 'Registro de Producto';
+    $id_proveedor = $_POST['id_proveedor'];
 
     try {
         if ($editar == "si") {
             $id_producto = $_POST['id_producto'];
-            $query = $conn->prepare("UPDATE productos SET nombre_producto=:nombre, categoria=:categoria, lote=:lote, stock=:stock, precio=:precio, precio_compra=:precio_compra WHERE id_producto=:id_producto");
+            $query = $conn->prepare("UPDATE productos SET nombre_producto=:nombre, categoria=:categoria, lote=:lote, stock=:stock, precio=:precio, precio_compra=:precio_compra, id_proveedor=:id_proveedor WHERE id_producto=:id_producto");
             $respuesta = $query->execute([
                 ":nombre" => $nombre,
                 ":categoria" => $categoria,
@@ -27,6 +28,7 @@ if (empty($_POST['nombre_producto']) || empty($_POST['categoria']) || empty($_PO
                 ":stock" => $stock,
                 ":precio" => $precio,
                 ":precio_compra" => $precio_compra,
+                ":id_proveedor" => $id_proveedor,
                 ":id_producto" => $id_producto
             ]);
 
@@ -39,7 +41,6 @@ if (empty($_POST['nombre_producto']) || empty($_POST['categoria']) || empty($_PO
             }
         } else {
             $usuario = $_POST["id_usuario"];
-            $id_proveedor = $_POST['id_proveedor'];
             $query2 = $conn->prepare("INSERT INTO productos (nombre_producto, categoria, lote, stock, precio, precio_compra, id_proveedor) VALUES (:nombre, :categoria, :lote, :stock, :precio, :precio_compra, :id_proveedor)");
             $respuesta2 = $query2->execute([
                 ":nombre" => $nombre,

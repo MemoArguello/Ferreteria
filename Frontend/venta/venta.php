@@ -8,10 +8,17 @@ if (!isset($usuario)) {
     header("location:../../index.php");
     exit();
 }
-$consulta= $conn->query("SELECT * FROM usuarios where usuario ='$usuario'");
-$consulta->execute();
 
-$resultado=$consulta->fetch(PDO::FETCH_ASSOC);
+// Consulta para obtener categorías
+$query = $conn->prepare("SELECT * FROM categorias");
+$query->execute();
+$resultado2 = $query->fetchAll(PDO::FETCH_ASSOC);
+
+// Consulta para obtener información del usuario
+$consulta = $conn->prepare("SELECT id_usuario FROM usuarios WHERE usuario = :usuario");
+$consulta->bindParam(':usuario', $usuario);
+$consulta->execute();
+$resultado = $consulta->fetch(PDO::FETCH_ASSOC);
 ?>
 <style>
 
@@ -129,48 +136,20 @@ $resultado=$consulta->fetch(PDO::FETCH_ASSOC);
                     </div>
                     <div class="row">
                         <div class="col-25">
-                            <label for="codigo_factura">Código de factura:</label>
+                            <label for="cliente">Ingrese Cedula del Cliente:</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" name="codigo_factura" required>
+                            <input type="text" id="fname" name="cedula" placeholder="Cedula" required>
+                            <button class="boton" onclick="consultarCliente();">Buscar</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-25">
-                            <label for="cliente">Cliente:</label>
+                            <label for="tipo">Cliente:</label>
                         </div>
                         <div class="col-75">
-                            <select name="cliente" required>
-                                <option value="">Seleccione una opción</option>
-                                <?php
-                                // Ejecutar la consulta SQL
-                                $result = $conn->query("SELECT id_cliente, nombre FROM cliente");
-
-                                // Verificar si hay filas devueltas
-                                if ($result->rowCount() > 0) {
-                                    // Iterar sobre cada fila y mostrar opciones
-                                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                        // Mostrar una opción por cada cliente
-                                        echo "<option value='{$row['id_cliente']}'>{$row['nombre']}</option>";
-                                    }
-                                } else {
-                                    // Si no hay resultados
-                                    echo "<option value=''>No hay clientes disponibles</option>";
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="tipo">Tipo:</label>
-                        </div>
-                        <div class="col-75">
-                            <select name="tipo" required>
-                                <option value="">Seleccione una opción</option>
-                                <option value="Productos">Productos</option>
-                                <option value="Servicios">Servicios</option>
-                            </select>
+                            <input type="text" id="nombreCliente" readonly placeholder="Nombre del Cliente">
+                            <button class="boton" onclick="consultarCliente();">Buscar</button>
                         </div>
                     </div>
                     <div class="left">
@@ -186,61 +165,32 @@ $resultado=$consulta->fetch(PDO::FETCH_ASSOC);
                             <select name="categoria" id="categoria" onchange="cargarProductos(this.value)" required>
                                 <option value="">Seleccione una opción</option>
                                 <?php
-                                // Ejecutar la consulta SQL
-                                $result = $conn->query("SELECT * FROM categorias");
-
-                                // Verificar si hay filas devueltas
-                                if ($result->rowCount() > 0) {
-                                    // Iterar sobre cada fila y mostrar opciones
-                                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                        // Mostrar una opción por cada cliente
-                                        echo "<option value='{$row['id_categoria']}'>{$row['descripcion']}</option>";
-                                    }
-                                } else {
-                                    // Si no hay resultados
-                                    echo "<option value=''>No hay datos disponibles</option>";
+                                foreach ($resultado2 as $categoria) {
+                                    echo "<option value='" . $categoria['id_categoria'] . "'>" . $categoria['descripcion'] . "</option>";
                                 }
                                 ?>
                             </select>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-25">
                             <label for="producto">Producto:</label>
                         </div>
                         <div class="col-75">
-                            <select name="producto[]" id="producto" required>
-                                <option value="" disabled selected>Selecciona primero la categoría</option>
+                            <select id="producto" name="id_producto" required>
+                                <option value="">Seleccione una opción</option> <!-- Opción en blanco -->
                             </select>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-25">
                             <label for="cantidad">Cantidad:</label>
                         </div>
                         <div class="col-75">
-                            <input type="number" name="cantidad[]" min="1" required>
+                            <input type="number" name="cantidad" min="1" required>
                         </div>
-                    </div>
-                    <div class="row">
-                        <input type="button" class="boton2" value="Agregar" onclick="agregarProducto()">
-                    </div>
-                    <br>
-                    <br>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Cantidad</th>
-                                    <th>Producto</th>
-                                    <th>Costo</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tabla_productos">
-                                <!-- Aquí se mostrarán los productos seleccionados -->
-                            </tbody>
-                        </table>
                     </div>
                     <div class="row">
                         <input type="hidden" name="id_usuario" value='<?= $resultado['id_usuario'] ?>' readonly>
@@ -251,69 +201,24 @@ $resultado=$consulta->fetch(PDO::FETCH_ASSOC);
             </div>
         </div>
     </main>
-    <script>
-        function cargarProductos(idCategoria) {
-            $.ajax({
-                url: 'cargar_productos.php',
-                method: 'GET',
-                data: {
-                    id_categoria: idCategoria
-                },
-                success: function(data) {
-                    $('#producto').html(data);
-                }
-            });
+</section>
+
+<script>
+function cargarProductos(id_categoria) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var productos = JSON.parse(this.responseText);
+            var options = '<option value="">Seleccione una opción</option>'; // Opción en blanco por defecto
+            for (var i = 0; i < productos.length; i++) {
+                options += '<option value="' + productos[i].id_producto + '">' + productos[i].nombre_producto + '</option>';
+            }
+            document.getElementById("producto").innerHTML = options;
         }
+    };
+    xhttp.open("GET", "./cargar_productos.php?id_categoria=" + id_categoria, true);
+    xhttp.send();
+}
+</script>
 
-        function agregarProducto() {
-            var productoSelect = document.getElementsByName('producto[]')[0];
-            var cantidadInput = document.getElementsByName('cantidad[]')[0];
-
-            var productoId = productoSelect.value;
-            var productoNombre = productoSelect.options[productoSelect.selectedIndex].text;
-            var cantidad = cantidadInput.value;
-
-            cargarCostoProducto(productoId, cantidad, productoNombre);
-        }
-
-        function cargarCostoProducto(idProducto, cantidad, nombreProducto) {
-            $.ajax({
-                url: 'obtener_costo_producto.php',
-                method: 'GET',
-                data: {
-                    productoId: idProducto
-                },
-                success: function(data) {
-                    var costo = parseFloat(data);
-                    if (!isNaN(costo)) {
-                        var total = cantidad * costo;
-                        var newRow = document.createElement('tr');
-                        newRow.innerHTML = '<td>' + cantidad + '</td>' +
-                            '<td>' + nombreProducto + '</td>' +
-                            '<td>' + costo.toFixed(2) + '</td>' +
-                            '<td>' + total.toFixed(2) + '</td>';
-                        document.getElementById('tabla_productos').appendChild(newRow);
-                        calcularTotales();
-                    } else {
-                        console.log('Error: El costo no es un número válido.');
-                    }
-                },
-                error: function() {
-                    console.log('Error al obtener el costo del producto.');
-                }
-            });
-        }
-
-        function calcularTotales() {
-            var subtotal = 0;
-            var tableRows = document.querySelectorAll('#tabla_productos tbody tr');
-            tableRows.forEach(function(row) {
-                var totalCell = row.cells[3];
-                subtotal += parseFloat(totalCell.textContent || totalCell.innerText);
-            });
-            document.getElementsByName('subtotal')[0].value = subtotal.toFixed(2);
-            document.getElementsByName('impuesto')[0].value = (subtotal * 0.1).toFixed(2);
-            document.getElementsByName('total')[0].value = (subtotal + (subtotal * 0.1)).toFixed(2);
-        }
-    </script>
-    <?php require "../../include/footer.php"; ?>
+<?php require "../../include/footer.php"; ?>

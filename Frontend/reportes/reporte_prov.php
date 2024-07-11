@@ -57,8 +57,19 @@ $proveedorTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                         <td><?=$proveedor->telefono?></td>
                                         <td><?=$proveedor->nombre_d?></td>
                                         <td><?=$proveedor->nombre_c?></td>
-                                        <th></th>
-                                        <th></th>
+                                        <td>
+                                            <a class="submitBotonEditar" href="../proveedores/editar_prov.php?id=<?=$proveedor->id_proveedor?>">
+                                                Editar
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form action="../../Backend/proveedor/eliminar_prov.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
+                                                <input type="hidden" name="id" value="<?=$proveedor->id_proveedor?>">
+                                                <button type="submit" class="submitBotonEliminar">
+                                                    Eliminar
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                     <?php endforeach;?>
                                 </tbody>

@@ -6,6 +6,7 @@
 	box-sizing: border-box;
 	
 }
+
 .submitBoton {
 	background-color: #4CAF50; /* verde */
 	border: none;
@@ -18,15 +19,15 @@
 	border-radius: 4px;
   }
   .submitBotonEditar {
-    background-color: transparent; /* Hacer el fondo transparente */
-    border: none;
-    padding: 0; /* Eliminar el padding */
-    display: inline-block;
-    background: url('../IMG/edit.png') no-repeat center; /* Ruta al ícono */
-    background-size: 38px 38px; /* Tamaño del ícono */
-    width: 40px; /* Ancho del botón */
-    height: 40px; /* Altura del botón */
-    cursor: pointer; /* Cambiar el cursor a pointer */
+	background-color: #4CAF50; /* verde */
+	border: none;
+	color: white;
+	padding: 4px 12px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 4px;
   }
   .submitBotonPagado {
 	background-color: #0400ff; /* verde */
@@ -40,29 +41,28 @@
 	border-radius: 4px;
   }
   .submitBotonEliminar {
-    background-color: transparent; /* Hacer el fondo transparente */
-    border: none;
-    padding: 0; /* Eliminar el padding */
-    display: inline-block;
-    background: url('../IMG/delete.png') no-repeat center center; /* Ruta al ícono, centrado vertical y horizontalmente */
-    background-size: 35px 35px; /* Tamaño del ícono */
-    width: 35px; /* Ancho del botón */
-    height: 35px; /* Altura del botón */
-    cursor: pointer; /* Cambiar el cursor a pointer */
+	background-color: #c51f1f; /* verde */
+	border: none;
+	color: white;
+	padding: 5px 12px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 4px;
 }
 
   
 .submitBotonPass {
-    display: inline-block;
-    width: 30px; /* Ancho del botón */
-    height: 30px; /* Altura del botón */
-    text-align: center; /* Centrar texto */
-    line-height: 30px; /* Alinear verticalmente el contenido */
-    background: url('../IMG/pass.png') no-repeat center center; /* Ruta al ícono, centrado vertical y horizontalmente */
-    background-size: 100% auto; /* Tamaño del ícono */
-    cursor: pointer; /* Cambiar el cursor a pointer */
-    border: none; /* Quitar el borde */
-    padding: 0; /* Quitar el padding */
+	background-color: #18b9ac; /* verde */
+	border: none;
+	color: white;
+	padding: 5px 12px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 4px;
 }
 
   .submitBotonClose {
@@ -123,6 +123,21 @@
 
   .submitBotonClose:hover {
 	background-color: #1100ff;
+	transform: translateY(2px);
+  }
+  .submitBotonEditar:hover {
+	background-color: #1a9103;
+	transform: translateY(2px);
+	color: rgb(255, 255, 255);
+  
+  }
+  .submitBotonPass:hover {
+	background-color: #19948a;
+	transform: translateY(2px);
+  }
+
+  .submitBotonEliminar:hover {
+	background-color: #cf0505;
 	transform: translateY(2px);
   }
 img.card{
@@ -205,7 +220,6 @@ body {
     border-radius: 4px;
     cursor: pointer;
     display: block; /* Hacer que el botón sea un bloque para aplicar márgenes automáticamente */
-    margin: auto; /* Centrar horizontalmente */
 }
 
 .boton2:hover {
@@ -219,21 +233,54 @@ body {
 }
 
 .boton3 {
-	width: 10%;
-	background-color: #16cccc;
-	color: white;
-	padding: 12px 20px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	float: right;
+    width: 100%; /* Ajustar el ancho al 100% en pantallas pequeñas */
+    background-color: #3421C0;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block; /* Hacer que el botón sea un bloque para aplicar márgenes automáticamente */
+    margin: auto; /* Centrar horizontalmente */
 }
 
 .boton3:hover {
-	background-color: #1a9999;
+    background-color: #0f0d80;
 }
 
+@media screen and (min-width: 768px) {
+    .boton3 {
+        width: auto; /* Restablecer el ancho automático en pantallas grandes */
+    }
+}
+.botonCancelar {
+	width: 100%; /* Ajustar el ancho al 100% en pantallas pequeñas */
+    background-color: #46c021;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.botonCancelar:hover {
+    background-color: #46aa2d;
+}
+@media screen and (min-width: 768px) {
+    .botonCancelar {
+        width: auto; /* Restablecer el ancho automático en pantallas grandes */
+    }
+}
+/* Asegurar que los botones estén centrados en pantallas móviles */
+.row {
+    text-align: center;
+}
 
+/* En pantallas más grandes, los botones pueden estar uno al lado del otro */
+@media screen and (min-width: 768px) {
+    .row {
+        text-align: left; /* O eliminar esta línea si prefieres mantenerlos centrados */
+    }
+}
 
 /* SIDEBAR */
 #sidebar {

@@ -72,6 +72,7 @@ $resultado2 = $query2->fetch(PDO::FETCH_OBJ);
                             </div>
                         </div>
                         <br>
+
                         <div class="row">
                             <input type="hidden" name="id_usuario" id="" value='<?php echo $resultado2->id_usuario ?>' readonly>
                             <input type="hidden" name="editar" id="" value='si' readonly>

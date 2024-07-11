@@ -128,6 +128,5 @@ try {
     xhttp.open("GET", "./get_ciudades.php?id_departamento=" + idDepartamento, true);
     xhttp.send();
 }
-
 </script>
 <?php require "../../include/footer.php" ?>

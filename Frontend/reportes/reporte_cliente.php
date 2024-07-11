@@ -58,8 +58,19 @@ $clientes = $sql->fetchAll(PDO::FETCH_OBJ);
                                         <td><?=$cliente->ruc?></td>
                                         <td><?=$cliente->nombre_d?></td>
                                         <td><?=$cliente->nombre_c?></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>
+                                        <a class="submitBotonEditar" href="../cliente/editar_cliente.php?id=<?=$cliente->id_cliente?>">
+                                            Editar
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <form action="../../Backend/cliente/eliminar_cliente.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
+                                            <input type="hidden" name="id" value="<?=$cliente->id_cliente?>">
+                                            <button type="submit" class="submitBotonEliminar">
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </td>
                                     </tr>
                                 <?php endforeach;?>
                                 </tbody>

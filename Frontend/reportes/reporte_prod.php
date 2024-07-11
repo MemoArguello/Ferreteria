@@ -66,8 +66,19 @@ $productoTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                         <td><?=$producto->precio?></td>
                                         <td><?=$producto->precio_compra?></td>
                                         <td><?=$producto->proveedor?></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>
+                                            <a class="submitBotonEditar" href="../productos/editar_prod.php?id=<?=$producto->id_producto?>">
+                                                Editar
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form action="../../Backend/producto/eliminar_prod.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este Registro?');">
+                                                <input type="hidden" name="id" value="<?=$producto->id_producto?>">
+                                                <button type="submit" class="submitBotonEliminar">
+                                                    Eliminar
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>

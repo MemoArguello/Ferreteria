@@ -31,61 +31,76 @@ $totalVentasGs = $valores[4];
 $totalComprasGs = $valores[5];
 ?>
 
-
-?>
-    <section id="content">
-        <main>
-                <div class="left">
-                    <nav class="nav">
-                        <ul class="breadcrumb">
-                            <li>
-                                <a class="active" href="./inicio.php">Inicio</a>
-                            </li>
-                        </ul>
-                        <ul class="breadcrumb">
-                            <li>
-                                <a href="./estadisticas.php" <?php if (basename($_SERVER['PHP_SELF']) == 'estadisticas.php') echo 'class="active"'; ?>>Estadisticas</a>
-                            </li>
-                        </ul>
-                        <ul class="breadcrumb">
-                            <li>
-                                <a class="active" href="../reportes/reporte_auditoria.php">Auditoria</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <ul class="box-info">
-                    <div>
-                        <canvas id="myChart"></canvas>
-                    </div>
+<section id="content">
+    <main>
+        <div class="left">
+            <nav class="nav">
+                <ul class="breadcrumb">
+                    <li>
+                        <a class="active" href="./inicio.php">Inicio</a>
+                    </li>
                 </ul>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="./estadisticas.php" <?php if (basename($_SERVER['PHP_SELF']) == 'estadisticas.php') echo 'class="active"'; ?>>Estadísticas</a>
+                    </li>
+                </ul>
+                <ul class="breadcrumb">
+                    <li>
+                        <a class="active" href="../reportes/reporte_auditoria.php">Auditoría</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <ul class="box-info">
+            <div>
+                <canvas id="myChart"></canvas>
+            </div>
+        </ul>
 
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-            <script>
-                const ctx = document.getElementById('myChart');
+        <script>
+            const ctx = document.getElementById('myChart').getContext('2d');
 
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Clientes', 'Productos', 'Ventas', 'Proveedores'],
-                        datasets: [{
-                            label: 'Cantidad',
-                            data: <?php echo json_encode($valores); ?>,
-                            backgroundColor: 'rgba(0, 4, 255, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Clientes', 'Productos', 'Ventas', 'Proveedores'],
+                    datasets: [{
+                        label: 'Cantidad',
+                        data: [
+                            <?php echo $totalClientes; ?>,
+                            <?php echo $totalProductos; ?>,
+                            <?php echo $totalVentas; ?>,
+                            <?php echo $totalProveedores; ?>
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
                         }
                     }
-                });
-            </script>
-        </main>
-        <section>
+                }
+            });
+        </script>
+    </main>
+</section>
+
 <?php require "../../include/footer.php"; ?>
+
