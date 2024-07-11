@@ -1,30 +1,19 @@
 <?php
 include '../../Backend/config/baseDeDatos.php';
+try{
+    $id_cliente = $_POST["id_cliente"];
+    $estado = "1";
+    $stmt = $conn->prepare("INSERT INTO factura_cabecera (cliente, estado) VALUES (:cliente, :estado)");
+    $stmt->bindParam(':cliente',$id_cliente, PDO::PARAM_INT);
+    $stmt->bindParam(':estado',$estado, PDO::PARAM_INT);
+    $stmt->execute();
 
-if(empty($_POST['codigo_factura']) || empty($_POST['cliente']) || empty($_POST['tipo'])){
-    echo "<script>alert('Complete los datos');
-    window.location.href='../../Frontend/venta/venta.php'</script>";
-    exit;
-}else{
-    $cliente = $_POST['cliente'];
-    $tipo = $_POST['tipo'];
-    $usuario = $_POST['id_usuario'];
-    $evento = 'Se creo una factura';
-    $fechaActual = date("Y-m-d H:i:s");
+    //valor del ultimo id generado
+    $factura_id = $conn->lastInsertId();
 
-    try {
-            $query2 = "INSERT INTO factura_cabecera (cliente, tipo) VALUES (?, ?)";
-            $stmt2 = $conn->prepare($query2);
-            $stmt2->execute([$codigo, $cliente, $tipo]);
+    echo json_encode(array('success'=>true,'id_factura'=>$factura_id));
 
-            $query4 = "INSERT INTO auditoria (id_usuario, evento, fecha) VALUES (?, ?, ?)";
-            $stmt4 = $conn->prepare($query4);
-            $stmt4->execute([$usuario, $evento, $fechaActual]);
-
-            echo "<script>alert('Registro Exitoso');
-            window.location.href='../../Frontend/venta/venta.php'</script>";
-
-    } catch(PDOException $e) {
-        echo "Error: " . $e->getMessage();
-    }
+}catch (PDOException $e){
+    echo json_encode(array('error'=>'Error al ingresar la factura'.$e->getMessage()));
 }
+?>

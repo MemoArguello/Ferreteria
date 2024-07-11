@@ -8,11 +8,11 @@ if (empty($usuario)) {
 }
 $sql = $conn->query("SELECT detalle_factura.id_detalle, detalle_factura.id_factura, detalle_factura.productos, 
             detalle_factura.cantidad, detalle_factura.costo_unitario, detalle_factura.total, 
-            facturas.id_factura, facturas.codigo_factura, facturas.cliente, productos.id_producto,
+            factura_cabecera.id_factura, factura_cabecera.cliente, productos.id_producto,
             productos.nombre_producto, cliente.id_cliente, cliente.nombre, cliente.cedula, detalle_factura.estado 
-            FROM detalle_factura JOIN facturas 
-            ON facturas.id_factura =  detalle_factura.id_factura JOIN productos 
-            ON productos.id_producto = detalle_factura.productos JOIN cliente ON cliente.id_cliente = facturas.cliente");
+            FROM detalle_factura JOIN factura_cabecera 
+            ON factura_cabecera.id_factura =  detalle_factura.id_factura JOIN productos 
+            ON productos.id_producto = detalle_factura.productos JOIN cliente ON cliente.id_cliente = factura_cabecera.cliente");
 $sql->execute();
 
 $facturaTotal = $sql->fetchAll(PDO::FETCH_OBJ);

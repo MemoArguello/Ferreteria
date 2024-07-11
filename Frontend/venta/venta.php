@@ -50,7 +50,7 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
     background-color: #0400ff;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -61,32 +61,27 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
 }
 
 
-/* Tabla responsiva */
-.table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin-bottom: 20px;
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
 
-#tabla_productos {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 
-#tabla_productos th, #tabla_productos td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
 
-#tabla_productos th {
-    background-color: #f2f2f2;
-    color: #333;
-}
+#customers tr:hover {background-color: #ddd;}
 
-#tabla_productos tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
 }
 
 /* Estilos para pantallas pequeñas */
@@ -130,7 +125,6 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
         </div>
         <div class="table-data">
             <div class="container">
-                <form action="procesar_factura.php" method="post" class="form_vent">
                     <div class="left">
                         <h1>Generar Factura</h1>
                     </div>
@@ -139,7 +133,7 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                             <label for="cliente">Ingrese Cedula del Cliente:</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="fname" name="cedula" placeholder="Cedula" required>
+                            <input type="text" id="ciCliente" name="cedula" placeholder="Cedula" required>
                             <button class="boton" onclick="consultarCliente();">Buscar</button>
                         </div>
                     </div>
@@ -149,76 +143,115 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                         </div>
                         <div class="col-75">
                             <input type="text" id="nombreCliente" readonly placeholder="Nombre del Cliente">
-                            <button class="boton" onclick="consultarCliente();">Buscar</button>
+                            <button class="boton" onclick="insertarFactura();">Iniciar Factura</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="tipo">Factura N°:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="numeroFactura" readonly>
                         </div>
                     </div>
                     <div class="left">
-                        <h3>Formulario de Productos:</h3>
+                        <h2>Agrega un Productos:</h2>
                     </div>
                     <br>
                     <br>
                     <div class="row">
                         <div class="col-25">
-                            <label for="categoria">Categoría:</label>
+                            <label for="categoria">Producto:</label>
                         </div>
                         <div class="col-75">
-                            <select name="categoria" id="categoria" onchange="cargarProductos(this.value)" required>
-                                <option value="">Seleccione una opción</option>
-                                <?php
-                                foreach ($resultado2 as $categoria) {
-                                    echo "<option value='" . $categoria['id_categoria'] . "'>" . $categoria['descripcion'] . "</option>";
-                                }
-                                ?>
-                            </select>
+                            <input type="text" id="idProducto" name="producto" placeholder="Ingrese Nombre">
+                            <button class="boton" onclick="consultarCliente();">Agregar</button>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-25">
-                            <label for="producto">Producto:</label>
+                            <label for="producto">Cantidad:</label>
                         </div>
                         <div class="col-75">
-                            <select id="producto" name="id_producto" required>
-                                <option value="">Seleccione una opción</option> <!-- Opción en blanco -->
-                            </select>
+                            <input type="text" id="txtCantidad" name="cantidad" placeholder="Cantidad">
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="cantidad">Cantidad:</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="number" name="cantidad" min="1" required>
-                        </div>
+                    <div class="left">
+                        <h3>Productos Seleccionados</h3>
                     </div>
+                    <table id="customers">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultadoProducto">
+
+                        </tbody>
+                    </table>
+                    <h4 id="subtotal">Sub Total:</h4>
+                    <h4 id="iva">IVA %:</h4>
+                    <h4 id="total">Total Factura:</h4>
                     <div class="row">
                         <input type="hidden" name="id_usuario" value='<?= $resultado['id_usuario'] ?>' readonly>
                         <br>
                         <input type="submit" class="boton2" value="Vender">
                     </div>
-                </form>
             </div>
         </div>
     </main>
 </section>
 
 <script>
-function cargarProductos(id_categoria) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var productos = JSON.parse(this.responseText);
-            var options = '<option value="">Seleccione una opción</option>'; // Opción en blanco por defecto
-            for (var i = 0; i < productos.length; i++) {
-                options += '<option value="' + productos[i].id_producto + '">' + productos[i].nombre_producto + '</option>';
+    var id=0;
+    var idFactura=0;
+    var Total=0;
+
+    function consultarCliente(){
+        var ciCliente =document.getElementById("ciCliente").value;
+        $.ajax({
+            url:'consultar_cliente.php',
+            method: 'POST',
+            data: {
+                ciCliente : ciCliente
+            },
+            dataType: 'json',
+            success:function(data){
+                if(data.error){
+                    alert(data.error)
+                }else{
+                    document.getElementById("nombreCliente").value = data.nombre_cliente;
+                    id = data.id_cliente;
+                }
             }
-            document.getElementById("producto").innerHTML = options;
-        }
-    };
-    xhttp.open("GET", "./cargar_productos.php?id_categoria=" + id_categoria, true);
-    xhttp.send();
-}
+        })
+    }
+
+    function insertarFactura(){
+        $.ajax({
+            url:'procesar_factura.php',
+            method: 'POST',
+            data: {
+                id_cliente : id
+            },
+            dataType: 'json',
+            success:function(data){
+                if(data.success){
+                    var id_factura = data.id_factura
+                    document.getElementById("numeroFactura").value = data.id_factura;
+                    idFactura = id_factura;
+                }else{
+                    alert("Error al insertar la factura"+data.error)
+                }
+            }
+        })
+    }
 </script>
 
 <?php require "../../include/footer.php"; ?>

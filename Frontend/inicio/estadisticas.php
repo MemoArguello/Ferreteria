@@ -10,7 +10,7 @@ if (!isset($usuario)) {
 $queries = [
     "SELECT COUNT(*) total1 FROM cliente",
     "SELECT COUNT(*) total2 FROM productos",
-    "SELECT COUNT(*) total3 FROM facturas",
+    "SELECT COUNT(*) total3 FROM factura_cabecera",
     "SELECT COUNT(*) total4 FROM proveedores",
     "SELECT sum(ingreso) total5 FROM caja",
     "SELECT sum(egreso) total6 FROM caja"

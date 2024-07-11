@@ -6,8 +6,8 @@ $usuario = $_SESSION['usuario'];
 if (empty($usuario)) {
     header("location:../../index.php");
 }
-$sql = $conn->query("SELECT facturas.id_factura, facturas.codigo_factura, facturas.tipo, facturas.fecha_creacion,
-            cliente.id_cliente, cliente.nombre FROM facturas JOIN cliente ON cliente.id_cliente =  facturas.cliente");
+$sql = $conn->query("SELECT factura_cabecera.id_factura, factura_cabecera.fecha_creacion,
+            cliente.id_cliente, cliente.nombre FROM factura_cabecera JOIN cliente ON cliente.id_cliente =  factura_cabecera.cliente");
 $sql->execute();
 
 $ventaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
@@ -42,9 +42,7 @@ $ventaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                 <thead>
                                     <tr>
                                         <th>N°</th>
-                                        <th>Codigo</th>
                                         <th>Cliente</th>
-                                        <th>Tipo</th>
                                         <th>Fecha</th>
                                         <th>Editar</th>
                                         <th>Eliminar</th>
@@ -54,9 +52,7 @@ $ventaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                     <?php $i=1; foreach($ventaTotal as $venta):?>
                                     <tr>
                                         <td><?=$i++?></td>
-                                        <td><?=$venta->codigo_factura?></td>
                                         <td><?=$venta->nombre?></td>
-                                        <td><?=$venta->tipo?></td>
                                         <td><?=$venta->fecha_creacion?></td>
                                         <td></td>
                                         <td></td>

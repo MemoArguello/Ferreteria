@@ -15,7 +15,7 @@ $sql->execute();
 
 $query1 = $conn->query("SELECT COUNT(*) total1 FROM cliente");
 $query2 = $conn->query("SELECT COUNT(*) total2 FROM productos");
-$query3 = $conn->query("SELECT COUNT(*) total3 FROM facturas");
+$query3 = $conn->query("SELECT COUNT(*) total3 FROM factura_cabecera");
 $query4 = $conn->query("SELECT COUNT(*) total4 FROM proveedores");
 $query5 = $conn->query("SELECT sum(ingreso) total5 FROM caja");
 $query6 = $conn->query("SELECT sum(egreso) total6 FROM caja");
