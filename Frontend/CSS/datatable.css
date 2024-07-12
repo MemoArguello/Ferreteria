@@ -1,6 +1,6 @@
 /* Estilos para DataTables */
 #listado_wrapper {
-    padding: 40px; /* Espaciado interior */
+    padding: 10px; /* Espaciado interior */
     border: 1px solid #ddd; /* Borde */
 }
 
@@ -35,7 +35,7 @@
 
 .dt-paging-button.page-item .page-link {
     color: #007bff; /* Color del texto del enlace de paginación */
-    border: 1px solid #007bff; /* Borde del enlace de paginación */
+    border: 0px solid #007bff; /* Borde del enlace de paginación */
     padding: 6px 12px; /* Espaciado interior del enlace de paginación */
     margin: 0 2px; /* Margen entre enlaces de paginación */
     border-radius: 4px; /* Borde redondeado del enlace de paginación */
@@ -57,3 +57,38 @@
 .dt-paging.paging_full_numbers {
     text-align: center; /* Centra el paginador */
 }
+
+/* Estilos adicionales para botones */
+.submitBotonEditar, .submitBotonEliminar, .submitBotonFactura {
+    display: inline-block;
+    padding: 4px 8px;
+    margin-right: 5px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.submitBotonEliminar {
+    background-color: #dc3545; /* Rojo para eliminar */
+}
+
+.submitBotonFactura{
+    background-color: #da4500; 
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .submitBotonEditar, .submitBotonEliminar, .submitBotonFactura {
+        display: block;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .submitBotonEliminar {
+        margin-right: 0; /* Eliminar margen derecho en dispositivos móviles */
+    }
+}
+

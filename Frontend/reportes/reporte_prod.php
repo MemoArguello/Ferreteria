@@ -35,9 +35,14 @@ $productoTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                 </div>
             <div class="table-data">
             <div class="container">
-                <div class="titulo" align="center">
+                <div class="titulo" align="center" >
                     <h2>Listado de Productos</h2>
                 </div>
+                <ul class="pdf">
+                        <li>
+                            <a class="active" href="PDF/pdf_prod.php" target="_blank">Reporte PDF</a>
+                        </li>
+                </ul>
                 <div class"row">
                     <div class="col-lg-12">
                         <table id="listado" class="table-striped table-bordered" style="width: 100%">

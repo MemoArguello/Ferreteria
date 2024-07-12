@@ -1,34 +1,22 @@
 <?php
 include '../config/baseDeDatos.php';
 
-$id_factura = isset($_GET['id_factura']) ? mysqli_real_escape_string(conectardb(), $_GET['id_factura']) : '';
+if (isset($_POST['id'])) {
+    $id_factura = $_POST['id'];
 
-if (empty($id_factura)) {
-    echo "<script>alert('ID de venta no válido');
-    window.location.href='../../Frontend/reportes/reporte_venta.php'</script>";
-    exit();
-}
+    try {
+        $query = $conn->prepare("DELETE FROM factura_cabecera WHERE id_factura = :id_factura");
+        $query->bindParam(':id_factura', $id_factura, PDO::PARAM_INT);
 
-$conexiondb = conectardb();
-
-try{
-$query = $conexiondb->prepare("DELETE FROM facturas WHERE id_factura=?");
-$query->bind_param("i", $id_factura);
-$query->execute();
-}catch (Exception){
-    echo "<script>alert('No se pudo eliminar el Registro');
-    window.location.href='../../Frontend/reportes/reporte_venta.php'</script>";
-   
-}
-if ($query->affected_rows > 0) {
-    echo "<script>alert('Registro Eliminado');
-    window.location.href='../../Frontend/reportes/reporte_venta.php'</script>";
-    exit();
+        if ($query->execute()) {
+            echo "<script>alert('detalle_factura Eliminado'); window.location.href='../../Frontend/reportes/reporte_factura.php';</script>";
+        } else {
+            echo "<script>alert('No se pudo eliminar la factura'); window.location.href='../../Frontend/reportes/reporte_factura.php';</script>";
+        }
+    } catch (Exception $e) {
+        echo "<script>alert('Error: No se pudo eliminar la factura porque esta relacionada'); window.location.href='../../Frontend/reportes/reporte_factura.php';</script>";
+    }
 } else {
-    echo "<script>alert('No se pudo Eliminar');
-    window.location.href='../../Frontend/reportes/reporte_venta.php'</script>";
+    echo "<script>alert('Error: ID detalle_factura no recibido'); window.location.href='../../Frontend/reportes/reporte_factura.php';</script>";
 }
-
-$query->close();
-mysqli_close($conexiondb);
 ?>

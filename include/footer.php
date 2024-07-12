@@ -57,10 +57,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json',
                     paginate: {
-                        first: 'Primero',
+                        first: '<<',
                         previous: 'Ant',
                         next: 'Sig',
-                        last: 'Últ'
+                        last: '>>'
                     }
                 }
             });

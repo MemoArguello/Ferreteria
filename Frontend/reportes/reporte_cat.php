@@ -45,7 +45,7 @@ $categoriaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                 </ul>
                 <ul class="pdf">
                         <li>
-                            <a class="active" href="./reporte_cat.php">Reporte PDF</a>
+                            <a class="active" href="PDF/pdf_cat.php" target="_blank">Reporte PDF</a>
                         </li>
                 </ul>
                 <div class"row">

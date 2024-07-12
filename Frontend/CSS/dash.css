@@ -7,6 +7,67 @@
 	
 }
 
+#listado {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+  }
+  
+  #listado td, #listado th {
+	border: 1px solid #ddd;
+	padding: 8px;
+  }
+  
+  
+  #listado tr:hover {background-color: #ddd;}
+  
+  #listado th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #04AA6D;
+	color: white;
+  }
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* Estilos para pantallas pequeñas */
+@media screen and (max-width: 600px) {
+    .col-25, .col-75 {
+        flex: 100%;
+        max-width: 100%;
+    }
+
+    .col-25 {
+        margin-bottom: 10px;
+    }
+
+    .boton, .boton2 {
+        width: 100%;
+        padding: 12px 0;
+    }
+}
 .submitBoton {
 	background-color: #4CAF50; /* verde */
 	border: none;
@@ -42,14 +103,16 @@
   }
   .submitBotonEliminar {
 	background-color: #c51f1f; /* verde */
-	border: none;
-	color: white;
-	padding: 5px 12px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	border-radius: 4px;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 5px;
 }
 
   
@@ -76,17 +139,7 @@
 	font-size: 16px;
 	border-radius: 4px;
   }
-  .submitBotonFactura {
-	background-color: #ff5e00;
-	border: none;
-	color: rgb(255, 255, 255);
-	padding: 5px 20px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	border-radius: 4px;
-  }
+
   .submitBotonCerrar {
 	background-color: #ffd000ab;
 	border: none;
@@ -110,12 +163,7 @@
 	color: rgb(255, 255, 255);
   
   }
-  .submitBotonFactura:hover {
-	background-color: #1100ff;
-	transform: translateY(2px);
-	color: rgb(255, 255, 255);
-  
-  }
+
   .submitBoton:hover {
 	background-color: #15ff00;
 	transform: translateY(2px);
@@ -126,7 +174,7 @@
 	transform: translateY(2px);
   }
   .submitBotonEditar:hover {
-	background-color: #1a9103;
+	background-color: #030d91;
 	transform: translateY(2px);
 	color: rgb(255, 255, 255);
   
@@ -251,6 +299,10 @@ body {
 @media screen and (min-width: 768px) {
     .boton3 {
         width: auto; /* Restablecer el ancho automático en pantallas grandes */
+    }
+	.submitBotonEditar, .submitBotonEliminar {
+        font-size: 12px;
+        padding: 5px;
     }
 }
 .botonCancelar {

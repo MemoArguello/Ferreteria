@@ -60,46 +60,13 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
     border-radius: 5px;
 }
 
-
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+.table-container {
+    max-height: 300px; /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto;
+    margin-top: 20px;
+    border: 1px solid #ccc;
 }
 
-#customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-
-#customers tr:hover {background-color: #ddd;}
-
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
-
-/* Estilos para pantallas pequeñas */
-@media screen and (max-width: 600px) {
-    .col-25, .col-75 {
-        flex: 100%;
-        max-width: 100%;
-    }
-
-    .col-25 {
-        margin-bottom: 10px;
-    }
-
-    .boton, .boton2 {
-        width: 100%;
-        padding: 12px 0;
-    }
-}
 
 </style>
 <section id="content">
@@ -113,11 +80,6 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                 </ul>
                 <ul class="breadcrumb">
                     <li>
-                        <a class="active" href="../reportes/reporte_venta.php">Listado</a>
-                    </li>
-                </ul>
-                <ul class="breadcrumb">
-                    <li>
                         <a class="active" href="../reportes/reporte_factura.php">Facturas</a>
                     </li>
                 </ul>
@@ -125,17 +87,17 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
         </div>
         <div class="table-data">
             <div class="container">
-                    <div class="left">
-                        <h1>Generar Factura</h1>
-                    </div>
+                    <h1 align="center">Generar Factura</h1>
                     <div class="row">
                         <div class="col-25">
-                            <label for="cliente">Ingrese Cedula del Cliente:</label>
+                            <label for="cliente">Cedula</label>
                         </div>
                         <div class="col-75">
                             <input type="text" id="ciCliente" name="cedula" placeholder="Cedula" required>
-                            <button class="boton" onclick="consultarCliente();">Buscar</button>
                         </div>
+                    </div>
+                    <div class="row">
+                        <button class="boton" onclick="consultarCliente();">Buscar</button>
                     </div>
                     <div class="row">
                         <div class="col-25">
@@ -143,15 +105,17 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                         </div>
                         <div class="col-75">
                             <input type="text" id="nombreCliente" readonly placeholder="Nombre del Cliente">
-                            <button class="boton" onclick="insertarFactura();">Iniciar Factura</button>
                         </div>
+                    </div>
+                    <div class="row">
+                        <button class="boton" onclick="insertarFactura();">Iniciar Factura</button>
                     </div>
                     <div class="row">
                         <div class="col-25">
                             <label for="tipo">Factura N°:</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="numeroFactura" readonly>
+                            <input type="text" id="numeroFactura" name="id_factura_cabecera" readonly>
                         </div>
                     </div>
                     <div class="left">
@@ -161,48 +125,52 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                     <br>
                     <div class="row">
                         <div class="col-25">
-                            <label for="categoria">Producto:</label>
+                            <label for="Producto">Producto</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="idProducto" name="producto" placeholder="Ingrese Nombre">
-                            <button class="boton" onclick="consultarCliente();">Agregar</button>
+                            <input type="text" id="id_producto" name="producto" placeholder="Codigo del Producto">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-25">
-                            <label for="producto">Cantidad:</label>
+                            <label for="producto">Cantidad</label>
                         </div>
                         <div class="col-75">
                             <input type="text" id="txtCantidad" name="cantidad" placeholder="Cantidad">
                         </div>
                     </div>
-
+                    <div class="row">
+                        <button class="boton" onclick="consultarProducto();" id="btnAgregar">Agregar</button>
+                    </div>
                     <div class="left">
                         <h3>Productos Seleccionados</h3>
                     </div>
-                    <table id="customers">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Cantidad</th>
-                                <th scope="col">Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody id="resultadoProducto">
+                    <div class="table-container">
+                        <table id="customers">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Precio Unitario</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultadoProducto">
 
-                        </tbody>
-                    </table>
-                    <h4 id="subtotal">Sub Total:</h4>
-                    <h4 id="iva">IVA %:</h4>
-                    <h4 id="total">Total Factura:</h4>
-                    <div class="row">
-                        <input type="hidden" name="id_usuario" value='<?= $resultado['id_usuario'] ?>' readonly>
-                        <br>
-                        <input type="submit" class="boton2" value="Vender">
+                            </tbody>
+                        </table>
                     </div>
+                    <table id="customers">
+                            <tfoot>
+                                <tr>
+                                    <th id="subtotal">Sub Total:</th>
+                                    <th id="iva">IVA %:</th>
+                                    <th id="total">Total Factura:</th>
+                                </tr>
+                            </tfoot>
+                    </table>
             </div>
         </div>
     </main>
@@ -212,6 +180,7 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
     var id=0;
     var idFactura=0;
     var Total=0;
+    var subTotalGeneral=0;
 
     function consultarCliente(){
         var ciCliente =document.getElementById("ciCliente").value;
@@ -248,6 +217,64 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                     idFactura = id_factura;
                 }else{
                     alert("Error al insertar la factura"+data.error)
+                }
+            }
+        })
+    }
+
+    function consultarProducto(){
+        var id_producto =document.getElementById("id_producto").value;
+        var cant =document.getElementById("txtCantidad").value;
+
+        $.ajax({
+            url: 'cargar_productos.php',
+            method: 'post',
+            data:{
+                id_producto: id_producto
+            },
+            dataType: 'json',
+            success:function(data){
+                if(data.error){
+                    alert(data.error)
+                }else{
+                    var resultadoProducto = document.getElementById("resultadoProducto")
+                    var fila = document.createElement("tr")
+                    let subtotal = data.precio * cant;
+                    subTotalGeneral +=subtotal;
+                    //Iva = subTotalGeneral *0.19;
+                    Iva = 0;
+                    total = subTotalGeneral +=Iva;
+                    insertarFactura_detalle(idFactura, data.id_producto, cant, data.precio, subtotal);
+                    fila.innerHTML = "<td>" + data.id_producto + "</td><td>" +data.nombre_producto + "</td><td>" + data.precio.toLocaleString() + "</td><td>" +cant + "</td><td>" +subtotal.toLocaleString() + "</td>";
+                    resultadoProducto.appendChild(fila);
+                    document.getElementById("subtotal").innerText = "Sub Total: "+subTotalGeneral.toLocaleString();
+                    document.getElementById("iva").innerText = "IVA %: "+Iva.toLocaleString();
+                    document.getElementById("total").innerText = "Total Factura: "+total.toLocaleString();
+                }
+            }
+        });
+        // Limpiar los campos después de agregar
+        document.getElementById("id_producto").value = "";
+        document.getElementById("txtCantidad").value = "";
+    }
+    function insertarFactura_detalle(id_factura_cabecera,producto,cantidad, precio, subtotal){
+        $.ajax({
+            url:'guardar_detalle_factura.php',
+            method: 'POST',
+            data: {
+                id_factura_cabecera : id_factura_cabecera,
+                id_producto : producto,
+                cantidad : cantidad,
+                precio : precio,
+                subtotal :subtotal
+            },
+            dataType: 'json',
+            success:function(data){
+                if(data.success){
+                    alert("Producto agregado Correctamente")
+
+                }else{
+                    alert("Error al insertar el producto"+data.error)
                 }
             }
         })
