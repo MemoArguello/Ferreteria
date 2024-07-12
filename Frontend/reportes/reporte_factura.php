@@ -7,7 +7,7 @@ if (empty($usuario)) {
     header("location:../../index.php");
 }
 $sql = $conn->query("SELECT factura_cabecera.*, cliente.nombre FROM factura_cabecera 
-                    JOIN cliente ON cliente.id_cliente = factura_cabecera.cliente");
+                    JOIN cliente ON cliente.id_cliente = factura_cabecera.cliente WHERE factura_cabecera.estado = 1");
 $sql->execute();
 
 $facturaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
@@ -62,9 +62,9 @@ $facturaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                             </form>
                                         </td>
                                         <td>
-                                            <form id="formEliminarFactura" action="../../Backend/venta/eliminar_venta.php" method="POST">
+                                            <form id="formEliminarFactura<?=$factura->id_factura?>" action="../../Backend/venta/eliminar_venta.php" method="POST">
                                                 <input type="hidden" name="id" value="<?=$factura->id_factura?>">
-                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarFactura()">
+                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarFactura(<?=$factura->id_factura?>)">
                                                     <i class='bx bx-trash'></i>
                                                 </button>
                                             </form>

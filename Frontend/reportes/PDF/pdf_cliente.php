@@ -4,7 +4,7 @@ require "../../../backend/config/baseDeDatos.php";
 
 // Consulta SQL para obtener los datos de las categorías
 $sql = $conn->query("SELECT cliente.id_cliente, cliente.cedula, cliente.nombre, cliente.ruc, departamentos.nombre AS nombre_d, ciudades.nombre AS nombre_c FROM cliente JOIN departamentos ON departamentos.id_departamento = cliente.id_departamento
-                    JOIN ciudades ON ciudades.id_ciudad = cliente.id_ciudad");
+                    JOIN ciudades ON ciudades.id_ciudad = cliente.id_ciudad WHERE cliente.estado =1");
 $sql->execute();
 
 $clientes = $sql->fetchAll(PDO::FETCH_OBJ);

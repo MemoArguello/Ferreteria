@@ -1,22 +1,25 @@
 <?php
-include '../config/baseDeDatos.php';
+include '../../Backend/config/baseDeDatos.php';
 
 if (isset($_POST['id'])) {
     $id_factura = $_POST['id'];
+    $estado = 0;
 
     try {
-        $query = $conn->prepare("DELETE FROM factura_cabecera WHERE id_factura = :id_factura");
-        $query->bindParam(':id_factura', $id_factura, PDO::PARAM_INT);
+        $query = $conn->prepare("UPDATE factura_cabecera SET estado = :estado WHERE id_factura = :id_factura");
+        $query->bindParam(':estado', $estado);
+        $query->bindParam(':id_factura', $id_factura);
 
         if ($query->execute()) {
-            header('location: ../../Frontend/reportes/reporte_factura.php');
+            header('Location: ../../Frontend/reportes/reporte_factura.php?status=success');
         } else {
-            header('location: ../../Frontend/reportes/reporte_factura.php');
+            header('Location: ../../Frontend/reportes/reporte_factura.php?status=error');
         }
-    } catch (Exception $e) {
-        header('location: ../../Frontend/reportes/reporte_factura.php');
+    } catch (PDOException $e) {
+        error_log($e->getMessage(), 3, '../../Backend/logs/error.log');
+        header('Location: ../../Frontend/reportes/reporte_factura.php?status=error');
     }
 } else {
-    header('location: ../../Frontend/reportes/reporte_factura.php');
+    header('Location: ../../Frontend/reportes/reporte_factura.php?status=invalid');
 }
 ?>

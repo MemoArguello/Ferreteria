@@ -7,7 +7,7 @@ $usuario = $_SESSION['usuario'];
 if (empty($usuario)) {
     header("location:../../index.php");
 }
-$sql = $conn->query("SELECT * FROM categorias");
+$sql = $conn->query("SELECT * FROM categorias WHERE categorias.estado = 1");
 $sql->execute();
 
 $categoriaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
@@ -58,9 +58,9 @@ $categoriaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                             <a class="submitBotonEditar" href="../productos/editar_categoria.php?id=<?=$categoria->id_categoria?>"><i class='bx bx-edit'></i></a>
                                         </td>
                                         <td>
-                                            <form id="formEliminarCat" action="../../Backend/categoria/eliminar_categoria.php" method="POST">
+                                            <form id="formEliminarCat<?=$categoria->id_categoria?>" action="../../Backend/categoria/eliminar_categoria.php" method="POST">
                                                 <input type="hidden" name="id" value="<?=$categoria->id_categoria?>">
-                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarCat()">
+                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarCat(<?=$categoria->id_categoria?>)">
                                                     <i class='bx bx-trash'></i>
                                                 </button>
                                             </form>

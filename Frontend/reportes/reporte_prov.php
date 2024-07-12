@@ -7,7 +7,7 @@ if (empty($usuario)) {
     header("location:../../index.php");
 }
 $sql = $conn->query("SELECT proveedores.id_proveedor, proveedores.nombre_prov, proveedores.ruc, proveedores.telefono, departamentos.nombre AS nombre_d, ciudades.nombre AS nombre_c FROM proveedores JOIN departamentos ON departamentos.id_departamento = proveedores.departamento
-                    JOIN ciudades ON ciudades.id_ciudad = proveedores.distrito");
+                    JOIN ciudades ON ciudades.id_ciudad = proveedores.distrito WHERE proveedores.estado = 1");
 $sql->execute();
 
 $proveedorTotal = $sql->fetchAll(PDO::FETCH_OBJ);
@@ -69,9 +69,9 @@ $proveedorTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                             </a>
                                         </td>
                                         <td>
-                                            <form id="formEliminarProv" action="../../Backend/proveedor/eliminar_prov.php" method="POST">
+                                            <form id="formEliminarProv<?= $proveedor->id_proveedor ?>" action="../../Backend/proveedor/eliminar_prov.php" method="POST">
                                                 <input type="hidden" name="id" value="<?= $proveedor->id_proveedor ?>">
-                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarProv()">
+                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarProv(<?= $proveedor->id_proveedor ?>)">
                                                     <i class='bx bx-trash'></i>
                                                 </button>
                                             </form>

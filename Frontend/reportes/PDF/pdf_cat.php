@@ -3,7 +3,7 @@ require('../fpdf/fpdf.php');
 require "../../../backend/config/baseDeDatos.php";
 
 // Consulta SQL para obtener los datos de las categorías
-$sql = $conn->query("SELECT * FROM categorias");
+$sql = $conn->query("SELECT * FROM categorias WHERE categorias.estado =1");
 $sql->execute();
 
 $categoriaTotal = $sql->fetchAll(PDO::FETCH_OBJ);

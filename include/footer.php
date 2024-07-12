@@ -45,10 +45,10 @@
         });
     }
 
-    function confirmarEliminarFactura() {
+    function confirmarEliminarFactura(id_factura) {
         Swal.fire({
             title: '¿Estás seguro?',
-            text: "Esta acción eliminará la factura seleccionada.",
+            text: 'Se eliminará esta factura permanentemente.',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -63,15 +63,15 @@
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('formEliminarFactura').submit();
+                document.getElementById('formEliminarFactura' + id_factura).submit();
             }
         });
     }
 
-    function confirmarEliminarCat() {
+    function confirmarEliminarCat(id_categoria) {
         Swal.fire({
             title: '¿Estás seguro?',
-            text: "Esta acción no se puede deshacer.",
+            text: 'Se eliminará esta categoria permanentemente.',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -86,14 +86,14 @@
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('formEliminarCat').submit();
+                document.getElementById('formEliminarCat' + id_categoria).submit();
             }
         });
     }
-    function confirmarEliminarProd() {
+    function confirmarEliminarProd(id_producto) {
         Swal.fire({
             title: '¿Estás seguro?',
-            text: "Esta acción no se puede deshacer.",
+            text: 'Se eliminará esta Producto permanentemente.',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -108,15 +108,15 @@
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('formEliminarProd').submit();
+                document.getElementById('formEliminarProd' + id_producto).submit();
             }
         });
     }
 
-    function confirmarEliminarProv() {
+    function confirmarEliminarProv(id_proveedor) {
         Swal.fire({
             title: '¿Estás seguro?',
-            text: "Se eliminará este proveedor.",
+            text: 'Se eliminará este proveedor permanentemente.',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -131,7 +131,7 @@
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById("formEliminarProv").submit();
+                document.getElementById('formEliminarProv' + id_proveedor).submit();
             }
         });
     }

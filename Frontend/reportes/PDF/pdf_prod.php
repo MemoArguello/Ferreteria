@@ -3,7 +3,7 @@ require('../fpdf/fpdf.php');
 require "../../../backend/config/baseDeDatos.php";
 
 // Consulta SQL para obtener los datos de los productos
-$sql = $conn->query("SELECT productos.id_producto, productos.nombre_producto, productos.categoria, productos.lote, productos.stock, productos.precio, productos.precio_compra, categorias.descripcion AS categoria, proveedores.nombre_prov AS proveedor FROM productos JOIN categorias ON categorias.id_categoria = productos.categoria JOIN proveedores ON proveedores.id_proveedor = productos.id_proveedor");
+$sql = $conn->query("SELECT productos.id_producto, productos.nombre_producto, productos.categoria, productos.lote, productos.stock, productos.precio, productos.precio_compra, categorias.descripcion AS categoria, proveedores.nombre_prov AS proveedor FROM productos JOIN categorias ON categorias.id_categoria = productos.categoria JOIN proveedores ON proveedores.id_proveedor = productos.id_proveedor WHERE productos.estado =1");
 
 // Ejecutar la consulta
 $sql->execute();

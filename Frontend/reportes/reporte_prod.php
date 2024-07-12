@@ -7,7 +7,7 @@ if (empty($usuario)) {
     header("location:../../index.php");
 }
 $sql = $conn->query("SELECT productos.id_producto, productos.nombre_producto, productos.categoria, productos.lote, productos.stock, productos.precio, productos.precio_compra, categorias.descripcion AS categoria, proveedores.nombre_prov AS proveedor FROM productos JOIN categorias ON categorias.id_categoria = productos.categoria
-                    JOIN proveedores ON proveedores.id_proveedor = productos.id_proveedor");
+                    JOIN proveedores ON proveedores.id_proveedor = productos.id_proveedor WHERE productos.estado = 1");
 $sql->execute();
 
 $productoTotal = $sql->fetchAll(PDO::FETCH_OBJ);
@@ -72,9 +72,9 @@ $productoTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                             </a>
                                         </td>
                                         <td>
-                                            <form id="formEliminarProd" action="../../Backend/producto/eliminar_prod.php" method="POST">
+                                            <form id="formEliminarProd<?=$producto->id_producto?>" action="../../Backend/producto/eliminar_prod.php" method="POST">
                                                 <input type="hidden" name="id" value="<?=$producto->id_producto?>">
-                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarProd()">
+                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarProd(<?=$producto->id_producto?>)">
                                                     <i class='bx bx-trash' ></i>
                                                 </button>
                                             </form>

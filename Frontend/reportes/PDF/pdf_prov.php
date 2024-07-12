@@ -4,7 +4,7 @@ require "../../../backend/config/baseDeDatos.php";
 
 // Consulta SQL para obtener los datos de los productos
 $sql = $conn->query("SELECT proveedores.id_proveedor, proveedores.nombre_prov, proveedores.ruc, proveedores.telefono, departamentos.nombre AS nombre_d, ciudades.nombre AS nombre_c FROM proveedores JOIN departamentos ON departamentos.id_departamento = proveedores.departamento
-                    JOIN ciudades ON ciudades.id_ciudad = proveedores.distrito");
+                    JOIN ciudades ON ciudades.id_ciudad = proveedores.distrito WHERE proveedores.estado =1");
 $sql->execute();
 
 $proveedorTotal = $sql->fetchAll(PDO::FETCH_OBJ);
