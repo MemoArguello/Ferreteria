@@ -1,7 +1,6 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="<?=APPURL?>/Frontend/dashboard/script.js"></script>
-<script src="<?=APPURL?>/Frontend/js/script.js"></script>
 <script src="<?=APPURL?>/Frontend/datatable/datatables.js"></script>
 <script src="<?=APPURL?>/Frontend/datatable/datatables.min.js"></script>
 

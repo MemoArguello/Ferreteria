@@ -171,6 +171,13 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                                 </tr>
                             </tfoot>
                     </table>
+                    <br>
+                    <div class="left">
+                        <h4>Finalizar e Imprimir Factura</h4>
+                    </div>
+                    <div class="row">
+                        <button class="boton" onclick="imprimirFactura();" id="btnAgregar">Imprimir</button>
+                    </div>
             </div>
         </div>
     </main>
@@ -181,6 +188,41 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
     var idFactura=0;
     var Total=0;
     var subTotalGeneral=0;
+
+    function imprimirFactura() {
+        var numeroFactura = document.getElementById("numeroFactura").value;
+
+        // Realizar petición AJAX a ticket.php
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "./RECEIPT/ticket.php", true); 
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.responseType = 'blob'; // Esperamos una respuesta tipo blob (archivo)
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log("Factura generada correctamente");
+
+                // Crear URL del objeto blob
+                var blob = new Blob([xhr.response], { type: 'application/pdf' });
+                var url = URL.createObjectURL(blob);
+
+                // Abrir el PDF generado en una nueva ventana
+                window.open(url, '_blank');
+            }
+        };
+        xhr.send("id=" + numeroFactura);
+
+        // Limpiar los campos después de agregar
+        document.getElementById("ciCliente").value = "";
+        document.getElementById("nombreCliente").value = "";
+        document.getElementById("numeroFactura").value = "";
+        let table = document.getElementById("customers");
+        let tbody = table.getElementsByTagName("tbody")[0];
+    
+        // Limpiar las filas de la tabla
+        tbody.innerHTML = "";
+    }
+
 
     function consultarCliente(){
         var ciCliente =document.getElementById("ciCliente").value;
