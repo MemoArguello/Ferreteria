@@ -77,7 +77,13 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar'
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                title: 'my-title-class',
+                text: 'my-text-class',
+                confirmButton: 'my-confirm-button-class',
+                cancelButton: 'my-cancel-button-class'
+            }
         }).then((result) => {
             if (result.isConfirmed) {
                 document.getElementById('formEliminarCat').submit();
@@ -93,7 +99,13 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar'
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                title: 'my-title-class',
+                text: 'my-text-class',
+                confirmButton: 'my-confirm-button-class',
+                cancelButton: 'my-cancel-button-class'
+            }
         }).then((result) => {
             if (result.isConfirmed) {
                 document.getElementById('formEliminarProd').submit();
@@ -110,29 +122,65 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar'
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                title: 'my-title-class',
+                text: 'my-text-class',
+                confirmButton: 'my-confirm-button-class',
+                cancelButton: 'my-cancel-button-class'
+            }
         }).then((result) => {
             if (result.isConfirmed) {
                 document.getElementById("formEliminarProv").submit();
             }
         });
     }
-    function confirmarEliminarUsuario() {
+    function confirmarEliminarUsuario(id_usuario) {
         Swal.fire({
             title: '¿Estás seguro?',
-            text: 'Se eliminará este usuario permanentemente.',
+            text: 'Se eliminará este Usuario permanentemente.',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar'
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                title: 'my-title-class',
+                text: 'my-text-class',
+                confirmButton: 'my-confirm-button-class',
+                cancelButton: 'my-cancel-button-class'
+            }
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById("formEliminarUsuario").submit();
+                document.getElementById('formEliminarUsuario_' + id_usuario).submit();
             }
         });
     }
+
+    function confirmarEliminarCliente(clienteId) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Se eliminará este Cliente permanentemente.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                title: 'my-title-class',
+                text: 'my-text-class',
+                confirmButton: 'my-confirm-button-class',
+                cancelButton: 'my-cancel-button-class'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('formEliminarCliente_' + clienteId).submit();
+            }
+        });
+    }
+
 </script>
 
 

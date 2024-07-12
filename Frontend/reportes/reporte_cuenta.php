@@ -6,6 +6,9 @@ $usuario = $_SESSION['usuario'];
 if (empty($usuario)) {
     header("location:../../index.php");
 }
+if ($_SESSION['id_cargo'] != 1){
+    header("Location: ".INICIO."");
+}
 $sql = $conn->query("SELECT usuarios.*, cargo.descripcion as cargo 
                      FROM usuarios 
                      JOIN cargo ON cargo.id = usuarios.id_cargo
@@ -68,9 +71,9 @@ $usuariosTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                             </a>
                                         </td>
                                         <td>
-                                            <form id="formEliminarUsuario" action="../../Backend/cuenta/eliminar_cuenta.php" method="POST">
+                                            <form id="formEliminarUsuario_<?= $usuario->id_usuario ?>" action="../../Backend/cuenta/eliminar_cuenta.php" method="POST">
                                                 <input type="hidden" name="id" value="<?= $usuario->id_usuario ?>">
-                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarUsuario()">
+                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarUsuario(<?= $usuario->id_usuario ?>)">
                                                     <i class='bx bx-trash'></i>
                                                 </button>
                                             </form>

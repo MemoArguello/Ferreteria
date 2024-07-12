@@ -78,13 +78,14 @@ $configuracion = ['reporte_cuenta.php', 'registrar_usuario.php', 'editar_cuenta.
             </li>
         </ul>
         <ul class="side-menu">
+            <?php if($_SESSION['id_cargo'] != 2) : ?>    
                 <li class="<?= in_array($PaginaActual, $configuracion) ? 'active' : '' ?>">
                     <a href="../reportes/reporte_cuenta.php">
                         <i class='bx bxs-cog' style='color:#3c91e6'></i>
                         <span class="text">Configuracion</span>
                     </a>
                 </li>
-
+            <?php endif; ?>
             <li>
                 <a href="#" class="logout" onclick="confirmarCerrarSesion()">
                     <i class='bx bxs-log-out-circle'></i>
