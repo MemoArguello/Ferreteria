@@ -2,10 +2,8 @@
 include '../../Backend/config/baseDeDatos.php';
 try{
     $id_cliente = $_POST["id_cliente"];
-    $estado = "1";
-    $stmt = $conn->prepare("INSERT INTO factura_cabecera (cliente, estado) VALUES (:cliente, :estado)");
+    $stmt = $conn->prepare("INSERT INTO factura_cabecera (cliente) VALUES (:cliente)");
     $stmt->bindParam(':cliente',$id_cliente, PDO::PARAM_INT);
-    $stmt->bindParam(':estado',$estado, PDO::PARAM_INT);
     $stmt->execute();
 
     //valor del ultimo id generado

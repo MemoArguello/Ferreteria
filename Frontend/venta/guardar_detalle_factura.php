@@ -6,6 +6,7 @@ try{
     $cantidad = $_POST["cantidad"];
     $precio_unitario = $_POST["precio"];
     $total_pagar = $_POST["subtotal"];
+    $estado = 1;
 
     $stmt = $conn->prepare("INSERT INTO detalle_factura (id_factura, productos, cantidad, precio_unitario, total_pagar) VALUES (:id_factura, :productos, :cantidad, :precio_unitario, :total_pagar)");
     $stmt->bindParam(':id_factura',$id_factura_cabecera, PDO::PARAM_INT);
@@ -16,6 +17,11 @@ try{
 
     $stmt->execute();
 
+    $query = $conn->prepare("UPDATE factura_cabecera SET estado = :estado WHERE id_factura = :id_factura");
+    $query->bindParam(':estado',$estado, PDO::PARAM_INT);
+    $query->bindParam(':id_factura',$id_factura_cabecera, PDO::PARAM_INT);
+
+    $query->execute();
 
     echo json_encode(array('success'=>true));
 
