@@ -33,6 +33,11 @@ $proveedorTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                     <div class="titulo" align="center">
                         <h2>Listado de Proveedores</h2>
                     </div>
+                    <ul class="pdf">
+                        <li>
+                            <a class="active" href="PDF/pdf_prov.php" target="_blank">Reporte PDF</a>
+                        </li>
+                    </ul>
                     <div class"row">
                         <div class="col-lg-12">
                             <table id="listado" class="table-striped table-bordered" style="width: 100%">
@@ -59,14 +64,14 @@ $proveedorTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                         <td><?=$proveedor->nombre_c?></td>
                                         <td>
                                             <a class="submitBotonEditar" href="../proveedores/editar_prov.php?id=<?=$proveedor->id_proveedor?>">
-                                                Editar
+                                                <i class='bx bx-edit' ></i>
                                             </a>
                                         </td>
                                         <td>
                                             <form action="../../Backend/proveedor/eliminar_prov.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
                                                 <input type="hidden" name="id" value="<?=$proveedor->id_proveedor?>">
                                                 <button type="submit" class="submitBotonEliminar">
-                                                    Eliminar
+                                                    <i class='bx bx-trash' ></i>
                                                 </button>
                                             </form>
                                         </td>

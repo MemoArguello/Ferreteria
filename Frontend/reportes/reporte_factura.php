@@ -43,7 +43,7 @@ $facturaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                         <th>Cliente</th>
                                         <th>Fecha</th>
                                         <th>Factura</th>
-                                        <th>Eliminar</th>
+                                        <th>Eliminar</i></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,7 +57,7 @@ $facturaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                             <form action="../venta/RECEIPT/ticket.php" method="POST" target="_blank">
                                                 <input type="hidden" name="id" value="<?=$factura->id_factura?>">
                                                 <button type="submit" class="submitBotonFactura">
-                                                    Imprimir
+                                                    <i class='bx bxs-file-doc'></i>
                                                 </button>
                                             </form>
                                         </td>
@@ -65,7 +65,7 @@ $facturaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                             <form action="../../Backend/venta/eliminar_venta.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
                                                 <input type="hidden" name="id" value="<?=$factura->id_factura?>">
                                                 <button type="submit" class="submitBotonEliminar">
-                                                    Borrar
+                                                    <i class='bx bx-trash' ></i>
                                                 </button>
                                             </form>
                                         </td>

@@ -7,9 +7,9 @@ $PaginaActual = basename($_SERVER['PHP_SELF']); // Obtener el nombre del archivo
 
 $inicio = ['inicio.php', 'estadisticas.php', 'reporte_auditoria.php'];
 $ventas = ['venta.php', 'reporte_venta.php', 'reporte_factura.php'];
-$productos = ['reporte_prod.php', 'registrar_productos.php', 'reporte_cat.php', 'registrar_categoria.php','editar_categoria.php'];
+$productos = ['reporte_prod.php', 'registrar_productos.php'];
 $proveedores = ['reporte_prov.php', 'agg_proveedor.php', 'editar_prov.php'];
-$caja = ['inicio.php', 'estadisticas.php', 'reporte_auditoria.php'];
+$categoria = ['reporte_cat.php', 'registrar_categoria.php','editar_categoria.php'];
 $clientes = ['reporte_cliente.php', 'formulario_cliente.php'];
 $configuracion = ['reporte_cuenta.php', 'registrar_usuario.php','editar_cuenta.php' ,'editar_contraseña.php'];
 
@@ -59,10 +59,10 @@ $configuracion = ['reporte_cuenta.php', 'registrar_usuario.php','editar_cuenta.p
                 <span class="text">Proveedores</span>
             </a>
         </li>
-        <li class="<?= ($PaginaActual == 'reporte_caja.php') ? 'active' : '' ?>">
-            <a href="../reportes/reporte_caja.php">
-                <i class='bx bx-dollar-circle' style='color:#3c91e6'></i>
-                <span class="text">Caja</span>
+        <li class="<?= in_array($PaginaActual, $categoria) ? 'active' : '' ?>">
+            <a href="../reportes/reporte_cat.php">
+                <i class='bx bx-category' style='color:#3c91e6'></i>
+                <span class="text">Categorias</span>
             </a>
         </li>
         <li class="<?= in_array($PaginaActual, $clientes) ? 'active' : '' ?>">

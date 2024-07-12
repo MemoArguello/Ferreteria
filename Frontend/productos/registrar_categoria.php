@@ -30,19 +30,14 @@ if (!isset($usuario)) {
         <main>
                 <div class="left">
                     <nav class="nav">
-                        <ul class="breadcrumb">
-                            <li>
-                                <a class="active" href="../reportes/reporte_prod.php">Productos</a>
-                            </li>
-                        </ul>
-                        <ul class="breadcrumb">
-                            <li>
-                                <a class="active" href="./registrar_productos.php">Registrar</a>
-                            </li>
-                        </ul>
-                        <ul class="breadcrumb">
+                    <ul class="breadcrumb">
                             <li>
                                 <a class="active" href="../reportes/reporte_cat.php">Categorias</a>
+                            </li>
+                        </ul>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a class="active" href="./registrar_categoria.php">Registrar</a>
                             </li>
                         </ul>
                     </nav>

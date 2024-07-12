@@ -43,11 +43,6 @@ try {
                                 <a class="active" href="./registrar_productos.php">Registrar</a>
                             </li>
                         </ul>
-                        <ul class="breadcrumb">
-                            <li>
-                                <a class="active" href="../reportes/reporte_cat.php">Categorias</a>
-                            </li>
-                        </ul>
                     </nav>
                 </div>
 

@@ -55,19 +55,19 @@ $usuariosTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                     <td><?=$usuario->cargo?></td>
                                     <td>
                                         <a class="submitBotonPass" href="../configuracion/editar_contraseña.php?id=<?=$usuario->id_usuario?>">
-                                            Cambiar
+                                            <i class='bx bx-key'></i>
                                         </a>
                                     </td>
                                     <td>
                                         <a class="submitBotonEditar" href="../configuracion/editar_cuenta.php?id=<?=$usuario->id_usuario?>">
-                                            Editar
+                                            <i class='bx bx-edit'></i>
                                         </a>
                                     </td>
                                     <td>
                                         <form action="../../Backend/cuenta/eliminar_cuenta.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
                                             <input type="hidden" name="id" value="<?=$usuario->id_usuario?>">
                                             <button type="submit" class="submitBotonEliminar">
-                                                Eliminar
+                                                <i class='bx bx-trash' ></i>
                                             </button>
                                         </form>
                                     </td>

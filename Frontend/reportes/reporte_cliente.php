@@ -34,6 +34,11 @@ $clientes = $sql->fetchAll(PDO::FETCH_OBJ);
                     <div class="titulo" align="center">
                         <h2>Listado de Clientes</h2>
                     </div>
+                    <ul class="pdf">
+                        <li>
+                            <a class="active" href="PDF/pdf_cliente.php" target="_blank">Reporte PDF</a>
+                        </li>
+                    </ul>
                     <div class"row">
                         <div class="col-lg-12">
                             <table id="listado" class="table table-striped nowrap" style="width:100%">
@@ -60,14 +65,14 @@ $clientes = $sql->fetchAll(PDO::FETCH_OBJ);
                                         <td><?=$cliente->nombre_c?></td>
                                         <td>
                                         <a class="submitBotonEditar" href="../cliente/editar_cliente.php?id=<?=$cliente->id_cliente?>">
-                                            Editar
+                                            <i class='bx bx-edit'></i>
                                         </a>
                                     </td>
                                     <td>
                                         <form action="../../Backend/cliente/eliminar_cliente.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
                                             <input type="hidden" name="id" value="<?=$cliente->id_cliente?>">
                                             <button type="submit" class="submitBotonEliminar">
-                                                Borrar
+                                                <i class='bx bx-trash' ></i>
                                             </button>
                                         </form>
                                     </td>

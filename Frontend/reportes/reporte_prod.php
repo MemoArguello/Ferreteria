@@ -26,11 +26,6 @@ $productoTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                 <a class="active" href="../productos/registrar_productos.php">Registrar</a>
                             </li>
                         </ul>
-                        <ul class="breadcrumb">
-                            <li>
-                                <a class="active" href="./reporte_cat.php">Categorias</a>
-                            </li>
-                        </ul>
                     </nav>
                 </div>
             <div class="table-data">
@@ -73,14 +68,14 @@ $productoTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                         <td><?=$producto->proveedor?></td>
                                         <td>
                                             <a class="submitBotonEditar" href="../productos/editar_prod.php?id=<?=$producto->id_producto?>">
-                                                Editar
+                                                <i class='bx bx-edit'></i>
                                             </a>
                                         </td>
                                         <td>
                                             <form action="../../Backend/producto/eliminar_prod.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este Registro?');">
                                                 <input type="hidden" name="id" value="<?=$producto->id_producto?>">
                                                 <button type="submit" class="submitBotonEliminar">
-                                                    Eliminar
+                                                    <i class='bx bx-trash' ></i>
                                                 </button>
                                             </form>
                                         </td>
