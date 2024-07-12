@@ -72,9 +72,9 @@ $productoTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                             </a>
                                         </td>
                                         <td>
-                                            <form action="../../Backend/producto/eliminar_prod.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este Registro?');">
+                                            <form id="formEliminarProd" action="../../Backend/producto/eliminar_prod.php" method="POST">
                                                 <input type="hidden" name="id" value="<?=$producto->id_producto?>">
-                                                <button type="submit" class="submitBotonEliminar">
+                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarProd()">
                                                     <i class='bx bx-trash' ></i>
                                                 </button>
                                             </form>

@@ -9,15 +9,22 @@ if (isset($_POST['id'])) {
         $query->bindParam(':id_proveedor', $id_proveedor, PDO::PARAM_INT);
 
         if ($query->execute()) {
-            echo "<script>alert('Proveedor Eliminado'); window.location.href='../../Frontend/reportes/reporte_prov.php';</script>";
+            header('Location: ../../Frontend/reportes/reporte_prov.php');
+            exit();
         } else {
-            echo "<script>alert('No se pudo eliminar el proveedor'); window.location.href='../../Frontend/reportes/reporte_prov.php';</script>";
+            header('Location: ../../Frontend/reportes/reporte_prov.php');
+            exit();
         }
-    } catch (Exception $e) {
-        echo "<script>alert('Error: No se pudo eliminar el proveedor porque esta relacionada'); window.location.href='../../Frontend/reportes/reporte_prov.php';</script>";
+    } catch (PDOException $e) {
+        if ($e->getCode() == '23000') { // Código para violación de integridad
+            echo "<script>alert('No se puede eliminar el proveedor porque tiene productos asociados.');
+            window.location.href='../../Frontend/reportes/reporte_prov.php'</script>";
+        } else {
+            echo "Error: " . $e->getMessage();
+        }
     }
 } else {
-    echo "<script>alert('Error: ID de proveedor no recibido'); window.location.href='../../Frontend/reportes/reporte_prov.php';</script>";
+    header('Location: ../../Frontend/reportes/reporte_prov.php');
+    exit();
 }
 ?>
-

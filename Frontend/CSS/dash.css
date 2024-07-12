@@ -333,6 +333,28 @@ body {
         text-align: left; /* O eliminar esta línea si prefieres mantenerlos centrados */
     }
 }
+/*SWETALERT FUENTES*/
+
+.my-title-class {
+    font-family: 'Poppins', sans-serif; /* Cambia 'Arial' por la fuente que desees */
+    /* Otros estilos personalizados */
+}
+
+.my-text-class {
+    font-family: 'Poppins', sans-serif; /* Cambia 'Arial' por la fuente que desees */
+    /* Otros estilos personalizados */
+}
+
+.my-confirm-button-class {
+    font-family: 'Poppins', sans-serif; /* Cambia 'Arial' por la fuente que desees */
+    /* Otros estilos personalizados */
+}
+
+.my-cancel-button-class {
+    font-family: 'Poppins', sans-serif; /* Cambia 'Arial' por la fuente que desees */
+    /* Otros estilos personalizados */
+}
+
 
 /* SIDEBAR */
 #sidebar {
@@ -348,9 +370,10 @@ body {
 	overflow-x: hidden;
 	scrollbar-width: none;
 }
-#sidebar::--webkit-scrollbar {
-	display: none;
+#sidebar:state(webkit-scrollbar) {
+    display: none;
 }
+
 #sidebar.hide {
 	width: 60px;
 }

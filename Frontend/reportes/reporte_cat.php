@@ -58,9 +58,11 @@ $categoriaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                             <a class="submitBotonEditar" href="../productos/editar_categoria.php?id=<?=$categoria->id_categoria?>"><i class='bx bx-edit'></i></a>
                                         </td>
                                         <td>
-                                            <form action="../../Backend/categoria/eliminar_categoria.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
+                                            <form id="formEliminarCat" action="../../Backend/categoria/eliminar_categoria.php" method="POST">
                                                 <input type="hidden" name="id" value="<?=$categoria->id_categoria?>">
-                                                <button type="submit" class="submitBotonEliminar"><i class='bx bx-trash' ></i></button>
+                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarCat()">
+                                                    <i class='bx bx-trash'></i>
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

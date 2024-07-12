@@ -62,10 +62,10 @@ $facturaTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="../../Backend/venta/eliminar_venta.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
+                                            <form id="formEliminarFactura" action="../../Backend/venta/eliminar_venta.php" method="POST">
                                                 <input type="hidden" name="id" value="<?=$factura->id_factura?>">
-                                                <button type="submit" class="submitBotonEliminar">
-                                                    <i class='bx bx-trash' ></i>
+                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarFactura()">
+                                                    <i class='bx bx-trash'></i>
                                                 </button>
                                             </form>
                                         </td>

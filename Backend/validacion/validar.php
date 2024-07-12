@@ -18,32 +18,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Obtener el resultado
         $filas = $consulta->fetch(PDO::FETCH_ASSOC);
 
+        // Verificar si se encontró un usuario
         if ($filas) {
-            $_SESSION['usuario'] = $usuario;
+            // Asignar variables de sesión
+            $_SESSION['usuario'] = $filas['usuario'];
+            $_SESSION['id_cargo'] = $filas['id_cargo'];
+            $_SESSION['id_usuario'] = $filas['id_usuario'];
 
-            // Verificar el id_cargo del usuario
-            if ($filas['id_cargo'] == 1) { // Administrador
-                header("Location: ../../Frontend/inicio/inicio.php");
-                exit;
-            } else if ($filas['id_cargo'] == 2) { // Recepcionista
+            // Redirigir según el id_cargo del usuario
+            if ($filas['id_cargo'] == 1 || $filas['id_cargo'] == 2) {
                 header("Location: ../../Frontend/inicio/inicio.php");
                 exit;
             } else {
-                echo "<script>alert('No existe cuenta');
-                window.location.href='../../index.php';</script>";
+                echo "<script>alert('No tiene permisos suficientes');
+                      window.location.href='../../index.php';</script>";
                 exit;
             }
         } else {
             echo "<script>alert('No existe cuenta');
-            window.location.href='../../index.php';</script>";
+                  window.location.href='../../index.php';</script>";
             exit;
         }
     } else {
         echo "<script>alert('Por favor, rellene todos los campos');
-        window.location.href='../../index.php';</script>";
+              window.location.href='../../index.php';</script>";
         exit;
     }
 } else {
     header("Location: ../../index.php");
     exit;
 }
+?>

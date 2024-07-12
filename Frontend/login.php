@@ -1,3 +1,9 @@
+<?php require "../include/header.php" ?>
+<?php
+      if(isset($_SESSION['usuario'])){
+        header("Location: ".INICIO."");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 

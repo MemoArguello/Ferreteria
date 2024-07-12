@@ -1,72 +1,18 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const body = document.querySelector("body"),
-          modeToggle = document.querySelector(".mode-toggle"),
-          sidebar = document.querySelector("#sidebar"),
-          sidebarToggle = document.querySelector(".sidebar-toggle");
-
-    // Obtener y aplicar el modo desde localStorage
-    let getMode = localStorage.getItem("mode");
-    if (getMode && getMode === "dark") {
-        body.classList.add("dark");
+<script>
+    function confirmarCerrarSesion() {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Se cerrará la sesión actual.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, cerrar sesión',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '../../Backend/validacion/cerrar_sesion.php';
+            }
+        });
     }
-
-    // Obtener y aplicar el estado del sidebar desde localStorage
-    let getStatus = localStorage.getItem("status");
-    if (getStatus && getStatus === "close") {
-        sidebar.classList.add("close");
-    }
-
-    // Manejar el clic en el botón de modo
-    modeToggle.addEventListener("click", () => {
-        body.classList.toggle("dark");
-        if (body.classList.contains("dark")) {
-            localStorage.setItem("mode", "dark");
-        } else {
-            localStorage.setItem("mode", "light");
-        }
-    });
-
-    // Manejar el clic en el botón de sidebar
-    sidebarToggle.addEventListener("click", () => {
-        sidebar.classList.toggle("close");
-        if (sidebar.classList.contains("close")) {
-            localStorage.setItem("status", "close");
-        } else {
-            localStorage.setItem("status", "open");
-        }
-    });
-});
-
-
-const body = document.querySelector("body"),
-      modeToggle = body.querySelector(".mode-toggle");
-      sidebar = body.querySelector("nav");
-      sidebarToggle = body.querySelector(".sidebar-toggle");
-
-let getMode = localStorage.getItem("mode");
-if(getMode && getMode ==="dark"){
-    body.classList.toggle("dark");
-}
-
-let getStatus = localStorage.getItem("status");
-if(getStatus && getStatus ==="close"){
-    sidebar.classList.toggle("close");
-}
-
-modeToggle.addEventListener("click", () =>{
-    body.classList.toggle("dark");
-    if(body.classList.contains("dark")){
-        localStorage.setItem("mode", "dark");
-    }else{
-        localStorage.setItem("mode", "light");
-    }
-});
-
-sidebarToggle.addEventListener("click", () => {
-    sidebar.classList.toggle("close");
-    if(sidebar.classList.contains("close")){
-        localStorage.setItem("status", "close");
-    }else{
-        localStorage.setItem("status", "open");
-    }
-})
+</script>

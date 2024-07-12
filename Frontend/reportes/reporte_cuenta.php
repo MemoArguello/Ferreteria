@@ -1,12 +1,15 @@
 <?php require "../../include/header.php" ?>
-<?php require "../../backend/config/baseDeDatos.php"?>
+<?php require "../../backend/config/baseDeDatos.php" ?>
 <?php
 
 $usuario = $_SESSION['usuario'];
 if (empty($usuario)) {
     header("location:../../index.php");
 }
-$sql = $conn->query("SELECT usuarios.*, cargo.descripcion as cargo FROM usuarios JOIN cargo ON cargo.id = usuarios.id_cargo");
+$sql = $conn->query("SELECT usuarios.*, cargo.descripcion as cargo 
+                     FROM usuarios 
+                     JOIN cargo ON cargo.id = usuarios.id_cargo
+                     WHERE usuarios.estado = 1");
 $sql->execute();
 
 $usuariosTotal = $sql->fetchAll(PDO::FETCH_OBJ);
@@ -47,32 +50,34 @@ $usuariosTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i=1; foreach($usuariosTotal as $usuario):?>
-                                <tr>
-                                    <td><?=$i++?></td>
-                                    <td><?=$usuario->correo?></td>
-                                    <td><?=$usuario->usuario?></td>
-                                    <td><?=$usuario->cargo?></td>
-                                    <td>
-                                        <a class="submitBotonPass" href="../configuracion/editar_contraseña.php?id=<?=$usuario->id_usuario?>">
-                                            <i class='bx bx-key'></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="submitBotonEditar" href="../configuracion/editar_cuenta.php?id=<?=$usuario->id_usuario?>">
-                                            <i class='bx bx-edit'></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <form action="../../Backend/cuenta/eliminar_cuenta.php" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
-                                            <input type="hidden" name="id" value="<?=$usuario->id_usuario?>">
-                                            <button type="submit" class="submitBotonEliminar">
-                                                <i class='bx bx-trash' ></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <?php endforeach;?>
+                                <?php $i = 1;
+                                foreach ($usuariosTotal as $usuario) : ?>
+                                    <tr>
+                                        <td><?= $i++ ?></td>
+                                        <td><?= $usuario->correo ?></td>
+                                        <td><?= $usuario->usuario ?></td>
+                                        <td><?= $usuario->cargo ?></td>
+                                        <td>
+                                            <a class="submitBotonPass" href="../configuracion/editar_contraseña.php?id=<?= $usuario->id_usuario ?>">
+                                                <i class='bx bx-key'></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="submitBotonEditar" href="../configuracion/editar_cuenta.php?id=<?= $usuario->id_usuario ?>">
+                                                <i class='bx bx-edit'></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form id="formEliminarUsuario" action="../../Backend/cuenta/eliminar_cuenta.php" method="POST">
+                                                <input type="hidden" name="id" value="<?= $usuario->id_usuario ?>">
+                                                <button type="button" class="submitBotonEliminar" onclick="confirmarEliminarUsuario()">
+                                                    <i class='bx bx-trash'></i>
+                                                </button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

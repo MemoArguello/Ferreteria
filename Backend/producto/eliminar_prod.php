@@ -8,13 +8,13 @@ try {
     $query->bindParam(':id_producto', $id_producto, PDO::PARAM_INT);
 
     if ($query->execute()) {
-        echo "<script>alert('Producto Eliminado'); window.location.href='../../Frontend/reportes/reporte_prod.php'</script>";
+        header('location: ../../Frontend/reportes/reporte_prod.php');
     } else {
-        echo "<script>alert('No se pudo Eliminar'); window.location.href='../../Frontend/reportes/reporte_prod.php'</script>";
+        header('location: ../../Frontend/reportes/reporte_prod.php');
     }
 } catch (Exception $e) {
     // Si ocurre una excepción, mostrar un mensaje de error
-    echo "<script>alert('No se pudo Eliminar'); window.location.href='../../Frontend/reportes/reporte_prod.php'</script>";
+    header('location: ../../Frontend/reportes/reporte_prod.php');
 } finally {
     // Cerrar la conexión
 }

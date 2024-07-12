@@ -1,52 +1,7 @@
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const sidebarToggle = document.querySelector('.sidebar-toggle');
-    const sidebar = document.querySelector('#sidebar');
-    const switchMode = document.querySelector('#switch-mode');
-    const body = document.querySelector('body');
-
-    // Función para obtener el estado del sidebar desde localStorage
-    function getSidebarState() {
-        return localStorage.getItem('sidebarClosed') === 'true';
-    }
-
-    // Función para establecer el estado del sidebar en localStorage
-    function setSidebarState(isClosed) {
-        localStorage.setItem('sidebarClosed', isClosed);
-    }
-
-    // Función para obtener el estado del modo oscuro desde localStorage
-    function getDarkModeState() {
-        return localStorage.getItem('darkModeEnabled') === 'true';
-    }
-
-    // Función para establecer el estado del modo oscuro en localStorage
-    function setDarkModeState(isEnabled) {
-        localStorage.setItem('darkModeEnabled', isEnabled);
-    }
-
-    // Verifica el estado guardado del sidebar al cargar la página
-    sidebar.classList.toggle('closed', getSidebarState());
-
-    // Verifica el estado guardado del modo oscuro al cargar la página
-    body.classList.toggle('dark-mode', getDarkModeState());
-
-    // Evento para toggle del sidebar
-    sidebarToggle.addEventListener('click', function() {
-        sidebar.classList.toggle('closed');
-        setSidebarState(sidebar.classList.contains('closed'));
-    });
-
-    // Evento para toggle del modo oscuro
-    switchMode.addEventListener('change', function() {
-        body.classList.toggle('dark-mode');
-        setDarkModeState(body.classList.contains('dark-mode'));
-    });
-});
-</script>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="<?=APPURL?>/Frontend/dashboard/script.js"></script>
+<script src="<?=APPURL?>/Frontend/js/script.js"></script>
 <script src="<?=APPURL?>/Frontend/datatable/datatables.js"></script>
 <script src="<?=APPURL?>/Frontend/datatable/datatables.min.js"></script>
 
@@ -66,6 +21,120 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
 </script>
+<script>
+    function confirmarCerrarSesion() {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Se cerrará la sesión actual.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, cerrar sesión',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                title: 'my-title-class',
+                text: 'my-text-class',
+                confirmButton: 'my-confirm-button-class',
+                cancelButton: 'my-cancel-button-class'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '../../Backend/validacion/cerrar_sesion.php';
+            }
+        });
+    }
+
+    function confirmarEliminarFactura() {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Esta acción eliminará la factura seleccionada.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                title: 'my-title-class',
+                text: 'my-text-class',
+                confirmButton: 'my-confirm-button-class',
+                cancelButton: 'my-cancel-button-class'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('formEliminarFactura').submit();
+            }
+        });
+    }
+
+    function confirmarEliminarCat() {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Esta acción no se puede deshacer.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('formEliminarCat').submit();
+            }
+        });
+    }
+    function confirmarEliminarProd() {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Esta acción no se puede deshacer.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('formEliminarProd').submit();
+            }
+        });
+    }
+
+    function confirmarEliminarProv() {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Se eliminará este proveedor.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("formEliminarProv").submit();
+            }
+        });
+    }
+    function confirmarEliminarUsuario() {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Se eliminará este usuario permanentemente.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("formEliminarUsuario").submit();
+            }
+        });
+    }
+</script>
+
 
     </body>
 </html>
