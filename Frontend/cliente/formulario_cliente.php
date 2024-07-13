@@ -18,6 +18,7 @@ try {
     $query2 = $conn->prepare("SELECT * FROM ciudades WHERE id_departamento = :id_departamento");
     $query2->bindParam(':id_departamento', $id_departamento);
     $query2->execute();
+
     $resultado2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 
     // Obtener el ID del usuario para auditoría
@@ -111,7 +112,7 @@ try {
         </main>
     </section>
     <script>
-    function getCiudades(idDepartamento) {
+function getCiudades(idDepartamento) {
     // Realizar solicitud AJAX para obtener las ciudades del departamento seleccionado
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
