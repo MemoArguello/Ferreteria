@@ -8,12 +8,12 @@ if (!isset($usuario)) {
 }
 try {
     // Consulta a proveedores
-    $query = $conn->query("SELECT * FROM proveedores");
+    $query = $conn->query("SELECT * FROM proveedores WHERE estado = 1");
     $query->execute();
     $resultado1 = $query->fetchAll(PDO::FETCH_ASSOC);
 
     // Consulta a categorías
-    $query2 = $conn->query("SELECT * FROM categorias");
+    $query2 = $conn->query("SELECT * FROM categorias WHERE estado = 1");
     $query2->execute();
     $resultado2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 

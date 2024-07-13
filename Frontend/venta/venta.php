@@ -97,7 +97,7 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                         </div>
                     </div>
                     <div class="row">
-                        <button class="boton" onclick="consultarCliente();">Buscar</button>
+                            <button class="boton" onclick="consultarCliente();">Buscar</button>
                     </div>
                     <div class="row">
                         <div class="col-25">
@@ -108,7 +108,7 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                         </div>
                     </div>
                     <div class="row">
-                        <button class="boton" onclick="insertarFactura();">Iniciar Factura</button>
+                            <button class="boton" onclick="insertarFactura();">Iniciar Factura</button>
                     </div>
                     <div class="row">
                         <div class="col-25">
@@ -117,6 +117,9 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                         <div class="col-75">
                             <input type="text" id="numeroFactura" name="id_factura_cabecera" readonly>
                         </div>
+                    </div>
+                    <div class="row">
+                            <button class="boton" onclick="cancelarFactura();">Cancelar Factura</button>
                     </div>
                     <div class="left">
                         <h2>Agrega un Productos:</h2>
@@ -188,6 +191,30 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
     var idFactura=0;
     var Total=0;
     var subTotalGeneral=0;
+
+    function cancelarFactura(){
+        var numeroFactura = document.getElementById("numeroFactura").value;
+        $.ajax({
+            url:'eliminar_factura.php',
+            method: 'POST',
+            data: {
+                id_factura : numeroFactura
+            },
+            dataType: 'json',
+            success:function(data){
+                if(data.success){
+                    alert("Factura cancelada Correctamente")
+                }else{
+                    alert("Error al cancela la factura"+data.error)
+                }
+            }
+        })
+
+        // Limpiar los campos después de agregar
+        document.getElementById("ciCliente").value = "";
+        document.getElementById("nombreCliente").value = "";
+        document.getElementById("numeroFactura").value = "";
+    }
 
     function imprimirFactura() {
         var numeroFactura = document.getElementById("numeroFactura").value;
@@ -314,7 +341,6 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
             success:function(data){
                 if(data.success){
                     alert("Producto agregado Correctamente")
-
                 }else{
                     alert("Error al insertar el producto"+data.error)
                 }
