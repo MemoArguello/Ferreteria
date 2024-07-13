@@ -30,6 +30,7 @@ body {
 }
 
 .formulario {
+    height: 600px;
     box-shadow: 5px 5px 40px;     
     padding: 100px;
     background-color: var(--azul);

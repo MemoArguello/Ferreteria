@@ -1,8 +1,6 @@
 <?php require "../../include/header.php" ?>
 <?php require "../../backend/config/baseDeDatos.php" ?>
 <?php
-
-
 $usuario = $_SESSION['usuario'];
 if (!isset($usuario)) {
     header("location:../../index.php");
@@ -100,7 +98,7 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                 <h1 align="center">Generar Factura</h1>
                 <div class="row">
                     <div class="col-25">
-                        <label for="cliente">Cedula</label>
+                        <label for="ciCliente">Cedula</label>
                     </div>
                     <div class="col-75">
                         <input type="text" id="ciCliente" name="cedula" placeholder="Cedula" required>
@@ -111,7 +109,7 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="tipo">Cliente:</label>
+                        <label for="nombreCliente">Cliente:</label>
                     </div>
                     <div class="col-75">
                         <input type="text" id="nombreCliente" readonly placeholder="Nombre del Cliente">
@@ -122,7 +120,7 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="tipo">Factura N°:</label>
+                        <label for="numeroFactura">Factura N°:</label>
                     </div>
                     <div class="col-75">
                         <input type="text" id="numeroFactura" name="id_factura_cabecera" readonly>
@@ -153,7 +151,7 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="producto">Producto:</label>
+                        <label for="id_producto">Producto:</label>
                     </div>
                     <div class="col-75">
                         <select name="producto[]" id="id_producto" required>
@@ -164,7 +162,7 @@ $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
 
                 <div class="row">
                     <div class="col-25">
-                        <label for="producto">Cantidad</label>
+                        <label for="txtCantidad">Cantidad</label>
                     </div>
                     <div class="col-75">
                         <input type="text" id="txtCantidad" name="cantidad" placeholder="Cantidad">
