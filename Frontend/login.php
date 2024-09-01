@@ -1,8 +1,10 @@
-<?php require "../include/header.php" ?>
 <?php
-      if(isset($_SESSION['usuario'])){
-        header("Location: ".INICIO."");
-    }
+session_start();
+
+if (isset($_SESSION['usuario'])) {
+    header("Location: inicio/inicio.php"); 
+    exit(); 
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -31,6 +31,11 @@ $usuariosTotal = $sql->fetchAll(PDO::FETCH_OBJ);
                         <a class="active" href="../configuracion/registrar_usuario.php">Registrar Cuenta</a>
                     </li>
                 </ul>
+                <ul class="breadcrumb">
+                    <li>
+                        <a class="active" href="../configuracion/informacion.php">Datos de la Empresa</a>
+                    </li>
+                </ul>
             </nav>
         </div>
         <div class="table-data">

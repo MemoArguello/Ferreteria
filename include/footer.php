@@ -1,4 +1,25 @@
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const loaderOverlay = document.getElementById('loader-overlay');
 
+    function showLoader() {
+        loaderOverlay.style.display = 'block';
+    }
+
+    function hideLoader() {
+        loaderOverlay.style.display = 'none';
+    }
+
+    // Mostrar el loader al cargar la página inicialmente
+    showLoader();
+
+    // Mostrar el loader durante exactamente 3 segundos
+    setTimeout(function() {
+        hideLoader(); // Ocultar el loader después de 3 segundos
+    }, 500);
+});
+
+</script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="<?=APPURL?>/Frontend/datatable/datatables.js"></script>
 <script src="<?=APPURL?>/Frontend/datatable/datatables.min.js"></script>

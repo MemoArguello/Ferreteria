@@ -366,7 +366,7 @@ body {
 	background: var(--light);
 	z-index: 2000;
 	font-family: var(--lato);
-	transition: .3s ease;
+	transition: .1s ease;
 	overflow-x: hidden;
 	scrollbar-width: none;
 }
@@ -451,7 +451,7 @@ body {
 }
 #sidebar.hide .side-menu li a {
 	width: calc(48px - (4px * 2));
-	transition: width .3s ease;
+	transition: width .1s ease;
 }
 #sidebar .side-menu li a.logout {
 	color: var(--red);
@@ -475,14 +475,43 @@ body {
 	position: relative;
 	width: calc(100% - 280px);
 	left: 280px;
-	transition: .3s ease;
+	transition: .0s ease;
 }
 #sidebar.hide ~ #content {
 	width: calc(100% - 60px);
 	left: 60px;
 }
 
+/* Estilos para la pantalla de carga */
+#loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.938); /* Fondo semi-transparente */
+    display: none; /* Inicialmente oculto */
+    z-index: 3000; /* Z-index alto para estar encima de todo */
+}
 
+.loader {
+    border: 8px solid #f3f3f3; /* Luz del borde */
+    border-top: 8px solid #3498db; /* Borde superior azul */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 3s linear infinite; /* Animación de giro */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/*pantalla de carga*/
 
 
 /* NAVBAR */
@@ -511,7 +540,7 @@ body {
 }
 #content nav .nav-link {
 	font-size: 16px;
-	transition: .3s ease;
+	transition: .0s ease;
 }
 #content nav .nav-link:hover {
 	color: var(--blue);
@@ -595,7 +624,7 @@ body {
 	width: calc(25px - 4px);
 	background: var(--blue);
 	border-radius: 50%;
-	transition: all .3s ease;
+	transition: all .1s ease;
 }
 #content nav #switch-mode:checked + .switch-mode::before {
 	left: calc(100% - (25px - 4px) - 2px);

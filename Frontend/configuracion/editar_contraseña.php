@@ -19,20 +19,25 @@ $resultado2 = $query2->fetch(PDO::FETCH_OBJ);
 <body>
     <section id="content">
         <main>
-                <div class="left">
-                    <nav class="nav">
-                        <ul class="breadcrumb">
-                            <li>
-                                <a class="active" href="../reportes/reporte_cuenta.php">Cuentas</a>
-                            </li>
-                        </ul>
-                        <ul class="breadcrumb">
-                            <li>
-                                <a class="active" href="./registrar_usuario.php">Registrar Cuenta</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+            <div class="left">
+                <nav class="nav">
+                    <ul class="breadcrumb">
+                        <li>
+                            <a class="active" href="../reportes/reporte_cuenta.php">Cuentas</a>
+                        </li>
+                    </ul>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a class="active" href="./registrar_usuario.php">Registrar Cuenta</a>
+                        </li>
+                    </ul>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a class="active" href="../configuracion/informacion.php">Datos de la Empresa</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
             <div class="table-data">
                 <div class="container">
                     <form action="../../Backend/cuenta/cambiar_contraseña.php" class="form_vent" method="POST">
@@ -64,12 +69,12 @@ $resultado2 = $query2->fetch(PDO::FETCH_OBJ);
                         <br>
                         <br>
                         <div class="row">
-								<input type="hidden" name="id_usuario" id="" value='<?php echo $resultado2->id_usuario ?>' readonly>
-								<input type="hidden" name="editar" id="" value='si' readonly>
-                                <input type="submit" class="boton2" value="Editar">
+                            <input type="hidden" name="id_usuario" id="" value='<?php echo $resultado2->id_usuario ?>' readonly>
+                            <input type="hidden" name="editar" id="" value='si' readonly>
+                            <input type="submit" class="boton2" value="Editar">
                         </div>
                     </form>
                 </div>
             </div>
     </section>
-<?php require "../../include/footer.php"; ?>
+    <?php require "../../include/footer.php"; ?>

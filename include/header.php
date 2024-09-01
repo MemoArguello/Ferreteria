@@ -4,6 +4,8 @@ define("APPURL", "http://localhost/sistema_ferreteria");
 define("INICIO", "http://localhost/sistema_ferreteria/Frontend/inicio/inicio.php");
 define("EMPRESA", "ferreteria");
 
+include __DIR__ . '/../backend/config/baseDeDatos.php';
+
 $PaginaActual = basename($_SERVER['PHP_SELF']); // Obtener el nombre del archivo PHP actual
 
 $inicio = ['inicio.php', 'estadisticas.php', 'reporte_auditoria.php'];
@@ -14,6 +16,9 @@ $categoria = ['reporte_cat.php', 'registrar_categoria.php', 'editar_categoria.ph
 $clientes = ['reporte_cliente.php', 'formulario_cliente.php'];
 $configuracion = ['reporte_cuenta.php', 'registrar_usuario.php', 'editar_cuenta.php', 'editar_contraseña.php'];
 
+$query = $conn->query("SELECT * FROM datos_empresa");
+$query->execute();
+$resultado = $query->fetch(PDO::FETCH_OBJ);
 
 ?>
 <!DOCTYPE html>
@@ -37,7 +42,7 @@ $configuracion = ['reporte_cuenta.php', 'registrar_usuario.php', 'editar_cuenta.
     <section id="sidebar">
         <a href="../inicio/inicio.php" class="brand">
             <i class='bx bxs-store-alt' style='color:#3c91e6'></i>
-            <span class="text">Ferreteria</span>
+            <span class="text"><?=$resultado->nombre_empresa?></span>
         </a>
         <ul class="side-menu top">
             <li class="<?= in_array($PaginaActual, $inicio) ? 'active' : '' ?>">
@@ -110,6 +115,11 @@ $configuracion = ['reporte_cuenta.php', 'registrar_usuario.php', 'editar_cuenta.
                 <img src="<?= APPURL ?>/Frontend/IMG/shopping-bag_5939887.png">
             </a>
         </nav>
+                <!-- Pantalla de carga -->
+        <div id="loader-overlay">
+            <div class="loader"></div>
+        </div>
+
         <?php else: ?>
         <?php endif; ?>
     </section>

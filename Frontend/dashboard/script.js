@@ -10,11 +10,21 @@ document.addEventListener("DOMContentLoaded", () => {
     // Función para cerrar el sidebar si está en modo 'hide'
     function closeSidebar() {
         sidebar.classList.add('hide');
+        localStorage.setItem('sidebarState', 'closed'); // Guardar el estado del sidebar en localStorage
     }
 
-    // Cerrar el sidebar al cargar la página si es necesario
-    if (window.innerWidth < 768) {
+    // Función para abrir el sidebar
+    function openSidebar() {
+        sidebar.classList.remove('hide');
+        localStorage.setItem('sidebarState', 'open'); // Guardar el estado del sidebar en localStorage
+    }
+
+    // Restaurar el estado del sidebar desde el localStorage
+    const sidebarState = localStorage.getItem('sidebarState');
+    if (window.innerWidth < 768 || sidebarState === 'closed') {
         closeSidebar();
+    } else {
+        openSidebar();
     }
 
     // Escuchar clics en los elementos del menú lateral
@@ -23,17 +33,21 @@ document.addEventListener("DOMContentLoaded", () => {
         item.addEventListener('click', function () {
             allSideMenu.forEach(i => {
                 i.parentElement.classList.remove('active');
-            })
+            });
             li.classList.add('active');
             if (window.innerWidth < 768) {
                 closeSidebar();
             }
-        })
+        });
     });
 
     // Toggle para el sidebar desde el menú en la barra de navegación
     menuBar.addEventListener('click', function () {
-        sidebar.classList.toggle('hide');
+        if (sidebar.classList.contains('hide')) {
+            openSidebar();
+        } else {
+            closeSidebar();
+        }
     });
 
     // Funcionalidad de búsqueda
@@ -66,3 +80,4 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
